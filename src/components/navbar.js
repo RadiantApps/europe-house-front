@@ -1,8 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import Logo from "../../public/logo.svg"
 export default function Navbar() {
   return (
-    <header className="h-[90.5px] w-full border-b border-gray-200 px-[32px] flex items-center justify-between">
+    <header className="h-[90.5px] w-full border-b border-gray-200 px-[74px] flex items-center justify-between">
 
         <Image
           src={Logo} 
@@ -12,13 +13,13 @@ export default function Navbar() {
           className="mr-[50px]"
         />
         <nav className="flex flex-row gap-[30px] h-[32px] items-center">
-          <a href="#" className="text-sm text-black">Events</a>
-          <a href="#" className="text-sm text-black">News/blog</a>
-          <a href="#" className="text-sm text-black">Campaigns</a>
-          <a href="#" className="text-sm text-black">Publications</a>
-          <a href="#" className="text-sm text-black">About</a>
-          <a href="#" className="text-sm text-black">EU Support</a>
-          <a href="#" className="text-sm text-black">Contact</a>
+          <Link href="/events" className="text-sm text-black">Events</Link>
+          <Link href="/news" className="text-sm text-black">News/blog</Link>
+          <Link href="/campaigns" className="text-sm text-black">Campaigns</Link>
+          <Link href="/publications" className="text-sm text-black">Publications</Link>
+          <Link href="/about" className="text-sm text-black">About</Link>
+          <Link href="/eu-support" className="text-sm text-black">EU Support</Link>
+          <Link href="/contact" className="text-sm text-black">Contact</Link>
         </nav>
 
       <button className="h-[32px] w-[91px] border border-gray-300 rounded-[6px] text-sm px-[12px] py-[4px] flex items-center justify-between gap-[10px]">
