@@ -2,18 +2,24 @@
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import RrotaIcon from "../../assets/events/rrota.svg";
-import { getEvents } from "../../store/features/eventsSlice";
+import { getEvents, clearEvents } from "../../store/features/eventsSlice";
 import { formatDate, formatTime, getMonthName } from "@/utils/utils";
 import Footer from "@/components/footer";
 
 export default function Events() {
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  
   const { eventsData, totalEvents, eventsLoading, eventsError } = useSelector(
     (state) => state.events
   );
-
+  const selectedLanguage = useSelector((state) => state.language.selectedLanguage);
+  
+  const currentLanguage =  selectedLanguage;
+  
   const [filters, setFilters] = useState({
     year: "",
     month: "",
@@ -25,8 +31,18 @@ export default function Events() {
   const limit = 5;
 
   useEffect(() => {
-    dispatch(getEvents({ limit, offset, ...filters }));
-  }, [offset, filters]);
+    dispatch(getEvents({ 
+      limit, 
+      offset, 
+      lang: currentLanguage,
+      ...filters 
+    }));
+  }, [offset, filters, currentLanguage]);
+
+  useEffect(() => {
+    setOffset(0);
+    dispatch(clearEvents());
+  }, [currentLanguage]);
 
   const handleSeeMore = () => {
     setOffset((prev) => prev + limit);
@@ -133,11 +149,18 @@ export default function Events() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <div className="w-full h-12 bg-blue-600 flex items-center justify-center">
-        <span className="text-white text-sm font-medium">
-          DISCOVER UPCOMING EVENTS THAT CELEBRATE ART, MUSIC, AND UNITY.
-        </span>
+    <div className="min-h-screen bg-white flex flex-col">
+      <div className="w-full h-8 relative overflow-hidden">
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/slider-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
 
       <div className="px-[74px] pt-[43px] pb-[32px]">
@@ -224,7 +247,7 @@ export default function Events() {
         </div>
       </div>
 
-      <div className="w-full bg-[#EDF5FF] rounded-t-[36px]">
+      <div className="w-full bg-[#EDF5FF] rounded-t-[36px] flex-1">
         <div className="px-[74px] space-y-6">
           {eventsData && eventsData.length > 0 ? (
             eventsData.map((event, index) => (
@@ -353,7 +376,7 @@ export default function Events() {
               </div>
             ))
           ) : (
-            <div className="text-center py-16">
+            <div className="justify-center items-center text-center py-16">
               <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   className="w-8 h-8 text-gray-400"

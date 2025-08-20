@@ -1,7 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector, useDispatch } from "react-redux";
+import { setLanguage } from "../store/features/languageSlice";
 import Logo from "../../public/logo.svg"
+
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const selectedLanguage = useSelector((state) => state.language.selectedLanguage);
+
+  const handleLanguageChange = (event) => {
+    dispatch(setLanguage(event.target.value));
+  };
+
   return (
     <header className="h-[90.5px] w-full border-b border-gray-200 px-[74px] flex items-center justify-between">
 
@@ -22,17 +34,15 @@ export default function Navbar() {
           <Link href="/contact" className="text-sm text-black">Contact</Link>
         </nav>
 
-      <button className="h-[32px] w-[91px] border border-gray-300 rounded-[6px] text-sm px-[12px] py-[4px] flex items-center justify-between gap-[10px]">
-        English
-        <svg
-          className="w-3 h-3"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+        <select
+        className="h-[32px] w-[130px] border border-gray-300 rounded-[6px] text-sm px-[12px] py-[4px] bg-white focus:outline-none"
+        value={selectedLanguage}
+        onChange={handleLanguageChange}
+      >
+        <option value="en">English</option>
+        <option value="al">Shqip</option>
+        <option value="sr">Sb</option>
+      </select>
     </header>
   );
 }
