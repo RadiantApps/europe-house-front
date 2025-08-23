@@ -1,29 +1,41 @@
 export const formatTime = (startTime, endTime) => {
-    const start = startTime ? startTime.substring(0, 5) : "";
-    const end = endTime ? endTime.substring(0, 5) : "";
-    return `${start} - ${end}`;
-  };
+  const start = startTime ? startTime.substring(0, 5) : "";
+  const end = endTime ? endTime.substring(0, 5) : "";
+  return `${start} - ${end}`;
+};
 
-  // Format date display
+// Format date display
 export const formatDate = (day) => {
-    return day ? day.toString() : "";
-  };
+  return day ? day.toString() : "";
+};
 
-  // Get month name
+// Get month name
 export const getMonthName = (month) => {
-    const months = [
-      "JANUARY",
-      "FEBRUARY",
-      "MARCH",
-      "APRIL",
-      "MAY",
-      "JUNE",
-      "JULY",
-      "AUGUST",
-      "SEPTEMBER",
-      "OCTOBER",
-      "NOVEMBER",
-      "DECEMBER",
-    ];
-    return months[month - 1] || "";
-  };
+  const months = [
+    "JANUARY",
+    "FEBRUARY",
+    "MARCH",
+    "APRIL",
+    "MAY",
+    "JUNE",
+    "JULY",
+    "AUGUST",
+    "SEPTEMBER",
+    "OCTOBER",
+    "NOVEMBER",
+    "DECEMBER",
+  ];
+  return months[month - 1] || "";
+};
+
+export const formatDateYear = (dateString) => {
+  const options = { month: "long", day: "numeric" };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+};
+
+export const formatYear = (dateString) => {
+  const options = { month: "long", day: "numeric", year: "numeric" };
+  const date = new Date(dateString);
+  return date.toLocaleDateString(undefined, options);
+};
