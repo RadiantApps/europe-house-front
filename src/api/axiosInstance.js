@@ -1,11 +1,11 @@
+import { apiUrl } from "@/config";
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  // baseURL: "https://europe.com/api",
-  baseURL: "http://localhost:5000/api",
+  baseURL: apiUrl,
   timeout: 10000,
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
+    "Content-Type": "application/json",
     Accept: "application/json",
   },
 });
