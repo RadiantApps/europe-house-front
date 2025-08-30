@@ -1,24 +1,26 @@
 "use client";
-import { deleteBlogs, getAllBlogs } from "@/store/features/blogSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreateBlogModal, UpdateBlogModal } from "@/components";
-import Link from "next/link";
-const pages = () => {
-  const router = useRouter();
+import { CreateCampingsModal } from "@/components";
+import {
+  deleteCampings,
+  getAllCampaings,
+} from "@/store/features/campaingsSlice";
+
+const CampaingsDash = () => {
   const dispatch = useDispatch();
-  const blogData = useSelector((state) => state.blog.blogsData) || [];
-  const createBlogLoading = useSelector(
-    (state) => state.blog.createBlogsLoading
+  const router = useRouter();
+  const campaingData =
+    useSelector((state) => state.campaing.getAllCampaingsData) || [];
+  const createCampaingLoading = useSelector(
+    (state) => state.campaing.createCampingsLoading
   );
-  const deleteBlogLoading = useSelector(
-    (state) => state.blog.deleteBlogsLoading
+  const deleteCampaingLoading = useSelector(
+    (state) => state.campaing.deleteCampingsLoading
   );
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenUpdate, setIsOpenUpdate] = useState(false);
-  const [itemUpdate, setItemUpdate] = useState(null);
 
   const openModal = () => setIsOpen(!isOpen);
 
@@ -26,24 +28,11 @@ const pages = () => {
     setSearchTerm(e.target.value);
   };
 
-  const openModalUpdate = (item) => {
-    setIsOpenUpdate(!isOpenUpdate);
-    setItemUpdate(item);
-  };
   useEffect(() => {
-    dispatch(getAllBlogs());
-  }, [createBlogLoading, deleteBlogLoading]);
-
+    dispatch(getAllCampaings());
+  }, [createCampaingLoading, deleteCampaingLoading]);
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
-      <div className="mb-10">
-        <button
-          onClick={() => router.push("/dashboard/category-blog")}
-          className=" font-bold underline"
-        >
-          MANAGE CATEGORY FILTERS
-        </button>
-      </div>
       <div className="flex justify-between">
         <div className="mb-10">
           <input
@@ -60,11 +49,10 @@ const pages = () => {
             className="bg-[#B8F900] w-[283px]  font-medium py-2 px-4 rounded h-[50px] text-[#121212] text-[18px] leading-[22px]"
             onClick={openModal}
           >
-            Add Blog
+            Add Campaings
           </button>
         </div>
       </div>
-
       <div
         className="relative overflow-x-auto shadow-md sm:rounded-lg"
         style={{ borderRadius: 1 }}
@@ -93,9 +81,9 @@ const pages = () => {
             </tr>
           </thead>
           <tbody>
-            {blogData?.map((item) => (
+            {campaingData?.map((item) => (
               <tr
-                key={item.blog_id}
+                key={item.campaing_id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="px-4 py-4">{item?.translations?.sq?.title}</td>
@@ -103,21 +91,14 @@ const pages = () => {
                 <td className="px-4 py-4">{item?.translations?.sr?.title}</td>
                 <td className="px-4 py-4 flex space-x-2">
                   <button
-                    onClick={() => openModalUpdate(item)}
+                    onClick={() => {}}
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                   >
                     Edit
                   </button>
-                  <Link
-                    href="/"
-                    className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
-                  >
-                    Go to blog
-                  </Link>
+
                   <button
-                    onClick={() => {
-                      dispatch(deleteBlogs(item.blog_id));
-                    }}
+                    onClick={() => dispatch(deleteCampings(item?.campaing_id))}
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                   >
                     Delete
@@ -128,12 +109,9 @@ const pages = () => {
           </tbody>
         </table>
       </div>
-      {isOpen && <CreateBlogModal openModal={openModal} />}
-      {isOpenUpdate && (
-        <UpdateBlogModal openModal={openModalUpdate} item={itemUpdate} />
-      )}
+      {isOpen && <CreateCampingsModal openModal={openModal} />}
     </div>
   );
 };
 
-export default pages;
+export default CampaingsDash;

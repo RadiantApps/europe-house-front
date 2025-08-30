@@ -3,18 +3,18 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { getAllBlogCategory } from "@/store/features/blogCategorySlice";
-import { createBlogs } from "@/store/features/blogSlice";
+import { getAllTopicsPublication } from "@/store/features/categoryPublicationSlice";
+import { createPublication } from "@/store/features/publicationSlice";
 
-const CreateBlogModal = ({ openModal }) => {
+const CreatePublication = ({ openModal }) => {
   const dispatch = useDispatch();
-  const blogCategoryData =
-    useSelector((state) => state.blogCategory.blogCategoryData) || [];
+  const topicCategoryData =
+    useSelector((state) => state.categoryPublication.topicsCategoryData) || [];
 
   const [error, setError] = useState(null);
 
   const [formData, setFormData] = useState({
-    category_blog_id: "",
+    publication_blog_id: "",
     slug: "",
     sq: "",
     sr: "",
@@ -22,6 +22,9 @@ const CreateBlogModal = ({ openModal }) => {
     photo_sq: null,
     photo_en: null,
     photo_sr: null,
+    pdf_sq: null,
+    pdf_en: null,
+    pdf_sr: null,
   });
 
   const handleFileChange = (e) => {
@@ -41,32 +44,34 @@ const CreateBlogModal = ({ openModal }) => {
   };
 
   const onSubmit = async (e) => {
+    e.preventDefault();
+
     const translations = [
       { title: formData.sq, language: "sq" },
       { title: formData.en, language: "en" },
       { title: formData.sr, language: "sr" },
     ];
+
     const data = new FormData();
-    data.append("category_blog_id", formData.category_blog_id);
+    data.append("publication_blog_id", formData.publication_blog_id);
     data.append("slug", formData.slug);
     data.append("translations", JSON.stringify(translations));
+
+    // Photos
     if (formData.photo_sq) data.append("photo_sq", formData.photo_sq);
     if (formData.photo_en) data.append("photo_en", formData.photo_en);
     if (formData.photo_sr) data.append("photo_sr", formData.photo_sr);
 
-    dispatch(createBlogs(data))
-      .unwrap()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // PDFs
+    if (formData.pdf_sq) data.append("pdf_sq", formData.pdf_sq);
+    if (formData.pdf_en) data.append("pdf_en", formData.pdf_en);
+    if (formData.pdf_sr) data.append("pdf_sr", formData.pdf_sr);
+    dispatch(createPublication(data));
   };
 
   useEffect(() => {
-    dispatch(getAllBlogCategory());
-  }, [dispatch]);
+    dispatch(getAllTopicsPublication());
+  }, []);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center w-15">
@@ -91,86 +96,60 @@ const CreateBlogModal = ({ openModal }) => {
           <form autoComplete="off" onSubmit={onSubmit}>
             {/* Blog Category */}
             <div className="mt-[33px]">
-              <label
-                htmlFor="category_blog_id"
-                className="block mb-2 text-[18px] font-medium"
-              >
-                Blog Category
+              <label className="block mb-2 text-[18px] font-medium">
+                Publication Category
               </label>
               <select
-                name="category_blog_id"
-                id="category_blog_id"
+                name="publication_blog_id"
                 className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
-                value={formData.category_blog_id}
+                value={formData.publication_blog_id}
                 onChange={handleChange}
               >
                 <option value="">Select a category</option>
-                {blogCategoryData.map((cat) => (
+                {topicCategoryData.map((cat) => (
                   <option key={cat.id} value={cat.id}>
                     {cat?.translations?.en}
                   </option>
                 ))}
               </select>
-              {error && error.category_blog_id && (
-                <span className="text-red-500">{error.category_blog_id}</span>
-              )}
             </div>
 
-            {/* Slug */}
+            {/* ===== Albania ===== */}
             <div className="mt-[33px]">
-              <label
-                htmlFor="slug"
-                className="block mb-2 text-[18px] font-medium"
-              >
-                Slug
-              </label>
-              <input
-                type="text"
-                name="slug"
-                id="slug"
-                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
-                placeholder="Slug"
-                value={formData.slug}
-                onChange={handleChange}
-              />
-              {error && error.slug && (
-                <span className="text-red-500">{error.slug}</span>
-              )}
-            </div>
-
-            {/* Name Albania */}
-            <div className="mt-[33px]">
-              <label
-                htmlFor="sq"
-                className="block mb-2 text-[18px] font-medium"
-              >
+              <label className="block mb-2 text-[18px] font-medium">
                 Name Albania
               </label>
               <input
                 type="text"
                 name="sq"
-                id="sq"
-                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
                 placeholder="Name Albania"
                 value={formData.sq}
                 onChange={handleChange}
+                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
               />
-              {error && error.sq && (
-                <span className="text-red-500">{error.sq}</span>
-              )}
             </div>
-
-            {/* Photo Albania */}
             <div className="mt-5">
-              <label
-                htmlFor="photo_sq"
-                className="block mb-2 text-[18px] font-medium"
-              >
+              <label className="block mb-2 text-[18px] font-medium">
                 Photo Albania
               </label>
               <input
                 type="file"
                 name="photo_sq"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
+               file:bg-transparent file:rounded-[10px] file:border-[#767676]
+               file:border-1 file:mt-[12px]"
+              />
+            </div>
+            <div className="mt-5">
+              <label className="block mb-2 text-[18px] font-medium">
+                PDF Albania
+              </label>
+              <input
+                type="file"
+                name="pdf_sq"
+                accept="application/pdf"
                 onChange={handleFileChange}
                 className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
                file:bg-transparent file:rounded-[10px] file:border-[#767676]
@@ -178,39 +157,42 @@ const CreateBlogModal = ({ openModal }) => {
               />
             </div>
 
-            {/* Name English */}
+            {/* ===== English ===== */}
             <div className="mt-[33px]">
-              <label
-                htmlFor="en"
-                className="block mb-2 text-[18px] font-medium"
-              >
+              <label className="block mb-2 text-[18px] font-medium">
                 Name English
               </label>
               <input
                 type="text"
                 name="en"
-                id="en"
-                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
                 placeholder="Name English"
                 value={formData.en}
                 onChange={handleChange}
+                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
               />
-              {error && error.en && (
-                <span className="text-red-500">{error.en}</span>
-              )}
             </div>
-
-            {/* Photo English */}
             <div className="mt-5">
-              <label
-                htmlFor="photo_en"
-                className="block mb-2 text-[18px] font-medium"
-              >
+              <label className="block mb-2 text-[18px] font-medium">
                 Photo English
               </label>
               <input
                 type="file"
                 name="photo_en"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
+               file:bg-transparent file:rounded-[10px] file:border-[#767676]
+               file:border-1 file:mt-[12px]"
+              />
+            </div>
+            <div className="mt-5">
+              <label className="block mb-2 text-[18px] font-medium">
+                PDF English
+              </label>
+              <input
+                type="file"
+                name="pdf_en"
+                accept="application/pdf"
                 onChange={handleFileChange}
                 className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
                file:bg-transparent file:rounded-[10px] file:border-[#767676]
@@ -218,39 +200,42 @@ const CreateBlogModal = ({ openModal }) => {
               />
             </div>
 
-            {/* Name Serbian */}
+            {/* ===== Serbian ===== */}
             <div className="mt-[33px]">
-              <label
-                htmlFor="sr"
-                className="block mb-2 text-[18px] font-medium"
-              >
+              <label className="block mb-2 text-[18px] font-medium">
                 Name Serbian
               </label>
               <input
                 type="text"
                 name="sr"
-                id="sr"
-                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
                 placeholder="Name Serbian"
                 value={formData.sr}
                 onChange={handleChange}
+                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
               />
-              {error && error.sr && (
-                <span className="text-red-500">{error.sr}</span>
-              )}
             </div>
-
-            {/* Photo Serbian */}
             <div className="mt-5">
-              <label
-                htmlFor="photo_sr"
-                className="block mb-2 text-[18px] font-medium"
-              >
+              <label className="block mb-2 text-[18px] font-medium">
                 Photo Serbian
               </label>
               <input
                 type="file"
                 name="photo_sr"
+                accept="image/*"
+                onChange={handleFileChange}
+                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
+               file:bg-transparent file:rounded-[10px] file:border-[#767676]
+               file:border-1 file:mt-[12px]"
+              />
+            </div>
+            <div className="mt-5">
+              <label className="block mb-2 text-[18px] font-medium">
+                PDF Serbian
+              </label>
+              <input
+                type="file"
+                name="pdf_sr"
+                accept="application/pdf"
                 onChange={handleFileChange}
                 className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
                file:bg-transparent file:rounded-[10px] file:border-[#767676]
@@ -274,4 +259,4 @@ const CreateBlogModal = ({ openModal }) => {
   );
 };
 
-export default CreateBlogModal;
+export default CreatePublication;

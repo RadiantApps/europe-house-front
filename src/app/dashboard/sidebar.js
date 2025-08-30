@@ -21,7 +21,7 @@ const Sidebar = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    router.push("/login");
+    router.push("/auth");
   };
 
   return (

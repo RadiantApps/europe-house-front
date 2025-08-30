@@ -4,15 +4,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { getAllBlogCategory } from "@/store/features/blogCategorySlice";
-import { createBlogs } from "@/store/features/blogSlice";
 
-const CreateBlogModal = ({ openModal }) => {
+const UpdateBlogModal = ({ item, openModal }) => {
   const dispatch = useDispatch();
   const blogCategoryData =
     useSelector((state) => state.blogCategory.blogCategoryData) || [];
 
   const [error, setError] = useState(null);
-
   const [formData, setFormData] = useState({
     category_blog_id: "",
     slug: "",
@@ -53,21 +51,16 @@ const CreateBlogModal = ({ openModal }) => {
     if (formData.photo_sq) data.append("photo_sq", formData.photo_sq);
     if (formData.photo_en) data.append("photo_en", formData.photo_en);
     if (formData.photo_sr) data.append("photo_sr", formData.photo_sr);
-
-    dispatch(createBlogs(data))
-      .unwrap()
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   };
-
   useEffect(() => {
+    setFormData({
+      ...formData,
+      sq: item?.translations?.sq?.title,
+      en: item?.translations?.en?.title,
+      sr: item?.translations?.sr?.title,
+    });
     dispatch(getAllBlogCategory());
   }, [dispatch]);
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center w-15">
       <div
@@ -81,7 +74,7 @@ const CreateBlogModal = ({ openModal }) => {
         <div className="p-6 ">
           <div className="flex items-center justify-between">
             <h3 className="mb-1 text-xl font-normal text-center text-gray-500 dark:text-gray-400">
-              Add Blog
+              Update Blog
             </h3>
             <button onClick={openModal}>
               <IoIosCloseCircle />
@@ -116,29 +109,6 @@ const CreateBlogModal = ({ openModal }) => {
               )}
             </div>
 
-            {/* Slug */}
-            <div className="mt-[33px]">
-              <label
-                htmlFor="slug"
-                className="block mb-2 text-[18px] font-medium"
-              >
-                Slug
-              </label>
-              <input
-                type="text"
-                name="slug"
-                id="slug"
-                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
-                placeholder="Slug"
-                value={formData.slug}
-                onChange={handleChange}
-              />
-              {error && error.slug && (
-                <span className="text-red-500">{error.slug}</span>
-              )}
-            </div>
-
-            {/* Name Albania */}
             <div className="mt-[33px]">
               <label
                 htmlFor="sq"
@@ -173,8 +143,8 @@ const CreateBlogModal = ({ openModal }) => {
                 name="photo_sq"
                 onChange={handleFileChange}
                 className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
-               file:bg-transparent file:rounded-[10px] file:border-[#767676]
-               file:border-1 file:mt-[12px]"
+                  file:bg-transparent file:rounded-[10px] file:border-[#767676]
+                  file:border-1 file:mt-[12px]"
               />
             </div>
 
@@ -213,8 +183,8 @@ const CreateBlogModal = ({ openModal }) => {
                 name="photo_en"
                 onChange={handleFileChange}
                 className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
-               file:bg-transparent file:rounded-[10px] file:border-[#767676]
-               file:border-1 file:mt-[12px]"
+                  file:bg-transparent file:rounded-[10px] file:border-[#767676]
+                  file:border-1 file:mt-[12px]"
               />
             </div>
 
@@ -253,8 +223,8 @@ const CreateBlogModal = ({ openModal }) => {
                 name="photo_sr"
                 onChange={handleFileChange}
                 className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
-               file:bg-transparent file:rounded-[10px] file:border-[#767676]
-               file:border-1 file:mt-[12px]"
+                  file:bg-transparent file:rounded-[10px] file:border-[#767676]
+                  file:border-1 file:mt-[12px]"
               />
             </div>
 
@@ -274,4 +244,4 @@ const CreateBlogModal = ({ openModal }) => {
   );
 };
 
-export default CreateBlogModal;
+export default UpdateBlogModal;
