@@ -2,3 +2,8 @@ export { default as CreateUserModal } from "./modal/users/CreateUserModal";
 export { default as UpdateUserModal } from "./modal/users/UpdateUserModal";
 export { default as CreateBlogCategoryModal } from "./modal/blog/CreateBlogCategoryModal";
 export { default as CreateBlogModal } from "./modal/blog/CreateBlogModal";
+export { default as UpdateBlogModal } from "./modal/blog/UpdateBlogModal";
+export { default as CreateTopicsPulication } from "./modal/publication/CreateTopicsPulication";
+export { default as CreatePublication } from "./modal/publication/CreatePublication";
+export { default as CreateCampingsModal } from "./modal/campings/CreateCampingsModal";
+export { default as CreateTeamModal } from "./modal/about/CreateTeamModal";

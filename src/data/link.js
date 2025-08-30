@@ -13,6 +13,27 @@ export const links = [
         icon: "",
         roles: ["admin"],
       },
+
+      {
+        name: "Publication",
+        url: "publication",
+        icon: "",
+        roles: ["admin"],
+      },
+
+      {
+        name: "Campaings",
+        url: "campaings",
+        icon: "",
+        roles: ["admin"],
+      },
+
+      {
+        name: "About",
+        url: "about",
+        icon: "",
+        roles: ["admin"],
+      },
     ],
   },
 ];
