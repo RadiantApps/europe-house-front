@@ -7,3 +7,5 @@ export { default as CreateTopicsPulication } from "./modal/publication/CreateTop
 export { default as CreatePublication } from "./modal/publication/CreatePublication";
 export { default as CreateCampingsModal } from "./modal/campings/CreateCampingsModal";
 export { default as CreateTeamModal } from "./modal/about/CreateTeamModal";
+export { default as CreateEventCategoryModal } from "./modal/event/CreateEventCategoryModal";
+export { default as CreateContactModal } from "./modal/contact/CreateContactModal";
