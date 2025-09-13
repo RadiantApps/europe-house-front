@@ -8,6 +8,8 @@ import blogCategorySlice from "./features/blogCategorySlice";
 import categoryPublicationSlice from "./features/categoryPublicationSlice";
 import publicationSlice from "./features/publicationSlice";
 import campaingsSlice from "./features/campaingsSlice";
+import categoryEventSlice from "./features/categoryEventSlice";
+import locationSlice from "./features/locationSlice";
 
 export const store = configureStore({
   reducer: {
@@ -20,5 +22,7 @@ export const store = configureStore({
     categoryPublication: categoryPublicationSlice,
     publication: publicationSlice,
     campaing: campaingsSlice,
+    categoryevent: categoryEventSlice,
+    location: locationSlice,
   },
 });

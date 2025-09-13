@@ -8,7 +8,7 @@ export const links = [
         roles: ["admin"],
       },
       {
-        name: "Blgos",
+        name: "Blogs",
         url: "blogs",
         icon: "",
         roles: ["admin"],
@@ -27,10 +27,23 @@ export const links = [
         icon: "",
         roles: ["admin"],
       },
+      {
+        name: "Events",
+        url: "events",
+        icon: "",
+        roles: ["admin"],
+      },
 
       {
         name: "About",
         url: "about",
+        icon: "",
+        roles: ["admin"],
+      },
+
+      {
+        name: "Contact",
+        url: "contact",
         icon: "",
         roles: ["admin"],
       },
