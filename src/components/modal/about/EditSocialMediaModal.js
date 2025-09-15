@@ -1,0 +1,133 @@
+import { IoIosCloseCircle } from "react-icons/io";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { updateSocialTeam } from "@/store/features/teamSlice"; // your redux action
+
+const EditSocialMediaModal = ({ openModal, data }) => {
+  const dispatch = useDispatch();
+  const [error, setError] = useState(null);
+  const [formData, setFormData] = useState({
+    id: "",
+    facebook: "",
+    instagram: "",
+    twitter: "",
+    linkedin: "",
+  });
+
+  useEffect(() => {
+    if (data) {
+      setFormData(data?.socials || {});
+    }
+  }, [data]);
+
+  const handleChange = (field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(updateSocialTeam(formData))
+      .unwrap()
+      .then(() => {
+        toast.success("Social media updated successfully!");
+      })
+      .catch((err) => {
+        setError(err.message || "Failed to update social media.");
+      });
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center">
+      <div
+        className="bg-gray-900 bg-opacity-40 absolute inset-0"
+        onClick={openModal}
+      ></div>
+      <div
+        className="relative bg-[#EFEFEF] pl-[40px] pr-[40px] rounded-lg shadow-lg hide-scrollbar"
+        style={{ width: "514px", height: "80%", overflowY: "auto" }}
+      >
+        <div className="p-6">
+          <div className="flex items-center justify-between">
+            <h3 className="mb-1 text-xl font-normal text-gray-700">
+              Edit Social Media
+            </h3>
+            <button onClick={openModal}>
+              <IoIosCloseCircle className="text-2xl text-gray-600" />
+            </button>
+          </div>
+
+          <form
+            autoComplete="off"
+            onSubmit={onSubmit}
+            className="space-y-5 mt-[33px]"
+          >
+            <div>
+              <label className="block mb-2 text-[16px] font-medium">
+                Facebook
+              </label>
+              <input
+                type="text"
+                value={formData.facebook || ""}
+                onChange={(e) => handleChange("facebook", e.target.value)}
+                className="bg-white h-[45px] w-full rounded-[10px] pl-[12px]"
+              />
+            </div>
+            <div>
+              <label className="block mb-2 text-[16px] font-medium">
+                Instagram
+              </label>
+              <input
+                type="text"
+                value={formData.instagram || ""}
+                onChange={(e) => handleChange("instagram", e.target.value)}
+                className="bg-white h-[45px] w-full rounded-[10px] pl-[12px]"
+              />
+            </div>
+            <div>
+              <label className="block mb-2 text-[16px] font-medium">
+                Twitter
+              </label>
+              <input
+                type="text"
+                value={formData.twitter || ""}
+                onChange={(e) => handleChange("twitter", e.target.value)}
+                className="bg-white h-[45px] w-full rounded-[10px] pl-[12px]"
+              />
+            </div>
+            <div>
+              <label className="block mb-2 text-[16px] font-medium">
+                LinkedIn
+              </label>
+              <input
+                type="text"
+                value={formData.linkedin || ""}
+                onChange={(e) => handleChange("linkedin", e.target.value)}
+                className="bg-white h-[45px] w-full rounded-[10px] pl-[12px]"
+              />
+            </div>
+
+            <div className="flex items-center justify-center mt-5">
+              <button
+                type="submit"
+                className="w-full h-[50px] bg-[#B8F900] rounded-[10px] text-[18px] font-medium text-black mb-[30px]"
+              >
+                Publish
+              </button>
+            </div>
+          </form>
+
+          {error && (
+            <p className="text-red-500 text-sm mt-2 text-center">{error}</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default EditSocialMediaModal;
