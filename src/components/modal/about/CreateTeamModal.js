@@ -3,6 +3,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { createTeam } from "@/store/features/teamSlice";
 
 const CreateTeamModal = ({ openModal }) => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const CreateTeamModal = ({ openModal }) => {
   const [formData, setFormData] = useState({
     name: "",
     surname: "",
+    email: "",
     position_al: "",
     position_en: "",
     position_sr: "",
@@ -49,6 +51,7 @@ const CreateTeamModal = ({ openModal }) => {
     const data = new FormData();
     data.append("name", formData.name);
     data.append("surname", formData.surname);
+    data.append("email", formData.email);
     data.append("translations", JSON.stringify(translations));
     data.append("facebook", formData.facebook);
     data.append("instagram", formData.instagram);
@@ -58,10 +61,7 @@ const CreateTeamModal = ({ openModal }) => {
     if (formData.photo) data.append("photo", formData.photo);
 
     try {
-      // Example: dispatch to Redux thunk or make direct fetch call
-      // await dispatch(addTeamMember(data));
-      toast.success("Team member created successfully!");
-      openModal(); // close modal
+      dispatch(createTeam(data));
     } catch (err) {
       console.error(err);
       toast.error("Failed to create team member");
@@ -117,6 +117,20 @@ const CreateTeamModal = ({ openModal }) => {
                 className="bg-white h-[45px] w-full rounded-[10px] pl-[12px]"
                 placeholder="Enter surname"
                 value={formData.surname}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div>
+              <label className="block mb-2 text-[16px] font-medium">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                className="bg-white h-[45px] w-full rounded-[10px] pl-[12px]"
+                placeholder="Enter email"
+                value={formData.email}
                 onChange={handleChange}
               />
             </div>

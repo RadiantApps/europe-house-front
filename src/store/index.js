@@ -10,11 +10,15 @@ import publicationSlice from "./features/publicationSlice";
 import campaingsSlice from "./features/campaingsSlice";
 import categoryEventSlice from "./features/categoryEventSlice";
 import locationSlice from "./features/locationSlice";
+import teamSlice from "./features/teamSlice";
+import programmesSlice from "./features/programmesSlice";
+import eusupportSlice from "./features/eusupportSlice";
 
 export const store = configureStore({
   reducer: {
     events: eventsSlice,
     language: languageSlice,
+    team: teamSlice,
     toggle: toggleSlice,
     user: userSlice,
     blog: blogSlice,
@@ -24,5 +28,7 @@ export const store = configureStore({
     campaing: campaingsSlice,
     categoryevent: categoryEventSlice,
     location: locationSlice,
+    programme: programmesSlice,
+    eusupport: eusupportSlice,
   },
 });

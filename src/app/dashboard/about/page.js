@@ -1,20 +1,73 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import { CreateTeamModal } from "@/components";
+import {
+  CreateTeamModal,
+  EditTeamPositonModal,
+  EditSocialMediaModal,
+  EditTeamModal,
+} from "@/components";
+import { deleteTeams, getAllTeams } from "@/store/features/teamSlice";
+import Image from "next/image";
+import { imageUrl } from "@/config";
 const About = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const teamsData = useSelector((state) => state.team.allTeamsData) || [];
+  const createTeamLoading = useSelector(
+    (state) => state.team.createTeamLoading
+  );
+  const deleteTeamLoading = useSelector(
+    (state) => state.team.deleteTeamLoading
+  );
+  const updatePositionTeamLoading = useSelector(
+    (state) => state.team.updatePositionTeamLoading
+  );
+  const updateSocialMediaLoading = useSelector(
+    (state) => state.team.updateSocialMediaLoading
+  );
+  const updateTeamInfoLoading = useSelector(
+    (state) => state.team.updateTeamInfoLoading
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEditPosition, setIsOpenEditPosition] = useState(false);
+  const [itemEditPosition, setItemEditPosition] = useState(null);
+  const [itemEditSocialMedia, setItemEditSocialMedia] = useState(null);
+  const [isOpenEditSocialMedia, setIsOpenEditSocialMedia] = useState(false);
+  const [itemEditMain, setItemEditMain] = useState(null);
+  const [isOpenEditMain, setIsOpenEditMain] = useState(false);
 
   const openModal = () => setIsOpen(!isOpen);
 
+  const openEditPositionModal = (item) => {
+    setItemEditPosition(item);
+    setIsOpenEditPosition(!isOpenEditPosition);
+  };
+
+  const openEditSocialMediaModal = (item) => {
+    setItemEditSocialMedia(item);
+    setIsOpenEditSocialMedia(!isOpenEditSocialMedia);
+  };
+
+  const openEditMainModal = (item) => {
+    setItemEditMain(item);
+    setIsOpenEditMain(!isOpenEditMain);
+  };
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  useEffect(() => {
+    dispatch(getAllTeams());
+  }, [
+    createTeamLoading,
+    deleteTeamLoading,
+    updatePositionTeamLoading,
+    updateSocialMediaLoading,
+    updateTeamInfoLoading,
+  ]);
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
@@ -42,8 +95,9 @@ const About = () => {
                 Surname
               </th>
               <th scope="col" className="px-4 py-4">
-                Postion
+                Email
               </th>
+
               <th scope="col" className="px-4 py-4">
                 Photo
               </th>
@@ -59,30 +113,50 @@ const About = () => {
             </tr>
           </thead>
           <tbody>
-            {[]?.map((item) => (
+            {teamsData?.map((item) => (
               <tr
-                key={item.blog_id}
+                key={item.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
-                <td className="px-4 py-4">{item?.translations?.sq?.title}</td>
-                <td className="px-4 py-4">{item?.translations?.en?.title}</td>
-                <td className="px-4 py-4">{item?.translations?.sr?.title}</td>
+                <td className="px-4 py-4">{item?.name}</td>
+                <td className="px-4 py-4">{item?.surname}</td>
+                <td className="px-4 py-4">{item?.email}</td>
+                <td className="px-4 py-4">
+                  <Image
+                    src={`${imageUrl}/${item?.photo}`}
+                    alt="item name"
+                    width={100}
+                    height={100}
+                  />
+                </td>
                 <td className="px-4 py-4 flex space-x-2">
                   <button
-                    onClick={() => openModalUpdate(item)}
+                    onClick={() => {
+                      openEditMainModal(item);
+                    }}
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                   >
                     Edit
                   </button>
-                  <Link
-                    href="/"
-                    className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
-                  >
-                    Go to blog
-                  </Link>
                   <button
                     onClick={() => {
-                      dispatch(deleteBlogs(item.blog_id));
+                      openEditPositionModal(item);
+                    }}
+                    className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
+                  >
+                    Edit Position
+                  </button>
+                  <button
+                    onClick={() => {
+                      openEditSocialMediaModal(item);
+                    }}
+                    className="bg-[#F5F5F5] rounded-[10px] w-[150px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
+                  >
+                    Edit Social media
+                  </button>
+                  <button
+                    onClick={() => {
+                      dispatch(deleteTeams(item.id));
                     }}
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                   >
@@ -95,6 +169,24 @@ const About = () => {
         </table>
       </div>
       {isOpen && <CreateTeamModal openModal={openModal} />}
+      {isOpenEditPosition && (
+        <EditTeamPositonModal
+          openModal={() => setIsOpenEditPosition(!isOpenEditPosition)}
+          data={itemEditPosition}
+        />
+      )}
+      {isOpenEditSocialMedia && (
+        <EditSocialMediaModal
+          openModal={() => setIsOpenEditSocialMedia(!isOpenEditSocialMedia)}
+          data={itemEditSocialMedia}
+        />
+      )}
+      {isOpenEditMain && (
+        <EditTeamModal
+          openModal={() => setIsOpenEditMain(!isOpenEditMain)}
+          data={itemEditMain}
+        />
+      )}
     </div>
   );
 };

@@ -9,3 +9,10 @@ export { default as CreateCampingsModal } from "./modal/campings/CreateCampingsM
 export { default as CreateTeamModal } from "./modal/about/CreateTeamModal";
 export { default as CreateEventCategoryModal } from "./modal/event/CreateEventCategoryModal";
 export { default as CreateContactModal } from "./modal/contact/CreateContactModal";
+export { default as EditTeamPositonModal } from "./modal/about/EditTeamPositonModal";
+export { default as EditSocialMediaModal } from "./modal/about/EditSocialMediaModal";
+export { default as EditTeamModal } from "./modal/about/EditTeamModal";
+export { default as CreateProgrammeModal } from "./modal/programme/CreateProgrammeModal";
+export { default as EditProgrammeModal } from "./modal/programme/EditProgrammeModal";
+export { default as CreateEuSupportModal } from "./modal/eusupport/CreateEuSupportModal";
+export { default as UpdateEuSupportModal } from "./modal/eusupport/UpdateEuSupportModal";

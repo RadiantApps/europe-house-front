@@ -47,6 +47,12 @@ export const links = [
         icon: "",
         roles: ["admin"],
       },
+      {
+        name: "Support",
+        url: "support",
+        icon: "",
+        roles: ["admin"],
+      },
     ],
   },
 ];
