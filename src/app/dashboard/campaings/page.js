@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreateCampingsModal } from "@/components";
+import { CreateCampingsModal, EditCampaingsModal } from "@/components";
 import {
   deleteCampings,
   getAllCampaings,
@@ -19,9 +19,18 @@ const CampaingsDash = () => {
   const deleteCampaingLoading = useSelector(
     (state) => state.campaing.deleteCampingsLoading
   );
+  const updateCampingLoading = useSelector(
+    (state) => state.campaing.updateCampaingsLoading
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [itemEdit, setItemEdit] = useState(null);
 
+  const openModalEdit = (item) => {
+    setItemEdit(item);
+    setIsOpenEdit(!isOpenEdit);
+  };
   const openModal = () => setIsOpen(!isOpen);
 
   const handleSearch = (e) => {
@@ -30,7 +39,7 @@ const CampaingsDash = () => {
 
   useEffect(() => {
     dispatch(getAllCampaings());
-  }, [createCampaingLoading, deleteCampaingLoading]);
+  }, [createCampaingLoading, deleteCampaingLoading, updateCampingLoading]);
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
       <div className="flex justify-between">
@@ -83,7 +92,7 @@ const CampaingsDash = () => {
           <tbody>
             {campaingData?.map((item) => (
               <tr
-                key={item.campaing_id}
+                key={item.id}
                 className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
               >
                 <td className="px-4 py-4">{item?.translations?.sq?.title}</td>
@@ -91,14 +100,16 @@ const CampaingsDash = () => {
                 <td className="px-4 py-4">{item?.translations?.sr?.title}</td>
                 <td className="px-4 py-4 flex space-x-2">
                   <button
-                    onClick={() => {}}
+                    onClick={() => {
+                      openModalEdit(item);
+                    }}
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                   >
                     Edit
                   </button>
 
                   <button
-                    onClick={() => dispatch(deleteCampings(item?.campaing_id))}
+                    onClick={() => dispatch(deleteCampings(item?.id))}
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                   >
                     Delete
@@ -110,6 +121,9 @@ const CampaingsDash = () => {
         </table>
       </div>
       {isOpen && <CreateCampingsModal openModal={openModal} />}
+      {isOpenEdit && (
+        <EditCampaingsModal openModal={openModalEdit} editData={itemEdit} />
+      )}
     </div>
   );
 };

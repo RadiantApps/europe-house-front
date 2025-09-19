@@ -2,11 +2,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreatePublication } from "@/components";
+import { CreatePublication, EditCampaingsModal } from "@/components";
 import {
   deletePublication,
   getPublication,
 } from "@/store/features/publicationSlice";
+import EditPublicationModal from "@/components/modal/publication/EditPublicationModal";
 
 const Publication = () => {
   const dispatch = useDispatch();
@@ -21,19 +22,31 @@ const Publication = () => {
   const createPublicationLoading = useSelector(
     (state) => state.publication.createPublicationLoading
   );
+  const updatePublicationLoading = useSelector(
+    (state) => state.publication.updatePublicationLoading
+  );
   const [searchTerm, setSearchTerm] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [itemEdit, setItemEdit] = useState(null);
 
   const openModal = () => setIsOpen(!isOpen);
 
+  const openModalEdit = (item) => {
+    setIsOpenEdit(!isOpenEdit);
+    setItemEdit(item);
+  };
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
   useEffect(() => {
     dispatch(getPublication());
-  }, [deletePublicationLoading, createPublicationLoading]);
-
+  }, [
+    deletePublicationLoading,
+    createPublicationLoading,
+    updatePublicationLoading,
+  ]);
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
       <div className="mb-10">
@@ -102,7 +115,9 @@ const Publication = () => {
                 <td className="px-4 py-4">{item?.translations?.sr?.title}</td>
                 <td className="px-4 py-4 flex space-x-2">
                   <button
-                    onClick={() => {}}
+                    onClick={() => {
+                      openModalEdit(item);
+                    }}
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                   >
                     Edit
@@ -123,6 +138,9 @@ const Publication = () => {
         </table>
       </div>
       {isOpen && <CreatePublication openModal={openModal} />}
+      {isOpenEdit && (
+        <EditPublicationModal openModal={openModalEdit} editData={itemEdit} />
+      )}
     </div>
   );
 };

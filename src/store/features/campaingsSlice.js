@@ -43,6 +43,20 @@ export const deleteCampings = createAsyncThunk(
   }
 );
 
+export const updateCampaings = createAsyncThunk(
+  "campaings/updateCampaings",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.put("/campaings", data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Campaings update failed"
+      );
+    }
+  }
+);
+
 const initialState = {
   getAllCampaingsData: null,
   getAllCampaingsLoading: false,
@@ -55,6 +69,10 @@ const initialState = {
   deleteCampingsData: null,
   deleteCampingsLoading: false,
   deleteCampingsError: null,
+
+  updateCampaingsData: null,
+  updateCampaingsLoading: false,
+  updateCampaingsError: null,
 };
 
 const campaingsSlice = createSlice({
@@ -64,6 +82,18 @@ const campaingsSlice = createSlice({
   extraReducers: (builder) => {
     // Get all
     builder
+      .addCase(updateCampaings.rejected, (state, action) => {
+        state.updateCampaingsLoading = false;
+        state.updateCampaingsError = action.error.message;
+      })
+      .addCase(updateCampaings.fulfilled, (state, action) => {
+        state.updateCampaingsData = action.payload;
+        state.updateCampaingsLoading = false;
+      })
+      .addCase(updateCampaings.pending, (state) => {
+        state.updateCampaingsLoading = true;
+        state.updateCampaingsError = null;
+      })
       .addCase(getAllCampaings.pending, (state) => {
         state.getAllCampaingsLoading = true;
         state.getAllCampaingsError = null;

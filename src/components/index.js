@@ -16,3 +16,5 @@ export { default as CreateProgrammeModal } from "./modal/programme/CreateProgram
 export { default as EditProgrammeModal } from "./modal/programme/EditProgrammeModal";
 export { default as CreateEuSupportModal } from "./modal/eusupport/CreateEuSupportModal";
 export { default as UpdateEuSupportModal } from "./modal/eusupport/UpdateEuSupportModal";
+export { default as EditCampaingsModal } from "./modal/campings/EditCampaingsModal";
+export { default as CreateEventModal } from "./modal/event/CreateEventModal";

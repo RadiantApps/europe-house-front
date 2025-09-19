@@ -55,13 +55,15 @@ const CreateCampingsModal = ({ openModal }) => {
     if (formData.photo_en) data.append("photo_en", formData.photo_en);
     if (formData.photo_sr) data.append("photo_sr", formData.photo_sr);
 
-    try {
-      await dispatch(createCampings(data)).unwrap();
-      toast.success("Campaign created successfully!");
-    } catch (err) {
-      setError(err);
-      toast.error("Failed to create campaign");
-    }
+    dispatch(createCampings(data))
+      .unwrap()
+      .then(() => {
+        toast.success("Campaings created successfull");
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Campaings failed to created");
+      });
   };
 
   return (
