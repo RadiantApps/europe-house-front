@@ -4,6 +4,7 @@ import PublicationsIcon from "../../assets/publications/publications.svg";
 import { useState } from "react";
 import Image from "next/image";
 import { SlidersHorizontal } from "lucide-react";
+import Footer from "@/components/footer";
 
 export default function PublicationsPage() {
   const filterOptions = [
@@ -153,7 +154,7 @@ export default function PublicationsPage() {
           </div>
           <div className="lg:max-w-xl min-w-0">
             <p
-              className="text-[16px] sm:text-[18px] font-light leading-relaxed text-[#555353] text-left lg:text-justify"
+              className="text-[16px] sm:text-[18px] kanit-regular leading-relaxed text-[#555353] text-left lg:text-justify"
               style={{ fontFamily: "Kanit" }}
             >
               Leaf through our latest publications.
@@ -174,12 +175,14 @@ export default function PublicationsPage() {
                 {/* Mobile Layout */}
                 <div className="flex flex-col bg-[#dbdde0] lg:hidden">
                   <div className="p-4 sm:p-6">
-                    <h2 className="text-lg sm:text-xl font-medium uppercase text-[#1c1a1a] leading-tight">
+                    <h2 className="text-lg sm:text-xl kanit-medium uppercase text-[#1c1a1a] leading-tight">
                       {item.title}
                       <br />
                       <span className="normal-case">{item.subtitle}</span>
                     </h2>
-                    <p className="text-sm text-[#8e8d8d] mt-3">{item.date}</p>
+                    <p className="text-sm text-[#8e8d8d] mt-3 kanit-regular">
+                      {item.date}
+                    </p>
                   </div>
 
                   <img
@@ -189,7 +192,7 @@ export default function PublicationsPage() {
                   />
 
                   <div className="flex flex-col sm:flex-row sm:justify-between items-center bg-[#4343ee] px-4 sm:px-6 py-3 gap-3 w-full">
-                    <p className="text-white text-base font-light">
+                    <p className="text-white text-base kanit-regular">
                       Download PDF
                     </p>
                     <div className="flex gap-2 flex-wrap justify-center sm:justify-end">
@@ -198,7 +201,7 @@ export default function PublicationsPage() {
                           key={lang}
                           className="px-3 sm:px-4 py-1 rounded-[42px] bg-[#f7f0f0]"
                         >
-                          <p className="text-sm sm:text-base font-light uppercase text-[#4343ee]">
+                          <p className="text-sm sm:text-base kanit-regular uppercase text-[#4343ee] ">
                             {lang}
                           </p>
                         </div>
@@ -211,16 +214,18 @@ export default function PublicationsPage() {
                 <div className="hidden lg:flex flex-row bg-[#dbdde0]">
                   <div className="flex flex-col flex-1 min-w-0">
                     <div className="flex flex-col justify-center p-6 flex-1">
-                      <h2 className="text-xl xl:text-[26px] font-medium uppercase text-[#1c1a1a] leading-tight">
+                      <h2 className="text-xl xl:text-[26px] kanit-medium uppercase text-[#1c1a1a] leading-tight">
                         {item.title}
                         <br />
                         <span className="normal-case">{item.subtitle}</span>
                       </h2>
-                      <p className="text-sm text-[#8e8d8d] mt-3">{item.date}</p>
+                      <p className="text-sm text-[#8e8d8d] mt-3 kanit-regular">
+                        {item.date}
+                      </p>
                     </div>
 
                     <div className="flex flex-row justify-between items-center bg-[#4343ee] px-6 py-3 gap-3">
-                      <p className="text-white text-base font-light whitespace-nowrap">
+                      <p className="text-white text-base kanit-regular whitespace-nowrap kanit-regular">
                         Download PDF
                       </p>
                       <div className="flex gap-2 flex-wrap justify-end">
@@ -229,7 +234,7 @@ export default function PublicationsPage() {
                             key={lang}
                             className="px-3 xl:px-4 py-1 rounded-[42px] bg-[#f7f0f0] flex-shrink-0"
                           >
-                            <p className="text-sm xl:text-base font-light uppercase text-[#4343ee]">
+                            <p className="text-sm xl:text-base kanit-regular uppercase text-[#4343ee]">
                               {lang}
                             </p>
                           </div>
@@ -249,6 +254,7 @@ export default function PublicationsPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

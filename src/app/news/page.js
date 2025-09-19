@@ -3,29 +3,28 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ChevronDown, SlidersHorizontal } from "lucide-react";
-import NewsIcon from "../../assets/news/news.svg"
-import Img1 from "../../assets/news/1.png"
-import Img2 from "../../assets/news/2.png"
-import Img3 from "../../assets/news/3.png"
-import Img4 from "../../assets/news/4.png"
-import Img5 from "../../assets/news/5.png"
-import Img6 from "../../assets/news/6.png"
-import Img7 from "../../assets/news/7.png"
-import Img8 from "../../assets/news/8.png"
-
+import NewsIcon from "../../assets/news/news.svg";
+import Img1 from "../../assets/news/1.png";
+import Img2 from "../../assets/news/2.png";
+import Img3 from "../../assets/news/3.png";
+import Img4 from "../../assets/news/4.png";
+import Img5 from "../../assets/news/5.png";
+import Img6 from "../../assets/news/6.png";
+import Img7 from "../../assets/news/7.png";
+import Img8 from "../../assets/news/8.png";
 
 import Image from "next/image";
 import Footer from "@/components/footer";
 
 const mockNewsData = [
-
   {
     id: 2,
-    title: "A Summer of Joy and Learning: The SOS Children's Village Summer Camp 2024",
-    date: "June 28, 2024", 
+    title:
+      "A Summer of Joy and Learning: The SOS Children's Village Summer Camp 2024",
+    date: "June 28, 2024",
     category: "Community",
     description: "Children enjoying summer activities and learning experiences",
-    image: Img2
+    image: Img2,
   },
   {
     id: 3,
@@ -33,7 +32,7 @@ const mockNewsData = [
     date: "June 20, 2024",
     category: "Development",
     description: "Initiative focusing on sustainable construction practices",
-    image: Img3
+    image: Img3,
   },
   {
     id: 4,
@@ -41,7 +40,7 @@ const mockNewsData = [
     date: "June 15, 2024",
     category: "Culture",
     description: "New creative space opens for artists and thinkers",
-    image: Img4
+    image: Img4,
   },
   {
     id: 5,
@@ -49,7 +48,7 @@ const mockNewsData = [
     date: "June 10, 2024",
     category: "Culture",
     description: "Contemporary art exhibition showcasing diverse perspectives",
-    image: Img5
+    image: Img5,
   },
   {
     id: 6,
@@ -57,7 +56,7 @@ const mockNewsData = [
     date: "June 5, 2024",
     category: "History",
     description: "Documentary exploring liberation movements",
-    image: Img6
+    image: Img6,
   },
   {
     id: 7,
@@ -65,7 +64,7 @@ const mockNewsData = [
     date: "May 28, 2024",
     category: "Health",
     description: "Public health campaign promoting vaccination access",
-    image: Img7
+    image: Img7,
   },
   {
     id: 8,
@@ -73,9 +72,8 @@ const mockNewsData = [
     date: "May 20, 2024",
     category: "Education",
     description: "New educational quality assurance initiative",
-    image:Img8
+    image: Img8,
   },
- 
 ];
 
 export default function NewsBlog() {
@@ -153,16 +151,16 @@ export default function NewsBlog() {
   ];
 
   const handleSeeMore = () => {
-    setVisibleItems(prev => Math.min(prev + 4, filteredNews.length));
+    setVisibleItems((prev) => Math.min(prev + 4, filteredNews.length));
   };
 
   const applyFilters = () => {
     let filtered = newsData;
-    
+
     if (selectedCategory !== "Category") {
-      filtered = filtered.filter(item => item.category === selectedCategory);
+      filtered = filtered.filter((item) => item.category === selectedCategory);
     }
-    
+
     setFilteredNews(filtered);
     setVisibleItems(8);
   };
@@ -189,44 +187,37 @@ export default function NewsBlog() {
       <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
           <div className="flex flex-col">
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <Image
-              src={NewsIcon}
-              alt="Events Icon"
-              width={64}
-              height={64}
-              className="w-12 h-12 md:w-16 md:h-16 object-contain"
-            />
-            <h1
-              className="font-semibold text-[#1C1A1A] leading-[1.1]"
-              style={{
-                fontFamily: "Kanit",
-                fontSize: "clamp(28px, 4vw, 64px)",
-              }}
-            >
-              NEWS BLOG
-            </h1>
-            
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <Image
+                src={NewsIcon}
+                alt="Events Icon"
+                width={64}
+                height={64}
+                className="w-12 h-12 md:w-16 md:h-16 object-contain"
+              />
+              <h1
+                className="font-semibold text-[#1C1A1A] leading-[1.1] kanit-semibold"
+                style={{
+                  fontSize: "clamp(28px, 4vw, 64px)",
+                }}
+              >
+                NEWS BLOG
+              </h1>
+            </div>
+            <div className="w-full hidden lg:flex border-t border-[#C6C6C6]"></div>
           </div>
-          <div className="w-full hidden lg:flex border-t border-[#C6C6C6]"></div>
-
-          </div>
-          
 
           <div className="lg:max-w-xl min-w-0 flex flex-col">
-            <p
-              className="text-[16px] sm:text-[18px] font-light leading-relaxed text-[#555353] text-left lg:text-justify"
-              style={{ fontFamily: "Kanit" }}
-            >
-              Stay informed and inspired with our news section, where we bring you the latest updates, interviews.
+            <p className="text-[16px] sm:text-[18px] font-light leading-relaxed text-[#555353] text-left lg:text-justify kanit-semibold ">
+              Stay informed and inspired with our news section, where we bring
+              you the latest updates, interviews.
             </p>
-            <button className="mt-6 lg:mt-8 w-[190px] h-[50px] flex items-center justify-center gap-[10px] bg-indigo-600 text-white font-medium rounded-[56px]">
-                Join Us
-              </button>
+            <button className=" kanit-medium  mt-6 lg:mt-8 w-[190px] h-[50px] flex items-center justify-center gap-[10px] bg-indigo-600 text-white font-medium rounded-[56px]">
+              Join Us
+            </button>
           </div>
         </div>
         <div className="lg:hidden w-full border-t border-[#C6C6C6]"></div>
-
       </div>
       <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-6 md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px]">
         {/* Mobile Filter Button */}
@@ -247,7 +238,7 @@ export default function NewsBlog() {
               <select
                 value={filters[filter.key]}
                 onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-                className="appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full md:w-auto text-sm font-medium cursor-pointer"
+                className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full md:w-auto text-sm font-medium cursor-pointer"
               >
                 <option value="">{filter.label}</option>
                 {filter.options.map((opt, i) =>
@@ -286,7 +277,10 @@ export default function NewsBlog() {
         <div className="px-6 md:px-[74px] pt-[43px] pb-[32px]">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             {filteredNews.map((article, index) => (
-              <div key={article.id} className="overflow-hidden gap-9 lg:gap-11 ">
+              <div
+                key={article.id}
+                className="overflow-hidden gap-9 lg:gap-11 "
+              >
                 {/* Article Image */}
                 <div className="relative h-48 bg-gradient-to-br from-blue-100 to-purple-100">
                   {/* {article.amount && (
@@ -311,21 +305,20 @@ export default function NewsBlog() {
                       </div>
                     </div>
                   )} */}
-                  
-                    <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                      <Image src={article.image} alt="" />
-                    </div>
-                  
+
+                  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                    <Image src={article.image} alt="" />
+                  </div>
                 </div>
 
                 {/* Article Content */}
                 <div className="pt-6 lg:pt-5 ">
-                  <span className="text-xs text-gray-500">{article.date}</span>
-                  <h3 className="font-semibold text-gray-900 mt-[14px] lg:mt-3">
+                  <span className="text-xs text-gray-500 kanit-light">
+                    {article.date}
+                  </span>
+                  <h3 className="kanit-semibold  text-gray-900 mt-[14px] lg:mt-3">
                     {article.title}
                   </h3>
-                  
-                  
                 </div>
               </div>
             ))}
@@ -333,21 +326,20 @@ export default function NewsBlog() {
 
           {/* See More Button */}
           {/* {visibleItems < filteredNews.length && ( */}
-            <div className="text-center">
-              <button
-                onClick={handleSeeMore}
-                className="bg-blue-600 text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors"
-              >
-                See more
-              </button>
-            </div>
+          <div className="text-center">
+            <button
+              onClick={handleSeeMore}
+              className="bg-blue-600 text-white px-8 py-3 rounded-full text-sm font-medium hover:bg-blue-700 transition-colors"
+            >
+              See more
+            </button>
+          </div>
           {/* )} */}
 
           {/* Join Community Section */}
         </div>
       </div>
       <Footer />
-
     </div>
   );
 }
