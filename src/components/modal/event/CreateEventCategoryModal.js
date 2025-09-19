@@ -67,7 +67,7 @@ const CreateEventCategoryModal = ({ openModal }) => {
         <div className="p-6 ">
           <div className="flex items-center justify-between">
             <h3 className="mb-1 text-xl font-normal text-center text-gray-500 dark:text-gray-400">
-              Add Blog Cateogry
+              Add Event Cateogry
             </h3>
             <button onClick={openModal}>
               <IoIosCloseCircle />

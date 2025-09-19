@@ -48,7 +48,7 @@ const CreateBlogModal = ({ openModal }) => {
     ];
     const data = new FormData();
     data.append("category_blog_id", formData.category_blog_id);
-    data.append("slug", formData.slug);
+
     data.append("translations", JSON.stringify(translations));
     if (formData.photo_sq) data.append("photo_sq", formData.photo_sq);
     if (formData.photo_en) data.append("photo_en", formData.photo_en);
@@ -113,28 +113,6 @@ const CreateBlogModal = ({ openModal }) => {
               </select>
               {error && error.category_blog_id && (
                 <span className="text-red-500">{error.category_blog_id}</span>
-              )}
-            </div>
-
-            {/* Slug */}
-            <div className="mt-[33px]">
-              <label
-                htmlFor="slug"
-                className="block mb-2 text-[18px] font-medium"
-              >
-                Slug
-              </label>
-              <input
-                type="text"
-                name="slug"
-                id="slug"
-                className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
-                placeholder="Slug"
-                value={formData.slug}
-                onChange={handleChange}
-              />
-              {error && error.slug && (
-                <span className="text-red-500">{error.slug}</span>
               )}
             </div>
 

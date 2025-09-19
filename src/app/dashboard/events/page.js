@@ -1,22 +1,29 @@
 "use client";
 
-import { CreateEventCategoryModal } from "@/components";
-import { getAllCategoryEvent } from "@/store/features/categoryEventSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { CreateEventModal } from "@/components";
+import { deleteEvent, getEvents } from "@/store/features/eventsSlice";
+import { data } from "autoprefixer";
+import { formatDate, formatDateYear, formatTime } from "@/utils/utils";
 
 const Events = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const categoryEventData =
-    useSelector((state) => state.categoryevent.getAllCategoryEventData) || [];
+  const dataEvent = useSelector((state) => state.events.getAllEventData) || [];
+  const createEventLoading = useSelector(
+    (state) => state.events.createEventLoading
+  );
+  const deleteEventLoading = useSelector(
+    (state) => state.events.deleteEventLoading
+  );
   const openModal = () => setIsOpen(!isOpen);
 
   useEffect(() => {
-    dispatch(getAllCategoryEvent());
-  }, []);
+    dispatch(getEvents());
+  }, [createEventLoading, deleteEventLoading]);
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
       <div className="mb-10">
@@ -43,6 +50,84 @@ const Events = () => {
           Add Event
         </button>
       </div>
+
+      <div
+        className="relative overflow-x-auto shadow-md sm:rounded-lg"
+        style={{ borderRadius: 1 }}
+      >
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead className="bg-[#fff]">
+            <tr>
+              <th scope="col" className="px-4 py-4">
+                Date
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Start time
+              </th>
+              <th scope="col" className="px-4 py-4">
+                End time
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Location
+              </th>
+              <th scope="col" className="px-4 py-4">
+                Category Event
+              </th>
+              <th scope="col" className="px-4 py-4 ">
+                Action
+              </th>
+            </tr>
+            <tr>
+              <td colSpan="6">
+                <hr className="border-t border-gray-300" />
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            {dataEvent?.map((item) => {
+              const locationName = item?.location_translations.find(
+                (item) => item?.language_code === "en"
+              );
+
+              const categoryName = item?.category_translations.find(
+                (item) => item?.language_code === "en"
+              );
+              return (
+                <tr
+                  key={item.event_id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td className="px-4 py-4">
+                    {formatDateYear(item?.event_date)}
+                  </td>
+                  <td className="px-4 py-4">{item?.start_time}</td>
+                  <td className="px-4 py-4">{item?.end_time}</td>
+                  <td className="px-4 py-4">{locationName?.location_name}</td>
+                  <td className="px-4 py-4">{categoryName?.name}</td>
+                  <td className="px-4 py-4 flex space-x-2">
+                    <button
+                      onClick={() => {}}
+                      className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      onClick={() => {
+                        dispatch(deleteEvent(item?.event_id));
+                      }}
+                      className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {isOpen && <CreateEventModal openModal={openModal} />}
     </div>
   );
 };

@@ -46,6 +46,20 @@ export const deletePublication = createAsyncThunk(
   }
 );
 
+export const updatePublication = createAsyncThunk(
+  "publication/updatePublication",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.put("/publication", data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Publication updated failed"
+      );
+    }
+  }
+);
+
 const initialState = {
   createPublicationData: null,
   createPublicationLoading: false,
@@ -58,6 +72,10 @@ const initialState = {
   deletePublicationData: null,
   deletePublicationLoading: false,
   deletePublicationError: null,
+
+  updatePublicationData: null,
+  updatePublicationLoading: false,
+  updatePublicationError: null,
 };
 
 const publicationSlice = createSlice({
@@ -66,7 +84,18 @@ const publicationSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // CREATE
+      .addCase(updatePublication.rejected, (state, action) => {
+        state.updatePublicationLoading = false;
+        state.updatePublicationError = action.error.message;
+      })
+      .addCase(updatePublication.fulfilled, (state, action) => {
+        state.updatePublicationData = action.payload;
+        state.updatePublicationLoading = false;
+      })
+      .addCase(updatePublication.pending, (state) => {
+        state.updatePublicationLoading = true;
+        state.updatePublicationError = null;
+      })
       .addCase(createPublication.pending, (state) => {
         state.createPublicationLoading = true;
         state.createPublicationError = null;

@@ -14,11 +14,17 @@ const EventCategory = () => {
   const [isOpen, setIsOpen] = useState(false);
   const categoryEventData =
     useSelector((state) => state.categoryevent.getAllCategoryEventData) || [];
+  const createCategoryEventLoading = useSelector(
+    (state) => state.categoryevent.createCategoryEventLoading
+  );
+  const deleteCategoryEventLoading = useSelector(
+    (state) => state.categoryevent.deleteCategoryEventLoading
+  );
   const openModal = () => setIsOpen(!isOpen);
 
   useEffect(() => {
     dispatch(getAllCategoryEvent());
-  }, []);
+  }, [createCategoryEventLoading, deleteCategoryEventLoading]);
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
@@ -79,7 +85,9 @@ const EventCategory = () => {
 
                 <td className="px-6 py-6 flex   ">
                   <button
-                    onClick={() => dispatch(deleteCategoryEvent(item.id))}
+                    onClick={() =>
+                      dispatch(deleteCategoryEvent(item.category_event_id))
+                    }
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                   >
                     Delete
