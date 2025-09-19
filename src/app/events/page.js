@@ -1,25 +1,19 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "next/navigation";
+import { useState } from "react";
 import Image from "next/image";
 import RrotaIcon from "../../assets/events/rrota.svg";
-import { getEvents, clearEvents } from "../../store/features/eventsSlice";
+import Img1 from "../../assets/events/1.png";
+
+import Img2 from "../../assets/events/2.png";
+
+import Img3 from "../../assets/events/3.png";
+
 import { formatDate, formatTime, getMonthName } from "@/utils/utils";
 import Footer from "@/components/footer";
+import { SlidersHorizontal } from "lucide-react";
 
 export default function Events() {
-  const dispatch = useDispatch();
-  const searchParams = useSearchParams();
-  
-  const { eventsData, totalEvents, eventsLoading, eventsError } = useSelector(
-    (state) => state.events
-  );
-  const selectedLanguage = useSelector((state) => state.language.selectedLanguage);
-  
-  const currentLanguage =  selectedLanguage;
-  
   const [filters, setFilters] = useState({
     year: "",
     month: "",
@@ -28,21 +22,60 @@ export default function Events() {
   });
 
   const [offset, setOffset] = useState(0);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const limit = 5;
 
-  useEffect(() => {
-    dispatch(getEvents({ 
-      limit, 
-      offset, 
-      lang: currentLanguage,
-      ...filters 
-    }));
-  }, [offset, filters, currentLanguage]);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
-  useEffect(() => {
-    setOffset(0);
-    dispatch(clearEvents());
-  }, [currentLanguage]);
+  const clearFilters = () => {
+    setFilters({
+      year: "",
+      month: "",
+      location: "",
+      category: "",
+    });
+  };
+
+  // 🔹 Dummy events data
+  const dummyEvents = [
+    {
+      name: "Art Exhibition: Colors of Europe",
+      location: "Prishtinë",
+      start_time: "10:00",
+      end_time: "14:00",
+      day: 12,
+      month: 5,
+      category: "Exhibition",
+      image: Img1,
+    },
+    {
+      name: "Cultural Music Night",
+      location: "Prizren",
+      start_time: "18:00",
+      end_time: "22:00",
+      day: 24,
+      month: 6,
+      category: "Music",
+      image: Img2,
+    },
+    {
+      name: "Education Workshop: Future Leaders",
+      location: "Gjakova",
+      start_time: "09:00",
+      end_time: "12:00",
+      day: 3,
+      month: 7,
+      category: "Education",
+      image: Img3,
+    },
+  ];
+
+  const eventsData = dummyEvents;
+  const totalEvents = dummyEvents.length;
+  const eventsLoading = false;
+  const eventsError = null;
 
   const handleSeeMore = () => {
     setOffset((prev) => prev + limit);
@@ -64,6 +97,8 @@ export default function Events() {
         return "bg-purple-500";
       case "CULTURE":
         return "bg-blue-600";
+      case "MUSIC":
+        return "bg-red-500";
       default:
         return "bg-gray-500";
     }
@@ -98,26 +133,6 @@ export default function Events() {
         "Peja",
         "Gjakova",
         "Mitrovica",
-        "Ferizaj",
-        "Gjilan",
-        "Vushtrri",
-        "Suhareka",
-        "Lipjan",
-        "Podujeva",
-        "Rahovec",
-        "Skenderaj",
-        "Kamenica",
-        "Malisheva",
-        "Dragash",
-        "Kacanik",
-        "Kline",
-        "Decan",
-        "Obiliq",
-        "Shtime",
-        "Hani i Elezit",
-        "Zubin Potok",
-        "Zvecan",
-        "Leposaviq",
       ],
     },
     {
@@ -163,38 +178,32 @@ export default function Events() {
         </video>
       </div>
 
-      <div className="px-[74px] pt-[43px] pb-[32px]">
-        <div className="flex justify-between items-start mb-[23.8px]">
-          <div className="flex items-center gap-[12px]">
+      {/* Header Section */}
+      <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px]">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
+          <div className="flex items-center gap-3 flex-shrink-0">
             <Image
               src={RrotaIcon}
               alt="Events Icon"
               width={64}
               height={64}
-              className="object-contain"
+              className="w-12 h-12 md:w-16 md:h-16 object-contain"
             />
             <h1
-              className="text-[41px] font-semibold text-[#1C1A1A] tracking-[0%]"
+              className="font-semibold text-[#1C1A1A] leading-[1.1]"
               style={{
                 fontFamily: "Kanit",
-                fontWeight: 600,
-                fontStyle: "normal",
-                lineHeight: "115.99999999999999%",
+                fontSize: "clamp(28px, 4vw, 64px)",
               }}
             >
               EVENTS
             </h1>
           </div>
-          <div className="max-w-[556px] flex items-center w-full">
+
+          <div className="lg:max-w-xl min-w-0">
             <p
-              className="w-full text-[18px] font-light leading-[25px] tracking-[-0.006em] text-[#555353] text-justify"
-              style={{
-                fontFamily: "Kanit",
-                fontWeight: 300,
-                fontStyle: "normal",
-                lineHeight: "25px",
-                letterSpacing: "-0.6%",
-              }}
+              className="text-[16px] sm:text-[18px] font-light leading-relaxed text-[#555353] text-left lg:text-justify"
+              style={{ fontFamily: "Kanit" }}
             >
               Discover what's happening at Europe House Kosovo—join discussions,
               workshops, and cultural activities that inspire and engage.
@@ -205,14 +214,25 @@ export default function Events() {
         <div className="w-full border-t border-[#C6C6C6]"></div>
       </div>
 
-      <div className="px-[74px] pt-[32px] pb-[37.8px] max-w-[483px]">
-        <div className="flex gap-8">
+      {/* Filters Section */}
+      <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-6 md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px]">
+        <div className="md:hidden mb-4 flex justify-end">
+          <button
+            onClick={toggleSidebar}
+            className="flex items-center gap-3 px-6 py-3 bg-[#1c1a1a] text-white rounded-lg hover:bg-[#2a2828] transition-colors font-medium"
+          >
+            <span className="text-base font-bold">Filter</span>
+            <SlidersHorizontal className="w-6 h-6 text-white" />
+          </button>
+        </div>
+
+        <div className="hidden md:flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-8 max-w-full overflow-x-auto">
           {filterOptions.map((filter, idx) => (
-            <div className="relative" key={idx}>
+            <div className="relative flex-shrink-0" key={idx}>
               <select
                 value={filters[filter.key]}
                 onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-                className="appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] text-sm font-medium cursor-pointer"
+                className="appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full md:w-auto text-sm font-medium cursor-pointer"
               >
                 <option value="">{filter.label}</option>
                 {filter.options.map((opt, i) =>
@@ -247,17 +267,18 @@ export default function Events() {
         </div>
       </div>
 
+      {/* Events List Section */}
       <div className="w-full bg-[#EDF5FF] rounded-t-[36px] flex-1">
-        <div className="px-[74px] space-y-6">
+        <div className="px-4 md:px-[74px] space-y-6">
           {eventsData && eventsData.length > 0 ? (
             eventsData.map((event, index) => (
               <div key={index}>
+                {/* Desktop Layout */}
                 <div
-                  className={`flex items-center ${
+                  className={`hidden md:flex items-center ${
                     index === 0 ? "pt-[36.2px]" : ""
                   }`}
                 >
-                  {/* Left side */}
                   <div className="w-[59%] flex items-center gap-6">
                     <div className="w-[132px] h-[132px] bg-gray-300 rounded-md flex-shrink-0 relative overflow-hidden">
                       {event.image ? (
@@ -340,7 +361,6 @@ export default function Events() {
                     </div>
                   </div>
 
-                  {/* Right side */}
                   <div className="flex-1 flex items-center justify-between">
                     <div className="w-[132px] h-[116px] flex flex-col justify-center items-center gap-4">
                       <div className="text-4xl font-bold text-gray-900 leading-none">
@@ -372,46 +392,131 @@ export default function Events() {
                   </div>
                 </div>
 
-                <div className="w-full mt-8 border-t border-[#C6C6C6]"></div>
+                {/* Mobile Layout */}
+                <div
+                  className={`md:hidden bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100 ${
+                    index === 0 ? "mt-6" : ""
+                  }`}
+                >
+                  <div className="w-full h-48 bg-gray-300 relative overflow-hidden">
+                    {event.image ? (
+                      <Image
+                        src={event.image}
+                        alt={event.name}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-blue-400 to-purple-500 flex items-center justify-center">
+                        <svg
+                          className="w-12 h-12 text-white"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </div>
+                    )}
+                    <div className="absolute top-3 left-3">
+                      <span
+                        className={`${getCategoryColor(
+                          event.category
+                        )} text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wide`}
+                      >
+                        {event.category}
+                      </span>
+                    </div>
+                    <div className="absolute top-3 right-3 bg-white rounded-lg p-2 text-center min-w-[60px]">
+                      <div className="text-2xl font-bold text-gray-900 leading-none">
+                        {formatDate(event.day)}
+                      </div>
+                      <div className="text-xs font-semibold text-gray-700 uppercase tracking-wide">
+                        {getMonthName(event.month)}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-4">
+                    <h3 className="font-bold text-gray-900 text-lg mb-3 line-clamp-2">
+                      {event.name}
+                    </h3>
+                    
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <svg
+                          className="w-4 h-4 text-gray-500 flex-shrink-0"
+                          fill="#4433EE"
+                          stroke="#ffffff"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                          />
+                        </svg>
+                        <span className="font-medium">{event.location}</span>
+                      </div>
+                      
+                      <div className="flex items-center gap-2 text-sm text-gray-600">
+                        <svg
+                          className="w-4 h-4 text-gray-500 flex-shrink-0"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
+                        </svg>
+                        <span className="font-medium">
+                          {formatTime(event.start_time, event.end_time)}
+                        </span>
+                      </div>
+                    </div>
+
+                    <button
+                      className="w-full bg-[#4433EE] hover:bg-[#3628c7] text-white rounded-full py-3 flex items-center justify-center gap-2 transition-colors font-medium"
+                    >
+                      More info
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="w-full border-t border-[#C6C6C6] mt-6 md:mt-8"></div>
               </div>
             ))
           ) : (
-            <div className="justify-center items-center text-center py-16">
-              <div className="w-16 h-16 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg
-                  className="w-8 h-8 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                  />
-                </svg>
-              </div>
-              <p className="text-gray-600 text-lg">
-                No events available at the moment.
-              </p>
-              <p className="text-gray-400 text-sm mt-2">
-                Check back later for upcoming events.
-              </p>
-            </div>
+            <div className="text-center py-12 text-gray-600">No events found</div>
           )}
         </div>
-
-        {eventsData && eventsData.length < totalEvents && (
-          <div className="text-center pt-[52px] pb-12">
-            <button
-              onClick={handleSeeMore}
-              className="bg-[#4433EE] w-[190px] text-white rounded-[56px] pt-[18px] pr-[20px] pb-[18px] pl-[20px] gap-[10px] font-semibold text-lg"
-            >
-              See more
-            </button>
-          </div>
-        )}
       </div>
 
       <Footer />
