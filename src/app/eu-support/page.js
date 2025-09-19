@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React from "react";
 import { ArrowRight } from "lucide-react";
 import Tower from "../../assets/eu-support/tower.svg";
@@ -10,8 +10,13 @@ import Img3 from "../../assets/eu-support/3.jpg";
 
 import Image from "next/image";
 import Footer from "@/components/footer";
+import { useSelector } from "react-redux";
 
+import { supportTranslations, translationsEuprogrammes } from "@/data/euspport";
 export default function EuropeHouseMainContent() {
+  const selectedLanguage = useSelector(
+    (state) => state.language.selectedLanguage
+  );
   return (
     <div className="min-h-screen bg-[#EDF5FF]">
       <div className="pt-[54px] px-6 md:px-[74px]">
@@ -22,17 +27,15 @@ export default function EuropeHouseMainContent() {
         />
       </div>
 
-      <div className="px-6 md:px-[74px]">
+      <div className="px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto">
         <section className="py-8 md:py-[54px]">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
             <div className="space-y-6 md:space-y-[46px]">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
-                EU PROGRAMMES
+              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl kanit-bold  text-gray-900 leading-tight">
+                {translationsEuprogrammes[selectedLanguage]?.title}
               </h1>
-              <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed">
-                Choose the EU Programme that interests you,
-                <br className="hidden md:block" />
-                to find out more about funding opportunities.
+              <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed kanit-light md:w-[75%]">
+                {translationsEuprogrammes[selectedLanguage]?.description}
               </p>
             </div>
 
@@ -45,7 +48,7 @@ export default function EuropeHouseMainContent() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-3 md:py-4 font-semibold text-base md:text-lg flex items-center justify-between transition-colors duration-200 group-hover:scale-[1.02]">
+                <button className="kanit-medium w-full bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-3 md:py-4 font-semibold text-base md:text-lg flex items-center justify-between transition-colors duration-200 group-hover:scale-[1.02]">
                   Erasmus +
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -59,7 +62,7 @@ export default function EuropeHouseMainContent() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-3 md:py-4 font-semibold text-base md:text-lg flex items-center justify-between transition-colors duration-200 group-hover:scale-[1.02]">
+                <button className=" kanit-medium  w-full bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-3 md:py-4 font-semibold text-base md:text-lg flex items-center justify-between transition-colors duration-200 group-hover:scale-[1.02]">
                   Creative Europe
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -71,13 +74,11 @@ export default function EuropeHouseMainContent() {
         <section className="py-8 md:py-[54px]">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
             <div className="space-y-6 md:space-y-[46px]">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 leading-tight">
-                EU SUPPORT
+              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl kanit-bold  text-gray-900 leading-tight">
+                {supportTranslations[selectedLanguage]?.title}
               </h2>
-              <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed">
-                Click the following link to find out more about
-                <br className="hidden md:block" />
-                EU-funded projects implemented in Kosovo.
+              <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed kanit-light md:w-[70%]">
+                {supportTranslations[selectedLanguage]?.description}
               </p>
             </div>
 
@@ -90,7 +91,7 @@ export default function EuropeHouseMainContent() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-3 md:py-4 font-semibold text-base md:text-lg flex items-center justify-between transition-colors duration-200 group-hover:scale-[1.02]">
+                <button className="kanit-medium  w-full bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-3 md:py-4 font-semibold text-base md:text-lg flex items-center justify-between transition-colors duration-200 group-hover:scale-[1.02]">
                   Kosovo Projects
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </button>

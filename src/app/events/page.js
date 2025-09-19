@@ -127,13 +127,7 @@ export default function Events() {
     {
       label: "Location",
       key: "location",
-      options: [
-        "Prishtinë",
-        "Prizren",
-        "Peja",
-        "Gjakova",
-        "Mitrovica",
-      ],
+      options: ["Prishtinë", "Prizren", "Peja", "Gjakova", "Mitrovica"],
     },
     {
       label: "Category",
@@ -190,7 +184,7 @@ export default function Events() {
               className="w-12 h-12 md:w-16 md:h-16 object-contain"
             />
             <h1
-              className="font-semibold text-[#1C1A1A] leading-[1.1]"
+              className="font-semibold text-[#1C1A1A] leading-[1.1] kanit-semibold "
               style={{
                 fontFamily: "Kanit",
                 fontSize: "clamp(28px, 4vw, 64px)",
@@ -201,10 +195,7 @@ export default function Events() {
           </div>
 
           <div className="lg:max-w-xl min-w-0">
-            <p
-              className="text-[16px] sm:text-[18px] font-light leading-relaxed text-[#555353] text-left lg:text-justify"
-              style={{ fontFamily: "Kanit" }}
-            >
+            <p className="text-[16px] sm:text-[18px] font-light leading-relaxed text-[#555353] text-left lg:text-justify kanit-light">
               Discover what's happening at Europe House Kosovo—join discussions,
               workshops, and cultural activities that inspire and engage.
             </p>
@@ -232,7 +223,7 @@ export default function Events() {
               <select
                 value={filters[filter.key]}
                 onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-                className="appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full md:w-auto text-sm font-medium cursor-pointer"
+                className="kanit-regular  appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full md:w-auto text-sm font-medium cursor-pointer"
               >
                 <option value="">{filter.label}</option>
                 {filter.options.map((opt, i) =>
@@ -306,7 +297,7 @@ export default function Events() {
                       )}
                     </div>
                     <div className="flex-1 flex flex-col h-[132px] py-2 justify-between">
-                      <h3 className="font-bold text-gray-900 text-xl">
+                      <h3 className="font-bold text-gray-900 text-xl kanit-semibold">
                         {event.name}
                       </h3>
                       <div className="flex items-center gap-6 text-sm text-gray-600 ">
@@ -330,7 +321,9 @@ export default function Events() {
                               d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                             />
                           </svg>
-                          <span className="font-medium">{event.location}</span>
+                          <span className="font-medium kanit-light">
+                            {event.location}
+                          </span>
                         </div>
                         <div className="flex items-center gap-2">
                           <svg
@@ -346,14 +339,14 @@ export default function Events() {
                               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
-                          <span className="font-medium">
+                          <span className="font-medium kanit-light">
                             {formatTime(event.start_time, event.end_time)}
                           </span>
                         </div>
                         <span
                           className={`${getCategoryColor(
                             event.category
-                          )} text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wide`}
+                          )} kanit-light text-white text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wide`}
                         >
                           {event.category}
                         </span>
@@ -363,15 +356,15 @@ export default function Events() {
 
                   <div className="flex-1 flex items-center justify-between">
                     <div className="w-[132px] h-[116px] flex flex-col justify-center items-center gap-4">
-                      <div className="text-4xl font-bold text-gray-900 leading-none">
+                      <div className="text-4xl font-bold text-gray-900 leading-none kanit-semibold ">
                         {formatDate(event.day)}
                       </div>
-                      <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
+                      <div className="text-sm font-semibold text-gray-700 uppercase tracking-wide kanit-semibold ">
                         {getMonthName(event.month)}
                       </div>
                     </div>
                     <button
-                      className="bg-white hover:bg-gray-50 text-[#4433EE] border border-[#4433EE] rounded-[50px] flex flex-row items-center gap-[10px] px-[20px] py-[18px] transition-colors font-medium"
+                      className="kanit-regular bg-white hover:bg-gray-50 text-[#4433EE] border border-[#4433EE] rounded-[50px] flex flex-row items-center gap-[10px] px-[20px] py-[18px] transition-colors font-medium"
                       style={{ height: "49.1607px" }}
                     >
                       More info
@@ -444,7 +437,7 @@ export default function Events() {
                     <h3 className="font-bold text-gray-900 text-lg mb-3 line-clamp-2">
                       {event.name}
                     </h3>
-                    
+
                     <div className="space-y-2 mb-4">
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <svg
@@ -468,7 +461,7 @@ export default function Events() {
                         </svg>
                         <span className="font-medium">{event.location}</span>
                       </div>
-                      
+
                       <div className="flex items-center gap-2 text-sm text-gray-600">
                         <svg
                           className="w-4 h-4 text-gray-500 flex-shrink-0"
@@ -489,9 +482,7 @@ export default function Events() {
                       </div>
                     </div>
 
-                    <button
-                      className="w-full bg-[#4433EE] hover:bg-[#3628c7] text-white rounded-full py-3 flex items-center justify-center gap-2 transition-colors font-medium"
-                    >
+                    <button className="w-full bg-[#4433EE] hover:bg-[#3628c7] text-white rounded-full py-3 flex items-center justify-center gap-2 transition-colors font-medium">
                       More info
                       <svg
                         className="w-4 h-4"
@@ -514,7 +505,9 @@ export default function Events() {
               </div>
             ))
           ) : (
-            <div className="text-center py-12 text-gray-600">No events found</div>
+            <div className="text-center py-12 text-gray-600">
+              No events found
+            </div>
           )}
         </div>
       </div>
