@@ -47,6 +47,7 @@ const Publication = () => {
     createPublicationLoading,
     updatePublicationLoading,
   ]);
+
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
       <div className="mb-10">

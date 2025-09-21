@@ -42,6 +42,20 @@ export const deleteEvent = createAsyncThunk(
     }
   }
 );
+
+export const updateEvent = createAsyncThunk(
+  "events/updateEvent",
+  async (data, rejectWithValue) => {
+    try {
+      const response = await axiosInstance.put(`/event`, data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error?.response?.data?.message || "File to delete events"
+      );
+    }
+  }
+);
 const initialState = {
   getAllEventData: null,
   getAllEventLoading: false,
@@ -54,21 +68,30 @@ const initialState = {
   deleteEventData: null,
   deleteEventLoading: false,
   deleteEventError: null,
+
+  updateEventData: null,
+  updateEventLoading: false,
+  updateEventError: null,
 };
 
 const eventsSlice = createSlice({
   name: "events",
   initialState,
-  reducers: {
-    clearEvents: (state) => {
-      state.eventsData = null;
-      state.totalEvents = 0;
-      state.eventsError = null;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-
+      .addCase(updateEvent.rejected, (state, action) => {
+        state.updateEventLoading = false;
+        state.updateEventError = action.error.message;
+      })
+      .addCase(updateEvent.fulfilled, (state, action) => {
+        state.updateEventData = action.payload;
+        state.updateEventLoading = false;
+      })
+      .addCase(updateEvent.pending, (state) => {
+        state.updateEventLoading = true;
+        state.updateEventError = null;
+      })
       .addCase(deleteEvent.rejected, (state, action) => {
         state.deleteEventError = action.error.message;
         state.deleteEventLoading = false;

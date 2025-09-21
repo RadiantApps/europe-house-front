@@ -31,6 +31,19 @@ export const getPublication = createAsyncThunk(
   }
 );
 
+export const getPublicationCategory = createAsyncThunk(
+  "publication/getPublicationCategory",
+  async (_, rejectWithValue) => {
+    try {
+      const response = await axiosInstance.get("/categoryPublication");
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response.data.message || "Fail to get publication category"
+      );
+    }
+  }
+);
 // Async thunk for deleting a publication
 export const deletePublication = createAsyncThunk(
   "publication/deletePublication",
@@ -76,6 +89,10 @@ const initialState = {
   updatePublicationData: null,
   updatePublicationLoading: false,
   updatePublicationError: null,
+
+  getPublicationCategoryData: null,
+  getPublicationCategoryLoading: false,
+  getPublicationCategoryError: null,
 };
 
 const publicationSlice = createSlice({
@@ -84,6 +101,18 @@ const publicationSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(getPublicationCategory.rejected, (state, action) => {
+        state.getPublicationCategoryError = action.error.message;
+        state.getPublicationCategoryLoading = false;
+      })
+      .addCase(getPublicationCategory.fulfilled, (state, action) => {
+        state.getPublicationCategoryData = action.payload;
+        state.getPublicationCategoryLoading = false;
+      })
+      .addCase(getPublicationCategory.pending, (state) => {
+        state.getPublicationCategoryLoading = true;
+        state.getPublicationCategoryError = null;
+      })
       .addCase(updatePublication.rejected, (state, action) => {
         state.updatePublicationLoading = false;
         state.updatePublicationError = action.error.message;

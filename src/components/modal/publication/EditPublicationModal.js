@@ -10,7 +10,6 @@ const EditPublicationModal = ({ openModal, editData }) => {
   const dispatch = useDispatch();
   const [error, setError] = useState(null);
   const [translations, setTranslations] = useState({});
-  console.log(editData);
   useEffect(() => {
     if (editData?.translations) {
       const prepared = {};

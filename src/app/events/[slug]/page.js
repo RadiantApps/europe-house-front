@@ -1,11 +1,30 @@
 "use client";
 import { useState } from "react";
-import { Copy, Facebook, Linkedin, X } from "lucide-react";
-import TestImg from "../../../assets/events/test.svg";
 import Image from "next/image";
+import { useParams } from "next/navigation";
+import {
+  useGetEventItemQuery,
+  useGetUpcomingEventQuery,
+} from "@/store/services/eventApi";
+import { useSelector } from "react-redux";
+import { imageUrl } from "@/config";
+import { translations } from "@/data/event";
+import { Copy, Facebook, Linkedin, X } from "@/assets/events/icons";
+import { useRouter } from "next/navigation";
+import Footer from "@/components/footer";
 
 export default function EventPage() {
+  const router = useRouter();
+  const selectedLanguage = useSelector(
+    (state) => state.language.selectedLanguage
+  );
+  const params = useParams();
+  const eventId = params.slug; // [id] from URL
+
   const [copied, setCopied] = useState(false);
+  const { data } = useGetEventItemQuery({ id: eventId });
+  const { data: updcomingEvent } = useGetUpcomingEventQuery();
+  const event = data?.[0] || null;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -13,22 +32,43 @@ export default function EventPage() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  // Safe image source
+  const eventPhoto = event?.event_translations?.[selectedLanguage]?.photo
+    ? `${imageUrl}/${event.event_translations[
+        selectedLanguage
+      ].photo.replaceAll("\\", "/")}`
+    : null;
+  const handleClick = (id) => {
+    router.push(`/events/${id}`);
+  };
+
   return (
     <div className="w-full font-sans">
-      {/* Main Section */}
-      <main className="">
-        <div className="px-[24px] lg:px-[74px] pt-[70px]">
-          <h1 className="text-3xl font-bold mb-6 lg:mb-10">URBAN YOGA</h1>
+      <main>
+        <div className="px-[24px] lg:px-[74px] pt-[70px] xl:max-w-[1500px] xl:mx-auto">
+          <h1 className="text-[#101828] kanit-semibold text-[48px] leading-[60px]">
+            {event?.event_translations?.[selectedLanguage]?.title || ""}
+          </h1>
 
-          <div className="flex flex-col lg:flex-row lg:gap-[28px] gap-6">
+          <div className="flex flex-col lg:flex-row lg:gap-[28px] gap-6 mt-[40px]">
             {/* Left (Image + Content) */}
             <div className="flex-1 order-2 lg:order-1">
-              <div className="bg-green-900 rounded-2xl overflow-hidden">
-                <Image
-                  src={TestImg}
-                  alt="Urban Yoga"
-                  className="w-full object-cover lg:h-[516px] h-[350px]"
-                />
+              <div className="rounded-[12px] overflow-hidden relative w-full h-[350px] lg:h-[516px]">
+                {eventPhoto ? (
+                  <Image
+                    src={eventPhoto}
+                    alt={
+                      event?.event_translations?.[selectedLanguage]?.title ||
+                      "Event Image"
+                    }
+                    fill
+                    className="object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-300 flex items-center justify-center">
+                    <span>No Image</span>
+                  </div>
+                )}
               </div>
 
               {/* Copy + Social */}
@@ -37,98 +77,125 @@ export default function EventPage() {
                   onClick={handleCopy}
                   className="flex items-center gap-2 px-3 py-2 border rounded-lg text-sm"
                 >
-                  <Copy size={16} /> {copied ? "Copied!" : "Copy link"}
+                  <Copy /> {copied ? "Copied!" : "Copy link"}
                 </button>
                 <button className="p-2 border rounded-lg">
-                  <Facebook size={16} />
+                  <Facebook />
                 </button>
                 <button className="p-2 border rounded-lg">
-                  <X size={16} />
+                  <X />
                 </button>
                 <button className="p-2 border rounded-lg">
-                  <Linkedin size={16} />
+                  <Linkedin />
                 </button>
               </div>
 
               {/* Description */}
               <p className="mt-6 lg:mt-11 text-gray-600 leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur.
+                {event?.event_translations?.[selectedLanguage]?.description ||
+                  "No description available."}
               </p>
 
               <button className="mt-6 lg:mt-8 w-[190px] h-[50px] flex items-center justify-center gap-[10px] bg-indigo-600 text-white font-medium rounded-[56px]">
-                Join Us
+                {translations[selectedLanguage].joinbutton}
               </button>
             </div>
 
             {/* Right (Event Details) */}
             <aside className="lg:w-72 space-y-8 order-1 lg:order-2">
               <div className="space-y-[6px]">
-                <p className="font-semibold">Event Type</p>
-                <p>Exhibition</p>
+                <p className="kanit-semibold text-[22px] leading-[32px] text-[#1C1A1A]">
+                  Event Type
+                </p>
+                <p className="kanit-regular text-[18px] leading-[28px] text-[#555353]">
+                  {event?.category_translations?.[selectedLanguage]?.name ||
+                    "N/A"}
+                </p>
               </div>
               <div>
-                <p className="font-semibold">Date</p>
-                <p>7 August 2024</p>
+                <p className="kanit-semibold text-[22px] leading-[32px] text-[#1C1A1A]">
+                  Date
+                </p>
+                <p className="kanit-regular text-[18px] leading-[28px] text-[#555353]">
+                  {event?.event_date?.split("T")[0] || "N/A"}
+                </p>
               </div>
               <div>
-                <p className="font-semibold">Time</p>
-                <p>13:00 - 17:00</p>
+                <p className="kanit-semibold text-[22px] leading-[32px] text-[#1C1A1A]">
+                  Time
+                </p>
+                <p className="kanit-regular text-[18px] leading-[28px] text-[#555353]">
+                  {event?.start_time || "N/A"} - {event?.end_time || "N/A"}
+                </p>
               </div>
               <div>
-                <p className="font-semibold">Location</p>
-                <p>Prishtinë</p>
+                <p className="kanit-semibold text-[22px] leading-[32px] text-[#1C1A1A]">
+                  Location
+                </p>
+                <p className="kanit-regular text-[18px] leading-[28px] text-[#555353]">
+                  {event?.location_translations?.[selectedLanguage]
+                    ?.location_name || "N/A"}
+                </p>
               </div>
               <div>
-                <p className="font-semibold">Language</p>
-                <p>English</p>
+                <p className="kanit-semibold text-[22px] leading-[32px] text-[#1C1A1A]">
+                  Language
+                </p>
+                <p className="kanit-regular text-[18px] leading-[28px] text-[#555353]">
+                  {selectedLanguage.toUpperCase()}
+                </p>
               </div>
             </aside>
           </div>
         </div>
 
         {/* Upcoming Events */}
-        <section className="mt-9 lg:mt-[70px] bg-[#EDF5FF] px-[24px] lg:px-[74px] py-9 lg:py-[70px]">
-          <h2 className="text-2xl font-bold  mb-6 lg:mb-5 ">
-            Upcoming Events
+        <section className="mt-9 lg:mt-[70px] bg-[#EDF5FF] px-[24px] lg:px-[74px] py-9 lg:py-[70px] xl:max-w-[1500px] xl:mx-auto">
+          <h2 className="text-[36px] text-[#101828] kanit-semibold mb-6 lg:mb-5">
+            {translations[selectedLanguage].title_upcomig}
           </h2>
-          <p className="text-gray-500 pb-8">The latest events.</p>
+          <p className="text-[#475467] kanit-regular text-[20px] leading-[30px]">
+            {translations[selectedLanguage].subtitle}
+          </p>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div className="">
-              <Image
-                src={TestImg}
-                alt="Experience Europe"
-                className="w-full h-auto"
-              />
-              <div className="pt-[18px] lg:pt-8">
-                <h3 className="font-semibold mb-[18px] lg:mb-[22px]">Experience Europe</h3>
-                <a href="#" className="text-indigo-600 text-sm">
-                  Learn more →
-                </a>
-              </div>
-            </div>
-
-            <div className="">
-              <Image
-                src={TestImg}
-                alt="Plant a tree"
-                className="w-full h-auto"
-              />
-              <div className="pt-[18px] lg:pt-8">
-              <h3 className="font-semibold mb-[18px] lg:mb-[22px]">Plant a tree day</h3>
-                <a href="#" className="text-indigo-600 text-sm">
-                  Learn more →
-                </a>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-[30px]">
+            {updcomingEvent?.map((item) => {
+              const event = item?.event_translations[selectedLanguage];
+              return (
+                <div>
+                  {event.photo ? (
+                    <Image
+                      src={`${imageUrl}/${event.photo}`.replace(/\\/g, "/")} // Fix backslashes
+                      alt={event.title || "Event Image"}
+                      className="w-full h-auto"
+                      width={500} // specify width and height if not using `fill`
+                      height={300}
+                    />
+                  ) : (
+                    <div className="w-full h-60 bg-gray-200 flex items-center justify-center">
+                      No Image
+                    </div>
+                  )}
+                  <div className="pt-[18px] lg:pt-8">
+                    <h3 className="text-[#101828] kanit-semibold text-[24px] leading-[24px]">
+                      {event?.title}
+                    </h3>
+                    <button
+                      onClick={() => {
+                        handleClick(item?.event_id);
+                      }}
+                      className="kanit-semibold text-[#4433EE] text-[16px] mt-[22px]"
+                    >
+                      {translations[selectedLanguage].upcoming_button} →
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

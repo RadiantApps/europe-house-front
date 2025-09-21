@@ -55,9 +55,6 @@ const About = () => {
     setItemEditMain(item);
     setIsOpenEditMain(!isOpenEditMain);
   };
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
 
   useEffect(() => {
     dispatch(getAllTeams());

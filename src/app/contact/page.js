@@ -2,12 +2,13 @@
 import React, { useState } from "react";
 import { MapPin, Mail, Phone } from "lucide-react";
 import Footer from "@/components/footer";
-import { contactTranslations } from "@/data/contact";
+import { contactTranslations, officeTranslations } from "@/data/contact";
 import { useSelector } from "react-redux";
 const ContactUs = () => {
   const selectedLanguage = useSelector(
     (state) => state.language.selectedLanguage
   );
+  const t = officeTranslations[selectedLanguage];
   const [email, setEmail] = useState("");
 
   const handleJoinUs = (e) => {
@@ -36,56 +37,61 @@ const ContactUs = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+            {/* Pristina */}
             <div className="bg-white rounded-lg shadow-sm overflow-hidden">
               <div className="bg-indigo-600 text-white p-4">
-                <h3 className="text-xl kanit-medium">Pristina</h3>
+                <h3 className="text-xl kanit-medium">{t.pristina.city}</h3>
               </div>
               <div className="p-6 space-y-4">
                 <div className="flex items-center space-x-3">
                   <Mail className="text-indigo-600 w-5 h-5 flex-shrink-0" />
                   <span className="text-gray-700 kanit-light">
-                    info@europehouse-kosovo.com
+                    {t.pristina.email}
                   </span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Phone className="text-indigo-600 w-5 h-5 flex-shrink-0" />
                   <span className="text-gray-700 kanit-light">
-                    +383 (0) 38 25 99 99
+                    {t.pristina.phone}
                   </span>
                 </div>
                 <div className="flex items-start space-x-3">
                   <MapPin className="text-indigo-600 w-5 h-5 flex-shrink-0 mt-1" />
                   <div className="text-gray-700 kanit-light">
-                    <div>Str. UÇK nr.90,</div>
-                    <div>Pristina 10000, Kosovo</div>
+                    <div>{t.pristina.street}</div>
+                    <div>{t.pristina.full}</div>
                   </div>
                 </div>
               </div>
             </div>
 
+            {/* North Mitrovica */}
             <div className="bg-white rounded-lg shadow-sm overflow-hidden">
               <div className="bg-indigo-600 text-white p-4">
-                <h3 className="text-xl kanit-medium">North Mitrovica</h3>
+                <h3 className="text-xl kanit-medium">{t.mitrovica.city}</h3>
               </div>
               <div className="p-6 space-y-4">
                 <div className="flex items-center space-x-3">
                   <Mail className="text-indigo-600 w-5 h-5 flex-shrink-0" />
                   <span className="text-gray-700 kanit-light">
-                    info@europehouse-kosovo.com
+                    {t.mitrovica.email}
                   </span>
                 </div>
                 <div className="flex items-start space-x-3">
                   <Phone className="text-indigo-600 w-5 h-5 flex-shrink-0" />
                   <div className="text-gray-700 kanit-light">
-                    <div>+381 65 6599754</div>
-                    <div>+383 47 125 275</div>
+                    {Array.isArray(t.mitrovica.phone) ? (
+                      t.mitrovica.phone.map((p, i) => <div key={i}>{p}</div>)
+                    ) : (
+                      <div>{t.mitrovica.phone}</div>
+                    )}
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <MapPin className="text-indigo-600 w-5 h-5 flex-shrink-0 mt-1" />
                   <div className="text-gray-700 kanit-light">
-                    <div>Str. "Kralj Petar I" n.n.,</div>
-                    <div>North Mitrovica 40000, Kosovo</div>
+                    <div>{t.mitrovica.street}</div>
+                    <div>{t.mitrovica.full}</div>
                   </div>
                 </div>
               </div>
