@@ -1,3 +1,4 @@
+import { Mail, Phone, MapPin } from "lucide-react";
 export const contactTranslations = {
   en: {
     subtitle: "CONTACT US",
@@ -19,5 +20,56 @@ export const contactTranslations = {
     description:
       "Naš veoma iskusan tim u Europe House pozdravlja vaša pitanja i sugestije. Molimo napišite ispod svoje pitanje ili zabrinutost, a neko iz našeg tima će uložiti vreme i trud da vam odgovori što je pre moguće.",
     button: "Rezerviši sada",
+  },
+};
+
+export const officeTranslations = {
+  en: {
+    pristina: {
+      city: "Pristina",
+      street: "Str. UÇK no.90,",
+      full: "Pristina 10000, Kosovo",
+      email: "info@europehouse-kosovo.com",
+      phone: "+383 (0) 38 25 99 99",
+    },
+    mitrovica: {
+      city: "North Mitrovica",
+      street: 'Str. "Kralj Petar I" n.n.,',
+      full: "North Mitrovica 40000, Kosovo",
+      email: "info@europehouse-kosovo.com",
+      phone: ["+381 65 6599754", "+383 47 125 275"],
+    },
+  },
+  sq: {
+    pristina: {
+      city: "Prishtina",
+      street: "Rr. UÇK nr.90,",
+      full: "Prishtina 10000, Kosovë",
+      email: "info@europehouse-kosovo.com",
+      phone: "+383 (0) 38 25 99 99",
+    },
+    mitrovica: {
+      city: "Mitrovica e Veriut",
+      street: 'Rr. "Kralj Petar I" p.n.,',
+      full: "Mitrovicë e Veriut 40000, Kosovë",
+      email: "info@europehouse-kosovo.com",
+      phone: ["+381 65 6599754", "+383 47 125 275"],
+    },
+  },
+  sr: {
+    pristina: {
+      city: "Priština",
+      street: "Ul. UÇK br.90,",
+      full: "Priština 10000, Kosovo",
+      email: "info@europehouse-kosovo.com",
+      phone: "+383 (0) 38 25 99 99",
+    },
+    mitrovica: {
+      city: "Severna Mitrovica",
+      street: 'Ul. "Kralja Petra I" b.b.,',
+      full: "Severna Mitrovica 40000, Kosovo",
+      email: "info@europehouse-kosovo.com",
+      phone: ["+381 65 6599754", "+383 47 125 275"],
+    },
   },
 };

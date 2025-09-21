@@ -1,18 +1,40 @@
 "use client";
 import React from "react";
+import Image from "next/image";
+import { useSelector } from "react-redux";
 
 import Map from "../../assets/about-us/map.svg";
-import Image from "next/image";
 import Footer from "@/components/footer";
-import { useSelector } from "react-redux";
 import { content, servicesData } from "@/data/about";
+import { useGetTeamQuery } from "@/store/services/aboutApi";
+import { imageUrl } from "@/config";
+
+// Social icon components (make sure these are React components, not JSX)
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+} from "@/assets/about-us/socials";
 
 const WhoWeAre = () => {
   const selectedLanguage = useSelector(
     (state) => state.language.selectedLanguage
   );
+
+  const { data: teams } = useGetTeamQuery();
+
+  // Map of social icon components
+  const socialIcons = {
+    facebook: Facebook,
+    instagram: Instagram,
+    twitter: Twitter,
+    linkedin: Linkedin,
+  };
+
   return (
     <div className="min-h-screen bg-white">
+      {/* About Section */}
       <div className="px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 md:gap-12">
           <div
@@ -38,6 +60,7 @@ const WhoWeAre = () => {
         </div>
       </div>
 
+      {/* Services Section */}
       <div className="py-16 lg:py-24 bg-[#EDF5FF]">
         <div className="w-full px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto mt-[88px] mb-[88px]">
           <h2 className="text-3xl lg:text-[48px] kanit-bold text-center text-gray-900 ">
@@ -63,70 +86,70 @@ const WhoWeAre = () => {
         </div>
       </div>
 
+      {/* Team Section */}
       <div className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
           <h2 className="text-3xl lg:text-4xl kanit-bold text-center text-gray-900 mb-12">
             OUR TEAM
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {[].map((member, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-300"
-              >
-                <div className="aspect-w-4 aspect-h-5 bg-gray-200">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full h-80 object-cover"
-                  />
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 ">
+            {teams?.map((member) => {
+              const position = member?.positions.find(
+                (item) => item?.language_code === selectedLanguage
+              );
 
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-sm text-gray-600 mb-3">
-                    {member.position}
-                  </p>
-                  <a
-                    href={`mailto:${member.email}`}
-                    className="text-blue-600 hover:text-blue-800 text-sm transition-colors duration-200"
-                  >
-                    {member.email}
-                  </a>
+              return (
+                <div key={member?.id} className="mt-[76px]">
+                  <div>
+                    <img
+                      src={`${imageUrl}/${member?.photo}`}
+                      alt={member.name}
+                      className="w-full object-contain"
+                    />
+                  </div>
 
-                  {/* Social Links */}
-                  <div className="flex space-x-3 mt-4">
-                    {member.social.facebook && (
-                      <a
-                        href={member.social.facebook}
-                        className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white hover:bg-blue-700 transition-colors duration-200"
-                      >
-                        <span className="text-xs kanit-bold">f</span>
-                      </a>
-                    )}
-                    {member.social.twitter && (
-                      <a
-                        href={member.social.twitter}
-                        className="w-8 h-8 bg-blue-400 rounded-full flex items-center justify-center text-white hover:bg-blue-500 transition-colors duration-200"
-                      >
-                        <span className="text-xs kanit-bold">X</span>
-                      </a>
-                    )}
-                    {member.social.linkedin && (
-                      <a
-                        href={member.social.linkedin}
-                        className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center text-white hover:bg-blue-800 transition-colors duration-200"
-                      >
-                        <span className="text-xs kanit-bold">in</span>
-                      </a>
-                    )}
+                  <div>
+                    <h3 className="text-[20px] kanit-semibold mt-[29px]">
+                      {member.name} {member.surname}
+                    </h3>
+                    <p className="kanit-light text-[16px] text-[#8E8D8D]">
+                      {position?.position}
+                    </p>
+                    <a
+                      href={`mailto:${member.email}`}
+                      className="text-[#4433EE] text-[16px] kanit-light"
+                    >
+                      {member.email}
+                    </a>
+
+                    {/* Social Links */}
+                    <div className="flex space-x-3 mt-4">
+                      {Object.entries(member?.socials || {}).map(
+                        ([key, value]) => {
+                          if (key === "id" || !value) return null;
+
+                          const IconComponent = socialIcons[key];
+                          if (!IconComponent) return null;
+
+                          return (
+                            <a
+                              key={key}
+                              href={value}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-gray-700 hover:text-blue-500"
+                            >
+                              <IconComponent width={20} height={20} />
+                            </a>
+                          );
+                        }
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>

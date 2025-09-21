@@ -1,13 +1,15 @@
 "use client";
+
 import { IoIosCloseCircle } from "react-icons/io";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { imageUrl } from "@/config";
 import { getLocation } from "@/store/features/locationSlice";
 import { getAllCategoryEvent } from "@/store/features/categoryEventSlice";
-import { createEvent } from "@/store/features/eventsSlice";
+import { updateEvent } from "@/store/features/eventsSlice";
 
-const CreateEventModal = ({ openModal }) => {
+const UpdateEventModal = ({ openModal, editData }) => {
   const dispatch = useDispatch();
   const locationData =
     useSelector((state) => state.location.getLocationData) || [];
@@ -15,6 +17,7 @@ const CreateEventModal = ({ openModal }) => {
     useSelector((state) => state.categoryevent.getAllCategoryEventData) || [];
 
   const [formData, setFormData] = useState({
+    eventId: "",
     location_id: "",
     category_id: "",
     date: "",
@@ -23,6 +26,7 @@ const CreateEventModal = ({ openModal }) => {
     language: "",
     translations: {
       sq: {
+        id: null,
         title: "",
         description: "",
         photo: null,
@@ -31,6 +35,7 @@ const CreateEventModal = ({ openModal }) => {
         inner_preview: null,
       },
       en: {
+        id: null,
         title: "",
         description: "",
         photo: null,
@@ -39,6 +44,7 @@ const CreateEventModal = ({ openModal }) => {
         inner_preview: null,
       },
       sr: {
+        id: null,
         title: "",
         description: "",
         photo: null,
@@ -48,6 +54,42 @@ const CreateEventModal = ({ openModal }) => {
       },
     },
   });
+
+  // Populate formData when editing an existing event
+  useEffect(() => {
+    if (!editData) return;
+
+    const translations = { sq: {}, en: {}, sr: {} };
+    if (editData.translations && Array.isArray(editData.translations)) {
+      editData.translations.forEach((tr) => {
+        translations[tr.language_code] = {
+          id: tr.id,
+          title: tr.title || "",
+          description: tr.description || "",
+          photo: null,
+          inner_photo: null,
+          preview: tr.photo
+            ? `${imageUrl}/${tr.photo.replace(/\\/g, "/")}`
+            : null,
+          inner_preview: tr.inner_photo
+            ? `${imageUrl}/${tr.inner_photo.replace(/\\/g, "/")}`
+            : null,
+        };
+      });
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      eventId: editData.event_id || "",
+      location_id: editData.location_id || "",
+      category_id: editData.category_id || "",
+      date: editData.event_date ? editData.event_date.split("T")[0] : "",
+      start_time: editData.start_time || "",
+      end_time: editData.end_time || "",
+      language: editData.language || "",
+      translations,
+    }));
+  }, [editData]);
 
   const handleFileChange = (e, lang, type = "photo") => {
     const file = e.target.files[0];
@@ -98,16 +140,19 @@ const CreateEventModal = ({ openModal }) => {
     }
 
     const formDataToSend = new FormData();
+    formDataToSend.append("event_id", formData.eventId);
     formDataToSend.append("location_id", formData.location_id);
     formDataToSend.append("category_id", formData.category_id);
     formDataToSend.append("date", formData.date);
     formDataToSend.append("start_time", formData.start_time);
     formDataToSend.append("end_time", formData.end_time);
     formDataToSend.append("language", formData.language);
-    // Build translations array
+
+    // Build translations array including translation ID
     const translationsArray = Object.keys(formData.translations).map((lang) => {
-      const { title, description } = formData.translations[lang];
+      const { id, title, description } = formData.translations[lang];
       return {
+        id, // translation id for backend update
         language: lang,
         title,
         description,
@@ -116,24 +161,19 @@ const CreateEventModal = ({ openModal }) => {
 
     formDataToSend.append("translations", JSON.stringify(translationsArray));
 
-    // Append photos & inner_photos separately
+    // Append photos & inner_photos separately if user uploaded new files
     Object.keys(formData.translations).forEach((lang) => {
       const { photo, inner_photo } = formData.translations[lang];
-      if (photo) {
-        formDataToSend.append(`photo_${lang}`, photo);
-      }
-      if (inner_photo) {
+      if (photo) formDataToSend.append(`photo_${lang}`, photo);
+      if (inner_photo)
         formDataToSend.append(`inner_photo_${lang}`, inner_photo);
-      }
     });
 
-    dispatch(createEvent(formDataToSend))
+    dispatch(updateEvent(formDataToSend))
       .unwrap()
-      .then(() => {
-        toast.success("Event created successfully");
-      })
+      .then(() => toast.success("Event updated successfully"))
       .catch((error) => {
-        console.error(error);
+        console.log(error);
         toast.error("Something went wrong");
       });
   };
@@ -160,7 +200,7 @@ const CreateEventModal = ({ openModal }) => {
           {/* Header */}
           <div className="flex items-center justify-between">
             <h3 className="mb-1 text-xl font-normal text-gray-700">
-              Add Event
+              Update Event
             </h3>
             <button onClick={openModal}>
               <IoIosCloseCircle size={24} className="text-gray-600" />
@@ -220,6 +260,7 @@ const CreateEventModal = ({ openModal }) => {
               </select>
             </div>
 
+            {/* Language */}
             <div>
               <label className="block mb-2 text-[18px] font-medium">
                 Language Speak *
@@ -250,7 +291,6 @@ const CreateEventModal = ({ openModal }) => {
                 className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]"
               />
             </div>
-
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block mb-2 text-[18px] font-medium">
@@ -311,9 +351,7 @@ const CreateEventModal = ({ openModal }) => {
                     type="file"
                     accept="image/*"
                     onChange={(e) => handleFileChange(e, lang, "photo")}
-                    className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
-                   file:bg-transparent file:rounded-[10px] file:border-[#767676]
-                   file:border-1 file:mt-[12px]"
+                    className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px] file:bg-transparent file:rounded-[10px] file:border-[#767676] file:border-1 file:mt-[12px]"
                   />
                   {formData.translations[lang].preview && (
                     <img
@@ -337,9 +375,7 @@ const CreateEventModal = ({ openModal }) => {
                     type="file"
                     accept="image/*"
                     onChange={(e) => handleFileChange(e, lang, "inner_photo")}
-                    className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px]
-                   file:bg-transparent file:rounded-[10px] file:border-[#767676]
-                   file:border-1 file:mt-[12px]"
+                    className="bg-[#FFF] h-[50px] w-full rounded-[10px] pl-[16px] file:bg-transparent file:rounded-[10px] file:border-[#767676] file:border-1 file:mt-[12px]"
                   />
                   {formData.translations[lang].inner_preview && (
                     <img
@@ -368,12 +404,11 @@ const CreateEventModal = ({ openModal }) => {
               </div>
             ))}
 
-            {/* Submit button */}
             <button
               type="submit"
               className="w-full h-[50px] bg-[#B8F900] rounded-[10px] text-[18px] font-medium leading-[22px] text-[#000] mb-[67px]"
             >
-              Create Event
+              Update Event
             </button>
           </form>
         </div>
@@ -382,4 +417,4 @@ const CreateEventModal = ({ openModal }) => {
   );
 };
 
-export default CreateEventModal;
+export default UpdateEventModal;

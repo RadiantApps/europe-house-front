@@ -3,15 +3,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreateEventModal } from "@/components";
+import { CreateEventModal, UpdateEventModal } from "@/components";
 import { deleteEvent, getEvents } from "@/store/features/eventsSlice";
-import { data } from "autoprefixer";
-import { formatDate, formatDateYear, formatTime } from "@/utils/utils";
+import { formatDateYear, getLanguageLabel } from "@/utils/utils";
 
 const Events = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenEdit, setIsOpenEdit] = useState(false);
+  const [itemEdit, setItemEdit] = useState(null);
   const dataEvent = useSelector((state) => state.events.getAllEventData) || [];
   const createEventLoading = useSelector(
     (state) => state.events.createEventLoading
@@ -19,11 +20,20 @@ const Events = () => {
   const deleteEventLoading = useSelector(
     (state) => state.events.deleteEventLoading
   );
+  const updateEventLoading = useSelector(
+    (state) => state.events.updateEventLoading
+  );
   const openModal = () => setIsOpen(!isOpen);
+
+  const openModalEdit = (item) => {
+    setIsOpenEdit(!isOpenEdit);
+    setItemEdit(item);
+  };
 
   useEffect(() => {
     dispatch(getEvents());
-  }, [createEventLoading, deleteEventLoading]);
+  }, [createEventLoading, deleteEventLoading, updateEventLoading]);
+
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
       <div className="mb-10">
@@ -73,6 +83,9 @@ const Events = () => {
               <th scope="col" className="px-4 py-4">
                 Category Event
               </th>
+              <th scope="col" className="px-4 py-4">
+                Language Speak
+              </th>
               <th scope="col" className="px-4 py-4 ">
                 Action
               </th>
@@ -85,12 +98,12 @@ const Events = () => {
           </thead>
           <tbody>
             {dataEvent?.map((item) => {
-              const locationName = item?.location_translations.find(
-                (item) => item?.language_code === "en"
+              const locationName = item?.location_translations?.find(
+                (loc) => loc?.language_code === "en"
               );
 
-              const categoryName = item?.category_translations.find(
-                (item) => item?.language_code === "en"
+              const categoryName = item?.category_translations?.find(
+                (cat) => cat?.language_code === "en"
               );
               return (
                 <tr
@@ -102,11 +115,18 @@ const Events = () => {
                   </td>
                   <td className="px-4 py-4">{item?.start_time}</td>
                   <td className="px-4 py-4">{item?.end_time}</td>
-                  <td className="px-4 py-4">{locationName?.location_name}</td>
-                  <td className="px-4 py-4">{categoryName?.name}</td>
+                  <td className="px-4 py-4">
+                    {locationName?.location_name || ""}
+                  </td>
+                  <td className="px-4 py-4">{categoryName?.name || ""}</td>
+                  <td className="px-4 py-4">
+                    {getLanguageLabel(item?.language)}
+                  </td>
                   <td className="px-4 py-4 flex space-x-2">
                     <button
-                      onClick={() => {}}
+                      onClick={() => {
+                        openModalEdit(item);
+                      }}
                       className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
                     >
                       Edit
@@ -128,6 +148,9 @@ const Events = () => {
         </table>
       </div>
       {isOpen && <CreateEventModal openModal={openModal} />}
+      {isOpenEdit && (
+        <UpdateEventModal openModal={openModalEdit} editData={itemEdit} />
+      )}
     </div>
   );
 };

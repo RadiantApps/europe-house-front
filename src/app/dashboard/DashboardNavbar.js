@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setToggle, setToggleManual } from "../../store/features/toggleSlice";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
-const Navbar = () => {
+const DashboardNavbar = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [screenSize, setScreenSize] = useState();
@@ -58,4 +58,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default DashboardNavbar;

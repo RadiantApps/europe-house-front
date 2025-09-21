@@ -14,6 +14,10 @@ import teamSlice from "./features/teamSlice";
 import programmesSlice from "./features/programmesSlice";
 import eusupportSlice from "./features/eusupportSlice";
 
+import { publicationApi } from "./services/publicationApi";
+import { aboutApi } from "./services/aboutApi";
+import { eventApi } from "./services/eventApi";
+
 export const store = configureStore({
   reducer: {
     events: eventsSlice,
@@ -30,5 +34,13 @@ export const store = configureStore({
     location: locationSlice,
     programme: programmesSlice,
     eusupport: eusupportSlice,
+    [publicationApi.reducerPath]: publicationApi.reducer,
+    [aboutApi.reducerPath]: aboutApi.reducer,
+    [eventApi.reducerPath]: eventApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware()
+      .concat(publicationApi.middleware)
+      .concat(aboutApi.middleware)
+      .concat(eventApi.middleware),
 });

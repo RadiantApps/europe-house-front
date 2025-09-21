@@ -18,3 +18,4 @@ export { default as CreateEuSupportModal } from "./modal/eusupport/CreateEuSuppo
 export { default as UpdateEuSupportModal } from "./modal/eusupport/UpdateEuSupportModal";
 export { default as EditCampaingsModal } from "./modal/campings/EditCampaingsModal";
 export { default as CreateEventModal } from "./modal/event/CreateEventModal";
+export { default as UpdateEventModal } from "./modal/event/UpdateEventModal";
