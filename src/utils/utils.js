@@ -123,3 +123,14 @@ export function getDayAndMonth(dateStr) {
     },
   };
 }
+
+export function formatDateInLanguages(dateStr) {
+  const date = new Date(dateStr);
+  const options = { year: "numeric", month: "long", day: "numeric" };
+
+  return {
+    sq: new Intl.DateTimeFormat("sq-AL", options).format(date),
+    en: new Intl.DateTimeFormat("en-US", options).format(date),
+    sr: new Intl.DateTimeFormat("sr-RS", options).format(date),
+  };
+}

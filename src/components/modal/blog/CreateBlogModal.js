@@ -56,9 +56,7 @@ const CreateBlogModal = ({ openModal }) => {
 
     dispatch(createBlogs(data))
       .unwrap()
-      .then((response) => {
-        console.log(response);
-      })
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       });

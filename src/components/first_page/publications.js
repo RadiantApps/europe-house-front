@@ -1,45 +1,37 @@
 "use client";
 import React, { useState } from "react";
 import { ArrowLeft, ArrowRight, Download } from "lucide-react";
-import Img1 from "../../assets/publications/2.png";
 import Image from "next/image";
-
+import { useSelector } from "react-redux";
+import { translations } from "@/data/home";
+import { useRouter } from "next/navigation";
+import { useGetLatestPublicationQuery } from "@/store/services/homeApi";
+import { formatDateInLanguages } from "@/utils/utils";
+import { imageUrl } from "@/config";
 export default function PublicationsShowcase() {
+  const router = useRouter();
+  const selectedLanguage = useSelector(
+    (state) => state.language.selectedLanguage
+  );
   const languages = ["ENG", "ALB", "SRB"];
-  const items = [
-    {
-      id: 1,
-      image: Img1,
-      title: "SCHENGEN:",
-      subtitle: "YOUR GATEWAY TO FREE MOVEMENT IN EUROPE",
-      date: "Feb 2024",
-      backgroundType: "schengen",
-    },
-    {
-      id: 2,
-      image: Img1,
-      title: "EU FUNDING:",
-      subtitle: "Opportunities for local development",
-      date: "Mar 2024",
-      backgroundType: "default",
-    },
-    {
-      id: 3,
-      image: Img1,
-      title: "TRADE POLICY:",
-      subtitle: "Strengthening Kosovo's economic ties",
-      date: "Jan 2024",
-      backgroundType: "default",
-    },
-  ];
 
+  const { data: items } = useGetLatestPublicationQuery();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentItem = items[currentIndex];
+  const currentItem = items ? items[currentIndex] : null;
+  const date = currentItem
+    ? formatDateInLanguages(currentItem?.created_at)
+    : null;
 
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev === 0 ? items.length - 1 : prev - 1));
   const handleNext = () =>
     setCurrentIndex((prev) => (prev === items.length - 1 ? 0 : prev + 1));
+  const translationsArray = Object.entries(currentItem?.translations ?? {}).map(
+    ([lang, data]) => ({
+      lang,
+      ...data,
+    })
+  );
 
   return (
     <div className="px-6 lg:px-[74px] py-8 lg:py-[64px] bg-[#EDF5FF]">
@@ -48,17 +40,17 @@ export default function PublicationsShowcase() {
         <div className="space-y-6">
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Explore Our Publications
+              {translations[selectedLanguage].title_publication}
             </h2>
             <p className="text-gray-600 leading-relaxed">
-              Explore our reports, research papers, and policy briefs on
-              European integration, governance, and local development. Stay
-              informed with expert insights from Europe House Kosovo and our
-              partners on Europe's evolving impact on Kosovo.
+              {translations[selectedLanguage]?.description_publication}
             </p>
           </div>
-          <button className="bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition-colors duration-200 font-medium">
-            See all Publications
+          <button
+            onClick={() => router.push("/publications")}
+            className="bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition-colors duration-200 font-medium"
+          >
+            {translations[selectedLanguage]?.seeallpublication}
           </button>
         </div>
 
@@ -69,27 +61,33 @@ export default function PublicationsShowcase() {
             <div className={`bg-indigo-600 text-white`}>
               {/* Mobile Header */}
               <div className="p-6 pb-4">
-                <h2 className="text-xl font-bold uppercase leading-tight tracking-wide mb-2">
-                  {currentItem.title}
+                <h2 className="text-[26px] leading-[34px] kanit-medium text-[#F7F0F0] tracking-wide mb-2">
+                  {currentItem?.translations[selectedLanguage]?.title}
                 </h2>
 
-                <p className="text-sm font-light mb-9">{currentItem.date}</p>
+                <p className="text-[#B7A0F8] kanit-regular text-[14px] leading-[34px] mb-2">
+                  {" "}
+                  {date && date[selectedLanguage]}
+                </p>
 
                 {/* Mobile Download and Languages */}
                 <div className="flex items-center justify-between mb-2">
-                  <p className="text-white text-sm font-light flex items-center gap-2">
-                    <Download size={16} /> Download PDF
+                  <p className="text-[#fff] text-[16px] kanit-light laeding-[42px] flex items-center gap-2">
+                    Download PDF
                   </p>
                   <div className="flex gap-2">
-                    {languages.map((lang) => (
-                      <div
-                        key={lang}
-                        className="px-3 py-1 rounded-full bg-white/90 flex-shrink-0"
+                    {translationsArray.map((lang) => (
+                      <a
+                        key={lang.lang}
+                        href={`${imageUrl}/${lang?.filepath}`}
+                        target="_blank" // open in new tab
+                        rel="noopener noreferrer"
+                        className="px-3 xl:px-4 py-1 rounded-[42px] bg-[#f7f0f0] flex-shrink-0"
                       >
-                        <p className="text-sm font-medium uppercase text-indigo-600">
-                          {lang}
+                        <p className="text-sm xl:text-base kanit-regular uppercase text-[#4343ee]">
+                          {lang.lang}
                         </p>
-                      </div>
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -98,8 +96,10 @@ export default function PublicationsShowcase() {
               {/* Mobile Image */}
               <div className="px-2 pb-7">
                 <Image
-                  src={Img1}
-                  alt={currentItem.title}
+                  src={`${imageUrl}/${currentItem?.translations[selectedLanguage]?.photo}`}
+                  alt={currentItem?.translations[selectedLanguage]?.title}
+                  width={500}
+                  height={500}
                   className="w-full h-64 object-cover rounded-lg"
                 />
               </div>
@@ -133,12 +133,12 @@ export default function PublicationsShowcase() {
                 className={`text-white p-6 relative flex-1 min-h-[243px] bg-indigo-600 border-b border-gray-300`}
               >
                 <div className="relative z-10 h-full flex flex-col justify-between">
-                  <h2 className="text-xl xl:text-[26px] font-bold uppercase leading-tight tracking-wide mb-4">
-                    {currentItem.title}
-                    <br />
-                    <span className="font-medium">{currentItem.subtitle}</span>
+                  <h2 className="kanit-medium text-[26px] leading-[34px] text-[#F7F0F0]">
+                    {currentItem?.translations[selectedLanguage]?.title}
                   </h2>
-                  <p className="text-sm font-light">{currentItem.date}</p>
+                  <p className="text-[#B7A0F8] text-[14px] kanit-regular leading-[34px]">
+                    {date && date[selectedLanguage]}
+                  </p>
                 </div>
               </div>
 
@@ -146,36 +146,40 @@ export default function PublicationsShowcase() {
               <div
                 className={`text-white p-6 h-12 flex items-center justify-between bg-indigo-600 border-r border-gray-300`}
               >
-                <p className="text-white text-base font-light whitespace-nowrap flex items-center gap-2">
+                <p className="text-white text-[#fff] kanit-regular text-[16px] leading-[42px] whitespace-nowrap flex items-center gap-2">
                   Download PDF
                 </p>
                 <div className="flex gap-2">
-                  {languages.map((lang) => (
-                    <div
-                      key={lang}
-                      className="px-3 xl:px-4 py-1 rounded-full bg-white/90 flex-shrink-0"
-                    >
-                      <p className="text-sm xl:text-base font-medium uppercase text-indigo-600">
-                        {lang}
-                      </p>
-                    </div>
-                  ))}
+                  {translationsArray?.map((lang) => {
+                    return (
+                      <a
+                        key={lang.lang}
+                        href={`${imageUrl}/${lang?.filepath}`}
+                        target="_blank" // open in new tab
+                        rel="noopener noreferrer"
+                        className="px-3 xl:px-4 py-1 rounded-[42px] bg-[#f7f0f0] flex-shrink-0"
+                      >
+                        <p className="text-sm xl:text-base kanit-regular uppercase text-[#4343ee]">
+                          {lang.lang}
+                        </p>
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>
 
-            {/* Right Side - Image and Navigation */}
             <div className="flex flex-col flex-shrink-0 lg:w-[340px]">
-              {/* Top Right - Image/Content Area */}
-              <div className="flex-1">
+              <div className="flex-1 ">
                 <Image
-                  src={Img1}
-                  alt={currentItem.title}
-                  className="w-full h-[268px] object-cover"
+                  src={`${imageUrl}/${currentItem?.translations[selectedLanguage]?.photo}`}
+                  alt={currentItem?.translations[selectedLanguage]?.title}
+                  width={340}
+                  height={334}
+                  className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Bottom Right - Navigation */}
               <div
                 className={`h-12 flex items-center justify-center px-6 bg-indigo-600`}
               >
