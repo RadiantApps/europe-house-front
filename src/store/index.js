@@ -17,7 +17,9 @@ import eusupportSlice from "./features/eusupportSlice";
 import { publicationApi } from "./services/publicationApi";
 import { aboutApi } from "./services/aboutApi";
 import { eventApi } from "./services/eventApi";
-
+import { campaingsApi } from "./services/campaingsApi";
+import { blogApi } from "./services/blogApi";
+import { homeApi } from "./services/homeApi";
 export const store = configureStore({
   reducer: {
     events: eventsSlice,
@@ -37,10 +39,16 @@ export const store = configureStore({
     [publicationApi.reducerPath]: publicationApi.reducer,
     [aboutApi.reducerPath]: aboutApi.reducer,
     [eventApi.reducerPath]: eventApi.reducer,
+    [campaingsApi.reducerPath]: campaingsApi.reducer,
+    [blogApi.reducerPath]: blogApi.reducer,
+    [homeApi.reducerPath]: homeApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
       .concat(publicationApi.middleware)
       .concat(aboutApi.middleware)
-      .concat(eventApi.middleware),
+      .concat(eventApi.middleware)
+      .concat(campaingsApi.middleware)
+      .concat(blogApi.middleware)
+      .concat(homeApi.middleware),
 });

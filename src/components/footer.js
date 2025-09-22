@@ -4,6 +4,7 @@ import { footerLinks } from "@/data/link";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { communityContent, footerContent } from "@/data/footerData";
+import { UpIcon } from "@/assets/footer";
 export default function Footer() {
   const selectedLanguage = useSelector(
     (state) => state.language.selectedLanguage
@@ -70,22 +71,7 @@ export default function Footer() {
                 className="bg-[#4433EE] hover:bg-[#3322DD] transition-colors p-3 rounded-md text-white flex items-center justify-center w-12 h-12"
                 aria-label="Scroll to top"
               >
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="transform rotate-180"
-                >
-                  <path
-                    d="M8 12L8 4M8 4L4 8M8 4L12 8"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <UpIcon />
               </button>
             </div>
           </div>
