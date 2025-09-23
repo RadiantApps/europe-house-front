@@ -31,17 +31,17 @@ export default function EuropeHouseMainContent() {
         <section className="py-8 md:py-[54px]">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
             <div className="space-y-6 md:space-y-[46px]">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl kanit-bold  text-gray-900 leading-tight">
+              <h1 className="text-[#1C1A1A] kanit-semibold text-[36px] md:text-[64px] leading-[1.1]">
                 {translationsEuprogrammes[selectedLanguage]?.title}
               </h1>
-              <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed kanit-light md:w-[75%]">
+              <p className="text-[#8E8D8D] kanit-leight text-[16px] md:text-[22px]  md:w-[75%]">
                 {translationsEuprogrammes[selectedLanguage]?.description}
               </p>
             </div>
 
             <div className="grid gap-4 md:gap-7 lg:grid-cols-1 xl:grid-cols-2">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <div className="h-32 md:h-40 lg:h-56 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center relative">
+                <div className="h-[200px] md:h-32 md:h-40 lg:h-56 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center relative">
                   <Image
                     src={Img3}
                     alt="Tower"
@@ -55,7 +55,7 @@ export default function EuropeHouseMainContent() {
               </div>
 
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <div className="h-32 md:h-40 lg:h-56 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center relative">
+                <div className="h-[200px] md:h-32 md:h-40 lg:h-56 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center relative">
                   <Image
                     src={Img2}
                     alt="Creative Europe"
@@ -74,17 +74,17 @@ export default function EuropeHouseMainContent() {
         <section className="py-8 md:py-[54px]">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
             <div className="space-y-6 md:space-y-[46px]">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl kanit-bold  text-gray-900 leading-tight">
+              <h1 className="text-[#1C1A1A] kanit-semibold text-[36px] md:text-[64px] leading-[1.1]">
                 {supportTranslations[selectedLanguage]?.title}
-              </h2>
-              <p className="text-gray-600 text-base md:text-lg lg:text-xl leading-relaxed kanit-light md:w-[70%]">
+              </h1>
+              <p className="text-[#8E8D8D] kanit-leight text-[16px] md:text-[22px]  md:w-[75%]">
                 {supportTranslations[selectedLanguage]?.description}
               </p>
             </div>
 
             <div className="lg:max-w-md">
               <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <div className="h-32 md:h-40 lg:h-56 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center relative">
+                <div className="h-[200px] md:h-32  md:h-40 lg:h-56 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center relative">
                   <Image
                     src={Img1}
                     alt="Kosovo Projects"

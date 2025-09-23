@@ -56,12 +56,7 @@ export default function Campaigns() {
               height={64}
               className="w-12 h-12 md:w-16 md:h-16 object-contain"
             />
-            <h1
-              className="kanit-semibold text-[#1C1A1A] leading-[1.1]"
-              style={{
-                fontSize: "clamp(28px, 4vw, 64px)",
-              }}
-            >
+            <h1 className="text-[#1C1A1A] leading-[1.1] text-[52px] kanit-semibold">
               {translations[selectedLanguage].title}
             </h1>
           </div>

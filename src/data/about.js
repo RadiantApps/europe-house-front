@@ -18,6 +18,7 @@ export const content = {
       `Located at the center of Pristina and North Mitrovica, Europe House Kosovo is a place where citizens can meet, discuss, and seek information about the European Union. Europe House Kosovo provides information on the EU, its institutions and policies, various EU events and projects for Kosovo, and Kosovo's path toward EU integration.`,
       `Through communication with Kosovo citizens on EU-related matters, Europe House Kosovo acts as the "eyes and ears" for the EU presence in Kosovo and serves as the hub for EU-related activities.`,
     ],
+    about: "About Us",
   },
   sq: {
     title: "KUSH JEMI NE",
@@ -25,6 +26,7 @@ export const content = {
       `E vendosur në qendër të Prishtinës dhe Mitrovicës së Veriut, Europe House Kosova është një vend ku qytetarët mund të takohen, diskutojnë dhe të marrin informata rreth Bashkimit Evropian. Europe House Kosova ofron informacione mbi BE-në, institucionet dhe politikat e saj, ngjarjet dhe projektet e ndryshme për Kosovën, si dhe rrugën e Kosovës drejt integrimit në BE.`,
       `Nëpërmjet komunikimit me qytetarët e Kosovës për çështje të lidhura me BE-në, Europe House Kosova vepron si "sytë dhe veshët" e pranisë së BE-së në Kosovë dhe shërben si qendra e aktiviteteve të lidhura me BE-në.`,
     ],
+    about: "Rreth Nesh",
   },
   sr: {
     title: "KO SMO MI",
@@ -32,6 +34,7 @@ export const content = {
       `Smeštena u centru Prištine i Severne Mitrovice, Europe House Kosovo je mesto gde građani mogu da se sastanu, razgovaraju i dobiju informacije o Evropskoj uniji. Europe House Kosovo pruža informacije o EU, njenim institucijama i politikama, raznim EU događajima i projektima za Kosovo, kao i o putu Kosova ka integraciji u EU.`,
       `Kroz komunikaciju sa građanima Kosova o pitanjima vezanim za EU, Europe House Kosovo deluje kao "oči i uši" prisustva EU na Kosovu i služi kao centar aktivnosti vezanih za EU.`,
     ],
+    about: "O nama",
   },
 };
 

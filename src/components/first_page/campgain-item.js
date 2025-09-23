@@ -29,7 +29,7 @@ const CampaignsView = () => {
     router.push("/campaigns");
   };
   return (
-    <div className="bg-white px-6 lg:px-[74px] py-8 lg:py-[66px]">
+    <div className="bg-white px-6 lg:px-[74px] py-8 lg:py-[66px] xl:max-w-[1500px] mx-auto">
       <div className="lg:p-10 px-4 py-8 bg-[#EDF5FF]">
         {/* Header */}
         <div className="mb-8">
