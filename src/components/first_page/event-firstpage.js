@@ -24,7 +24,7 @@ export default function EuropeHouse() {
     setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1));
 
   return (
-    <section className="bg-white rounded-t-[36px] py-10 px-6 lg:px-[74px]">
+    <section className="bg-white rounded-t-[36px] py-10 px-6 lg:px-[74px] xl:max-w-[1500px] mx-auto xl:max-w-[1500px] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start">
         {/* Left Side Content */}
         <div className="space-y-6">

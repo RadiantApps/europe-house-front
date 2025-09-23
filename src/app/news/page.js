@@ -71,8 +71,8 @@ export default function NewsBlog() {
 
       <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
-          <div className="flex flex-col w-[55%]">
-            <div className="flex items-end space-x-[15px]">
+          <div className="flex flex-col md:w-[55%]">
+            <div className="flex items-center md:items-end space-x-[15px]">
               <Image
                 src={NewsIcon}
                 alt="Events Icon"
@@ -80,20 +80,15 @@ export default function NewsBlog() {
                 height={64}
                 className="w-12 h-12 md:w-16 md:h-16 object-contain"
               />
-              <h1
-                className="font-semibold text-[#1C1A1A] leading-[1.1] kanit-semibold"
-                style={{
-                  fontSize: "clamp(28px, 4vw, 64px)",
-                }}
-              >
+              <h1 className="text-[#1C1A1A] leading-[1.1] text-[52px] kanit-semibold">
                 {translations[selectedLanguage].title}
               </h1>
             </div>
             <div className="w-full hidden lg:flex border-t border-[#C6C6C6]"></div>
           </div>
 
-          <div className="w-[35%]">
-            <p className="kanit-light text-[18px] leading-[25px] text-[#555353]">
+          <div className="md:w-[35%]">
+            <p className="kanit-light text-[18px] leading-[25px] text-[#515151]">
               {translations[selectedLanguage].description}
             </p>
             <button className=" kanit-medium  mt-6 lg:mt-8 w-[190px] h-[50px] flex items-center justify-center gap-[10px] bg-indigo-600 text-white font-medium rounded-[56px]">

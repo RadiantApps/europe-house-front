@@ -34,7 +34,7 @@ export default function PublicationsShowcase() {
   );
 
   return (
-    <div className="px-6 lg:px-[74px] py-8 lg:py-[64px] bg-[#EDF5FF]">
+    <div className="px-6 lg:px-[74px] py-8 lg:py-[64px] bg-[#EDF5FF] xl:max-w-[1500px] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start md:mt-[66px]">
         {/* Left Content */}
         <div className="space-y-6">

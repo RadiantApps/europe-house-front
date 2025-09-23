@@ -26,7 +26,7 @@ const News = () => {
   const latest_5_blog = blogs?.blogs_data?.last_5_blogs;
 
   return (
-    <div className="px-6 lg:px-[74px] bg-[#EDF5FF] py-8 lg:py-[64px]">
+    <div className="px-6 lg:px-[74px] bg-[#EDF5FF] py-8 lg:py-[64px] xl:max-w-[1500px] mx-auto">
       <div className="flex justify-between items-center mb-11">
         <h2 className="kanit-medium text-[#1C1A1A] text-[34px] leading-[42px]">
           {translations[selectedLanguage].title_latest_news}
@@ -63,7 +63,7 @@ const News = () => {
             </h3>
           </div>
           <hr className="border-gray-500 " />
-          {latest_5_blog?.map((item) => {
+          {latest_5_blog?.slice(0, 4)?.map((item) => {
             return (
               <div className="py-4 border-b border-gray-400">
                 <p className="text-xs text-gray-500 mb-2 uppercase">
@@ -110,7 +110,7 @@ const News = () => {
 
         {/* Right Side - 4 Articles in 2x2 */}
         <div className="col-span-2 grid grid-cols-2 grid-rows-2 gap-4">
-          {latest_5_blog?.map((news, idx) => {
+          {latest_5_blog?.slice(0, 4)?.map((news, idx) => {
             const photo = JSON.parse(
               news?.translations[selectedLanguage].photo || "{}"
             );

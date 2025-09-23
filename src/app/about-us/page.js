@@ -36,24 +36,24 @@ const WhoWeAre = () => {
     <div className="min-h-screen bg-white">
       {/* About Section */}
       <div className="px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto">
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 md:gap-12">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 md:gap-12 mt-[32px]">
           <div
             className="w-full md:max-w-2xl 2xl:max-w-3xl"
             key={selectedLanguage}
           >
-            <h1 className="text-4xl lg:text-5xl kanit-bold text-gray-900 mb-6">
+            <h1 className="text-[46px] text-[#1C1A1A] kanit-semibold md:text-[64px]">
               {content[selectedLanguage]?.title}
             </h1>
-            <p className="text-lg text-gray-700 mb-6 leading-relaxed kanit-light">
+            <p className="mt-[24px] md:mt-0 text-[16px] text-[#8E8D8D] md:text-[22px] kanit-light">
               {content[selectedLanguage]?.paragraphs[0]}
             </p>
-            <p className="text-lg text-gray-700 leading-relaxed">
+            <p className="mt-[24px] md:mt-0 text-[16px] text-[#8E8D8D] md:text-[22px] kanit-light md:mt-5">
               {content[selectedLanguage]?.paragraphs[1]}
             </p>
           </div>
 
           <div className="w-full md:flex md:justify-center">
-            <div className="w-full h-[400px] md:h-[580px] md:max-w-md flex items-center justify-center">
+            <div className="w-full h-[400px] md:h-[580px] md:max-w-md flex items-center justify-center mb-[44px] md:mb-0">
               <Image src={Map} alt="map" />
             </div>
           </div>
@@ -62,8 +62,8 @@ const WhoWeAre = () => {
 
       {/* Services Section */}
       <div className="py-16 lg:py-24 bg-[#EDF5FF]">
-        <div className="w-full px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto mt-[88px] mb-[88px]">
-          <h2 className="text-3xl lg:text-[48px] kanit-bold text-center text-gray-900 ">
+        <div className="w-full px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto mt-[45px] md:mt-[88px] md:mb-[88px] ">
+          <h2 className="text-[32px] text-[#1C1A1A] kanit-semibold w-[70%] mx-auto text-center">
             BOTH CENTRES OFFER:
           </h2>
           <div className="flex flex-wrap gap-6 justify-center mt-[46px]">
@@ -77,7 +77,7 @@ const WhoWeAre = () => {
                 >
                   {service.icon}
                 </div>
-                <p className="text-gray-700 leading-relaxed mt-2 md:mt-0 line-clamp-2">
+                <p className="text-[#555353] text-[16px] kanit-leight leading-[23px]">
                   {service.title}
                 </p>
               </div>
@@ -89,8 +89,8 @@ const WhoWeAre = () => {
       {/* Team Section */}
       <div className="py-16 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-          <h2 className="text-3xl lg:text-4xl kanit-bold text-center text-gray-900 mb-12">
-            OUR TEAM
+          <h2 className="text-[32px] text-[#1C1A1A] kanit-semibold w-[70%] md:w-full md:text-[48px]  mx-auto text-center">
+            {content[selectedLanguage]?.about}
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 ">
@@ -100,7 +100,7 @@ const WhoWeAre = () => {
               );
 
               return (
-                <div key={member?.id} className="mt-[76px]">
+                <div key={member?.id} className="mt-[26px]">
                   <div>
                     <img
                       src={`${imageUrl}/${member?.photo}`}
