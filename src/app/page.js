@@ -9,14 +9,15 @@ import EventFirstPage from "@/components/first_page/event-firstpage";
 import LatestEU from "@/components/first_page/latest-eu";
 import News from "@/components/first_page/news";
 import Footer from "@/components/footer";
+import UpcomingEvents from "@/components/first_page/upcoming-events";
 
 export default function Home() {
   const [expandedCampaign, setExpandedCampaign] = useState(null);
 
   return (
     <div className="min-h-screen bg-[#D2E6FF]">
-      <LatestEU />
-
+        <LatestEU />
+      <UpcomingEvents />
       <EventFirstPage />
       <News />
       <CampaignsView />

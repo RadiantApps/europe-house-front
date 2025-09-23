@@ -39,8 +39,16 @@ export default function Events() {
     category: "",
   });
 
+  const [tempFilters, setTempFilters] = useState({
+    year: "",
+    month: "",
+    location: "",
+    category: "",
+  });
+
   const [offset, setOffset] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
   const limit = 5;
 
   const { data } = useGetEventApiQuery({
@@ -53,6 +61,31 @@ export default function Events() {
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleFilterSidebar = () => {
+    if (!isFilterSidebarOpen) {
+      // When opening sidebar, copy current filters to temp filters
+      setTempFilters(filters);
+    }
+    setIsFilterSidebarOpen(!isFilterSidebarOpen);
+  };
+
+  const closeFilterSidebar = () => {
+    setIsFilterSidebarOpen(false);
+  };
+
+  const handleTempFilterChange = (key, value) => {
+    setTempFilters((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const applyFilters = () => {
+    setFilters(tempFilters);
+    setOffset(0);
+    closeFilterSidebar();
   };
 
   const handleFilterChange = (key, value) => {
@@ -130,14 +163,14 @@ export default function Events() {
       </div>
 
       {/* Filters Section */}
-      <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-6 md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px]">
-        <div className="md:hidden mb-4 flex justify-end">
+      <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-[18px] md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px]">
+        <div className="md:hidden  flex justify-end">
           <button
-            onClick={toggleSidebar}
-            className="flex items-center gap-3 px-6 py-3 bg-[#1c1a1a] text-white rounded-lg hover:bg-[#2a2828] transition-colors font-medium"
+            onClick={toggleFilterSidebar}
+            className="flex items-center gap-2  text-[#4433EE] font-medium "
           >
-            <span className="text-base font-bold">Filter</span>
-            <SlidersHorizontal className="w-6 h-6 text-white" />
+            <span className="text-sm font-semibold">Filter</span>
+            <SlidersHorizontal className="w-5 h-5 text-[#4433EE]" />
           </button>
         </div>
 
@@ -427,6 +460,172 @@ export default function Events() {
               className="w-[150px] bg-[#4433EE] hover:bg-[#3628c7] text-white rounded-full py-3 flex items-center justify-center gap-2 transition-colors font-medium mt-[52px] mb-[52px]"
             >
               {translations[selectedLanguage].seebutton}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Filter Sidebar Overlay */}
+      {isFilterSidebarOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={closeFilterSidebar}
+        />
+      )}
+
+      {/* Mobile Filter Sidebar */}
+      <div
+        className={`md:hidden fixed top-0 right-0 max-w-xs w-full h-full bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out overflow-auto ${
+          isFilterSidebarOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col p-6 space-y-6">
+          {/* Close Button */}
+          <button
+            onClick={closeFilterSidebar}
+            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-800"
+            aria-label="Close filter menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Filter Title */}
+          <div className="border-b border-gray-200 pb-4">
+            <h2 className="text-[20px] font-semibold text-gray-800 kanit-semibold">
+              {translations[selectedLanguage]?.filterTitle || "Filter Events"}
+            </h2>
+          </div>
+
+          {/* Filter Options */}
+          <div className="space-y-6">
+            {filterOptions.map((filter, idx) => (
+              <div key={idx} className="relative">
+                <select
+                  value={tempFilters[filter.key]}
+                  onChange={(e) => handleTempFilterChange(filter.key, e.target.value)}
+                  className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
+                >
+                  <option value="">{filter.label}</option>
+                  {filter.options.map((opt, i) =>
+                    typeof opt === "string" ? (
+                      <option key={i} value={opt}>
+                        {opt}
+                      </option>
+                    ) : (
+                      <option key={i} value={opt.value}>
+                        {opt.label}
+                      </option>
+                    )
+                  )}
+                </select>
+                <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                  <svg
+                    className="w-3 h-3 text-gray-600"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            ))}
+
+            {/* Location Filter */}
+            <div className="relative">
+              <select
+                value={tempFilters.location}
+                onChange={(e) => handleTempFilterChange("location", e.target.value)}
+                className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
+              >
+                <option value="">Location</option>
+                {locationData?.map((item) => {
+                  const translation = item?.translations?.find(
+                    (tran) => tran.language_code === selectedLanguage
+                  );
+                  return (
+                    <option key={item.location_id} value={item.location_id}>
+                      {translation?.location_name || "No Name"}
+                    </option>
+                  );
+                })}
+              </select>
+              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg
+                  className="w-3 h-3 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            {/* Category Filter */}
+            <div className="relative">
+              <select
+                value={tempFilters.category}
+                onChange={(e) => handleTempFilterChange("category", e.target.value)}
+                className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
+              >
+                <option value="">Category</option>
+                {categoryData?.map((item) => (
+                  <option
+                    key={item.category_event_id}
+                    value={item.category_event_id}
+                  >
+                    {item?.translations[selectedLanguage]?.name}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg
+                  className="w-3 h-3 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Apply Filters Button */}
+          <div className="pt-4 border-t border-gray-200">
+            <button
+              onClick={applyFilters}
+              className="w-full bg-[#4433EE] hover:bg-[#3628c7] text-white rounded-full py-3 flex items-center justify-center transition-colors font-medium kanit-regular"
+            >
+              Apply Filters
             </button>
           </div>
         </div>

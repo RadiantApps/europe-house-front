@@ -27,9 +27,35 @@ export default function PublicationsPage() {
   );
 
   const [filters, setFilters] = useState({});
+  const [tempFilters, setTempFilters] = useState({});
+  const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  const toggleFilterSidebar = () => {
+    if (!isFilterSidebarOpen) {
+      // When opening sidebar, copy current filters to temp filters
+      setTempFilters(filters);
+    }
+    setIsFilterSidebarOpen(!isFilterSidebarOpen);
+  };
+
+  const closeFilterSidebar = () => {
+    setIsFilterSidebarOpen(false);
+  };
+
+  const handleTempFilterChange = (key, value) => {
+    setTempFilters((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
+  const applyFilters = () => {
+    setFilters(tempFilters);
+    closeFilterSidebar();
   };
 
   const handleFilterChange = (key, value) => {
@@ -49,17 +75,7 @@ export default function PublicationsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
-      <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-6 md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px] xl:max-w-[1500px] xl:mx-auto">
-        {/* Mobile Filter Button */}
-        <div className="md:hidden mb-4 flex justify-end">
-          <button
-            onClick={toggleSidebar}
-            className="flex items-center gap-3 px-6 py-3 bg-[#1c1a1a] text-white rounded-lg hover:bg-[#2a2828] transition-colors font-medium"
-          >
-            <span className="text-base font-bold">Filter</span>
-            <SlidersHorizontal className="w-6 h-6 text-white" />
-          </button>
-        </div>
+      <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px] xl:max-w-[1500px] xl:mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
           <div className="flex items-center gap-3 flex-shrink-0">
             <Image
@@ -74,55 +90,65 @@ export default function PublicationsPage() {
             </h1>
           </div>
           <div className="lg:max-w-xl min-w-0">
-            <p
-              className="text-[16px] sm:text-[18px] kanit-regular leading-relaxed text-[#555353] text-left lg:text-justify"
-              style={{ fontFamily: "Kanit" }}
-            >
+            <p className="text-[16px] sm:text-[18px] font-light leading-relaxed text-[#555353] text-left lg:text-justify kanit-light">
               {translationTitlePublic[selectedLanguage].description}
             </p>
           </div>
         </div>
+
+        <div className="w-full border-t border-[#C6C6C6]"></div>
       </div>
 
-      <div className="flex space-x-[45px] px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-6 md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px] xl:max-w-[1500px] xl:mx-auto">
-        {/* Topic Selector */}
-        <div className="relative flex-shrink-0">
-          <select
-            value={filters.year}
-            onChange={(e) => handleFilterChange("year", e.target.value)}
-            className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[100px] w-full md:w-auto text-sm font-medium cursor-pointer"
+      {/* Filters Section */}
+      <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-[18px] md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px] xl:max-w-[1500px] xl:mx-auto">
+        <div className="md:hidden flex justify-end">
+          <button
+            onClick={toggleFilterSidebar}
+            className="flex items-center gap-2 text-[#4433EE] font-medium"
           >
-            <option value="">Year</option>
-            {yearOptions.map((year, i) => (
-              <option key={i} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-          <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
-            <svg
-              className="w-3 h-3 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </div>
+            <span className="text-sm font-semibold">Filter</span>
+            <SlidersHorizontal className="w-5 h-5 text-[#4433EE]" />
+          </button>
         </div>
 
-        <div className="flex flex-row gap-4 md:gap-6 lg:gap-8 max-w-full overflow-x-auto">
-          {/* Topic Selector */}
+        <div className="hidden md:flex flex-col md:flex-row gap-4 md:gap-6 lg:gap-8 max-w-full overflow-x-auto">
+          {/* Year Filter */}
+          <div className="relative flex-shrink-0">
+            <select
+              value={filters.year}
+              onChange={(e) => handleFilterChange("year", e.target.value)}
+              className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full md:w-auto text-sm font-medium cursor-pointer"
+            >
+              <option value="">Year</option>
+              {yearOptions.map((year, i) => (
+                <option key={i} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+            <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              <svg
+                className="w-3 h-3 text-gray-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </div>
+          </div>
+
+          {/* Topic Filter */}
           <div className="relative flex-shrink-0">
             <select
               value={filters.topic}
               onChange={(e) => handleFilterChange("topic", e.target.value)}
-              className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[120px] w-full md:w-auto text-sm font-medium cursor-pointer"
+              className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full md:w-auto text-sm font-medium cursor-pointer"
             >
               <option value="">Topic</option>
               {categoryPublicationData.map((opt) => {
@@ -257,6 +283,129 @@ export default function PublicationsPage() {
           </div>
         </div>
       </div>
+
+      {/* Mobile Filter Sidebar Overlay */}
+      {isFilterSidebarOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+          onClick={closeFilterSidebar}
+        />
+      )}
+
+      {/* Mobile Filter Sidebar */}
+      <div
+        className={`md:hidden fixed top-0 right-0 max-w-xs w-full h-full bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out overflow-auto ${
+          isFilterSidebarOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="flex flex-col p-6 space-y-6">
+          {/* Close Button */}
+          <button
+            onClick={closeFilterSidebar}
+            className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-800"
+            aria-label="Close filter menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Filter Title */}
+          <div className="border-b border-gray-200 pb-4">
+            <h2 className="text-[20px] font-semibold text-gray-800 kanit-semibold">
+              Filter Publications
+            </h2>
+          </div>
+
+          {/* Filter Options */}
+          <div className="space-y-6">
+            {/* Year Filter */}
+            <div className="relative">
+              <select
+                value={tempFilters.year || ""}
+                onChange={(e) => handleTempFilterChange("year", e.target.value)}
+                className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
+              >
+                <option value="">Year</option>
+                {yearOptions.map((year, i) => (
+                  <option key={i} value={year}>
+                    {year}
+                  </option>
+                ))}
+              </select>
+              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg
+                  className="w-3 h-3 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            {/* Topic Filter */}
+            <div className="relative">
+              <select
+                value={tempFilters.topic || ""}
+                onChange={(e) => handleTempFilterChange("topic", e.target.value)}
+                className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
+              >
+                <option value="">Topic</option>
+                {categoryPublicationData.map((opt) => {
+                  return (
+                    <option key={opt.id} value={opt.id}>
+                      {opt.translations[selectedLanguage]}
+                    </option>
+                  );
+                })}
+              </select>
+              <div className="absolute right-0 top-1/2 transform -translate-y-1/2 pointer-events-none">
+                <svg
+                  className="w-3 h-3 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Apply Filters Button */}
+          <div className="pt-4 border-t border-gray-200">
+            <button
+              onClick={applyFilters}
+              className="w-full bg-[#4433EE] hover:bg-[#3628c7] text-white rounded-full py-3 flex items-center justify-center transition-colors font-medium kanit-regular"
+            >
+              Apply Filters
+            </button>
+          </div>
+        </div>
+      </div>
+
       <Footer />
     </div>
   );
