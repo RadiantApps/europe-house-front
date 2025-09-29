@@ -11,6 +11,7 @@ import { getAllBlogCategory } from "@/store/features/blogCategorySlice";
 import { useGetBlogsQuery } from "@/store/services/blogApi";
 import { imageUrl } from "@/config";
 import { formatDateInLanguages } from "@/utils/utils";
+import Link from "next/link";
 
 export default function NewsBlog() {
   const dispatch = useDispatch();
@@ -192,7 +193,6 @@ export default function NewsBlog() {
               const article = item?.translations[selectedLanguage];
               const photo = JSON.parse(article.photo || "{}");
               const formatData = formatDateInLanguages(item.created_at);
-
               return (
                 <div
                   key={item.blog_id}
@@ -208,13 +208,18 @@ export default function NewsBlog() {
                       />
                     </div>
                   </div>
-                  <div className="mt-[20px]">
+                  <div className="flex-col mt-[20px]">
                     <span className="text-[#8E8D8D] kanit-light text-[14px]">
                       {formatData[selectedLanguage]}
                     </span>
-                    <h3 className="kanit-semibold text-[#1C1A1A] text-[20px] mt-[12px]">
-                      {article.title}
-                    </h3>
+                    <div>
+                      <Link
+                        href={`/news/${item.blog_id}`}
+                        className="kanit-semibold text-[#1C1A1A] text-[20px] mt-[12px] hover:underline"
+                      >
+                        {article.title}
+                      </Link>
+                    </div>
                   </div>
                 </div>
               );

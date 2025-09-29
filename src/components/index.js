@@ -19,3 +19,7 @@ export { default as UpdateEuSupportModal } from "./modal/eusupport/UpdateEuSuppo
 export { default as EditCampaingsModal } from "./modal/campings/EditCampaingsModal";
 export { default as CreateEventModal } from "./modal/event/CreateEventModal";
 export { default as UpdateEventModal } from "./modal/event/UpdateEventModal";
+export { default as CreateBannerBlogDetailsModal } from "./modal/blogdetails/CreateBannerBlogDetailsModal";
+export { default as UpdateBannerBlogDetailsModal } from "./modal/blogdetails/UpdateBannerBlogDetailsModal";
+export { default as CreateBlogDetailsAdmin } from "./modal/blogdetails/CreateBlogDetailsAdmin";
+export { default as EditBlogDetailsAdmin } from "./modal/blogdetails/EditBlogDetailsAdmin";

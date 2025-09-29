@@ -23,7 +23,10 @@ export const blogApi = createApi({
         return `/blog/getBlogsApi?${params.toString()}`;
       },
     }),
+    getBlogById: builder.query({
+      query: ({ id }) => `/blog-details/getBlogDetailsWithTitle/${id}`,
+    }),
   }),
 });
 
-export const { useGetBlogsQuery } = blogApi;
+export const { useGetBlogsQuery, useGetBlogByIdQuery } = blogApi;

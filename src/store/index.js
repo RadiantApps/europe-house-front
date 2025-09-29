@@ -13,6 +13,8 @@ import locationSlice from "./features/locationSlice";
 import teamSlice from "./features/teamSlice";
 import programmesSlice from "./features/programmesSlice";
 import eusupportSlice from "./features/eusupportSlice";
+import blogDetailsSlice from "./features/blogDetailsSlice";
+import eventDetailSlice from "./features/eventDetailSlice";
 
 import { publicationApi } from "./services/publicationApi";
 import { aboutApi } from "./services/aboutApi";
@@ -20,8 +22,10 @@ import { eventApi } from "./services/eventApi";
 import { campaingsApi } from "./services/campaingsApi";
 import { blogApi } from "./services/blogApi";
 import { homeApi } from "./services/homeApi";
+
 export const store = configureStore({
   reducer: {
+    blogdetails: blogDetailsSlice,
     events: eventsSlice,
     language: languageSlice,
     team: teamSlice,
@@ -36,6 +40,8 @@ export const store = configureStore({
     location: locationSlice,
     programme: programmesSlice,
     eusupport: eusupportSlice,
+    eventDetails: eventDetailSlice,
+
     [publicationApi.reducerPath]: publicationApi.reducer,
     [aboutApi.reducerPath]: aboutApi.reducer,
     [eventApi.reducerPath]: eventApi.reducer,
