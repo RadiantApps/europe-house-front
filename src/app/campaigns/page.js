@@ -9,9 +9,10 @@ import Image from "next/image";
 import { translations } from "@/data/campaings";
 import { useGetCampaingsApiQuery } from "@/store/services/campaingsApi";
 import { imageUrl } from "@/config";
+import { useRouter } from "next/navigation";
 
 export default function Campaigns() {
-  const dispatch = useDispatch();
+  const router = useRouter();
   const selectedLanguage = useSelector(
     (state) => state.language.selectedLanguage
   );
@@ -97,7 +98,10 @@ export default function Campaigns() {
                       <p className="text-[16px] kanit-light leading-[24px] text-[#4433EE]">
                         {camp?.content}
                       </p>
-                      <button className="bg-[#4433EE] h-[46px] px-[20px] rounded-[56px] mt-[32px] kanit-medium text-[#F7F0F0] text-[16px]">
+                      <button
+                        onClick={() => router.push(`/campaigns/${item?.id}`)}
+                        className="bg-[#4433EE] h-[46px] px-[20px] rounded-[56px] mt-[32px] kanit-medium text-[#F7F0F0] text-[16px]"
+                      >
                         {translations[selectedLanguage].button}
                       </button>
                     </div>

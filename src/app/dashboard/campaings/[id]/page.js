@@ -1,83 +1,73 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "next/navigation";
 
 import Image from "next/image";
 import { imageUrl } from "@/config";
+import CreateBannerEventDetails from "@/components/modal/event/CreateBannerEventDetails";
 import {
-  deleteBlogDetails,
-  getBannerBlogDetails,
-  getBlogDetails,
+  deleteEventDetails,
+  getEventBanner,
+  getEventDetails,
   updateOrder,
-} from "@/store/features/blogDetailsSlice";
-import CreateBannerBlogDetailsModal from "@/components/modal/blogdetails/CreateBannerBlogDetailsModal";
-import UpdateBannerBlogDetailsModal from "@/components/modal/blogdetails/UpdateBannerBlogDetailsModal";
-import CreateBlogDetailsAdmin from "@/components/modal/blogdetails/CreateBlogDetailsAdmin";
-import { EditBlogDetailsAdmin } from "@/components";
+} from "@/store/features/eventDetailSlice";
+import UpdareBannerEventDetails from "@/components/modal/event/UpdareBannerEventDetails";
+import CreateEventDetailsAdmin from "@/components/modal/event/CreateEventDetailsAdmin";
+import EditEventDetailsAdmin from "@/components/modal/event/EditEventDetailsAdmin";
 
-const CreateBlogDetails = () => {
+const EventDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
 
   const bannerData =
-    useSelector((state) => state.blogdetails.getBannerData) || [];
-  const blogDetailsData =
-    useSelector((state) => state.blogdetails.getBlogDetailsData) || [];
-
+    useSelector((state) => state.eventDetails.getBannerData) || [];
+  const eventDetailsData =
+    useSelector((state) => state.eventDetails.eventDetailsData) || [];
   const createBannerLoading = useSelector(
-    (state) => state.blogdetails.createBannerDetailLoading
-  );
-  const updateBannerLoading = useSelector(
-    (state) => state.blogdetails.updateBannerLoading
-  );
-  const createBlogLoading = useSelector(
-    (state) => state.blogdetails.createBlogDetailsLoading
-  );
-  const deleteBlogDetailsLoading = useSelector(
-    (state) => state.blogdetails.deleteBlogDetailsLoading
-  );
-  const updateBlogDetailLoading = useSelector(
-    (state) => state.blogdetails.updateBlogDetailLoading
-  );
-  const createBlogDetailsLoading = useSelector(
-    (state) => state.blogdetails.createBlogDetailsLoading
+    (state) => state.eventDetails.createBannerDetailLoading
   );
 
-  const [isOpenCreateModal, setIsOpenCreateModal] = useState(false);
-  const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false);
-  const [isOpenCreateBlogModal, setIsOpenCreateBlogModal] = useState(false);
+  const createEventDetailsLoading = useSelector(
+    (state) => state.eventDetails.createEventDetailsLoading
+  );
+
+  const updateBannerLoading = useSelector(
+    (state) => state.eventDetails.updateBannerLoading
+  );
+
+  const deleteEventDetailsLoading = useSelector(
+    (state) => state.eventDetails.deleteEventDetailsLoading
+  );
+  const updateEventDetailsLoading = useSelector(
+    (state) => state.eventDetails.updateEventDetailLoading
+  );
+  const [isOpenCreateBanner, setIsOpenCreateBanner] = useState(false);
+  const [isOpenUpdateBanner, setIsOpenUpdateBanner] = useState(false);
+  const [isOpenCreateEventModal, setIsOpenCreateEventModal] = useState(false);
   const [isOpenEditItemModal, setIsOpenEditItemModal] = useState(false);
   const [editDataItem, setEditDataItem] = useState(null);
 
   const [items, setItems] = useState([]);
   const [draggedIndex, setDraggedIndex] = useState(null);
 
+  const openCreateEventModal = () =>
+    setIsOpenCreateEventModal(!isOpenCreateEventModal);
+
+  const handleOpenCreateBaner = () =>
+    setIsOpenCreateBanner(!isOpenCreateBanner);
+
+  const openEditBanner = () => setIsOpenUpdateBanner(!isOpenUpdateBanner);
+
   const openEditItemModal = (item) => {
     setEditDataItem(item);
     setIsOpenEditItemModal(!isOpenEditItemModal);
   };
-  const openCreateModal = () => setIsOpenCreateModal(!isOpenCreateModal);
-  const openUpdateModal = () => setIsOpenUpdateModal(!isOpenUpdateModal);
-  const openCreateBlogModal = () =>
-    setIsOpenCreateBlogModal(!isOpenCreateBlogModal);
+
+  const bannersExist = bannerData.length > 0;
 
   useEffect(() => {
-    dispatch(getBannerBlogDetails(id));
-    dispatch(getBlogDetails(id));
-  }, [
-    dispatch,
-    id,
-    createBannerLoading,
-    updateBannerLoading,
-    createBlogLoading,
-    deleteBlogDetailsLoading,
-    updateBlogDetailLoading,
-    createBlogDetailsLoading,
-  ]);
-
-  useEffect(() => {
-    const parsedItems = blogDetailsData.map((item) => ({
+    const parsedItems = eventDetailsData.map((item) => ({
       ...item,
       contentParsed:
         typeof item.content === "string"
@@ -85,11 +75,23 @@ const CreateBlogDetails = () => {
           : item.content,
     }));
 
-    // sort once here by order
     parsedItems.sort((a, b) => a.order - b.order);
 
     setItems(parsedItems);
-  }, [blogDetailsData]);
+  }, [eventDetailsData]);
+
+  useEffect(() => {
+    dispatch(getEventBanner(id));
+    dispatch(getEventDetails(id));
+  }, [
+    dispatch,
+    id,
+    createBannerLoading,
+    updateBannerLoading,
+    createEventDetailsLoading,
+    deleteEventDetailsLoading,
+    updateEventDetailsLoading,
+  ]);
 
   const onDragStart = (index) => setDraggedIndex(index);
   const onDragOver = (e) => e.preventDefault();
@@ -108,10 +110,9 @@ const CreateBlogDetails = () => {
       order: idx + 1,
     }));
 
+    console.log(updatedOrders);
     dispatch(updateOrder({ items: JSON.stringify(updatedOrders) }));
   };
-
-  const bannersExist = bannerData.length > 0;
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2">
@@ -119,27 +120,31 @@ const CreateBlogDetails = () => {
         {!bannersExist ? (
           <button
             className="bg-[#B8F900] w-[283px] font-medium py-2 px-4 rounded h-[50px] text-[#121212] text-[18px] leading-[22px]"
-            onClick={openCreateModal}
+            onClick={handleOpenCreateBaner}
           >
             Add Banner
           </button>
         ) : (
           <button
             className="bg-[#FFA500] w-[283px] font-medium py-2 px-4 rounded h-[50px] text-[#121212] text-[18px] leading-[22px]"
-            onClick={openUpdateModal}
+            onClick={openEditBanner}
           >
             Update Banner
           </button>
         )}
       </div>
 
-      {isOpenCreateModal && (
-        <CreateBannerBlogDetailsModal openModal={openCreateModal} blogId={id} />
+      {isOpenCreateBanner && (
+        <CreateBannerEventDetails
+          openModal={handleOpenCreateBaner}
+          eventId={id}
+        />
       )}
-      {isOpenUpdateModal && (
-        <UpdateBannerBlogDetailsModal
-          openModal={openUpdateModal}
-          blogId={id}
+
+      {isOpenUpdateBanner && (
+        <UpdareBannerEventDetails
+          openModal={openEditBanner}
+          eventId={id}
           existingBanners={bannerData}
         />
       )}
@@ -161,20 +166,19 @@ const CreateBlogDetails = () => {
         </div>
       )}
 
-      {/* Blog Details Section */}
       <div className="mt-20 mb-10">
         <button
           className="bg-[#B8F900] w-[283px] font-medium py-2 px-4 rounded h-[50px] text-[#121212] text-[18px] leading-[22px]"
-          onClick={openCreateBlogModal}
+          onClick={openCreateEventModal}
         >
-          Add Blog Detail
+          Add Event Details
         </button>
       </div>
 
-      {/* Items with drag and drop */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {items.map((item, index) => {
           const { type, contentParsed } = item;
+
           return (
             <div
               key={item.id}
@@ -236,7 +240,7 @@ const CreateBlogDetails = () => {
                 </button>
                 <button
                   className="bg-red-500 text-white px-3 py-1 rounded text-[20px] mt-10 w-full h-[50px]"
-                  onClick={() => dispatch(deleteBlogDetails(item.id))}
+                  onClick={() => dispatch(deleteEventDetails(item.id))}
                 >
                   Delete
                 </button>
@@ -246,12 +250,12 @@ const CreateBlogDetails = () => {
         })}
       </div>
 
-      {/* Create Blog Detail Modal */}
-      {isOpenCreateBlogModal && (
-        <CreateBlogDetailsAdmin openModal={openCreateBlogModal} id={id} />
+      {isOpenCreateEventModal && (
+        <CreateEventDetailsAdmin openModal={openCreateEventModal} id={id} />
       )}
+
       {isOpenEditItemModal && (
-        <EditBlogDetailsAdmin
+        <EditEventDetailsAdmin
           openModal={openEditItemModal}
           item={editDataItem}
         />
@@ -260,4 +264,4 @@ const CreateBlogDetails = () => {
   );
 };
 
-export default CreateBlogDetails;
+export default EventDetails;

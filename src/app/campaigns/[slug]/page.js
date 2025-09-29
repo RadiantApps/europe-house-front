@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { useGetBlogByIdQuery } from "@/store/services/blogApi";
 import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import { formatDateInLanguages } from "@/utils/utils";
@@ -10,6 +9,7 @@ import { Copy, Facebook, Linkedin, X } from "@/assets/events/icons";
 import Footer from "@/components/footer";
 import { useState } from "react";
 import { LeftIcon, RightIcon } from "@/assets/news";
+import { useGetCampaingsDetailApiQuery } from "@/store/services/campaingsApi";
 
 function GalleryCarousel({ gallery }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -46,16 +46,15 @@ function GalleryCarousel({ gallery }) {
   );
 }
 
-export default function EuropeDayComponent() {
+const CampaingsDetail = () => {
   const selectedLanguage = useSelector(
     (state) => state.language.selectedLanguage
   );
 
   const { slug } = useParams();
-  const { data, isLoading, isError } = useGetBlogByIdQuery({ id: slug });
-
-  if (isLoading) return <p>Loading...</p>;
-  if (isError) return <p>Error loading blog</p>;
+  const { data, isLoading, isError } = useGetCampaingsDetailApiQuery({
+    id: slug,
+  });
 
   const blog = Array.isArray(data) ? data[0] : data;
 
@@ -70,7 +69,6 @@ export default function EuropeDayComponent() {
   const banner = blog?.banners?.find(
     (b) => b.language_code === selectedLanguage
   );
-
   const parsedDetails = blog?.details
     ?.map((item) => {
       if (item.type === "video" && typeof item.content === "string") {
@@ -79,7 +77,17 @@ export default function EuropeDayComponent() {
       return item;
     })
     ?.sort((a, b) => a.order - b.order);
-
+  const getContent = (item) => {
+    if (!item?.content) return null;
+    if (typeof item.content === "string") {
+      try {
+        return JSON.parse(item.content);
+      } catch {
+        return null;
+      }
+    }
+    return item.content; // already parsed
+  };
   return (
     <>
       <div className="px-6 md:px-[74px] bg-white">
@@ -128,13 +136,15 @@ export default function EuropeDayComponent() {
         {/* Blog Details */}
         <div className="max-w-4xl mx-auto mt-12 space-y-8 mb-[51px]">
           {parsedDetails?.map((item) => {
+            const content = getContent(item);
+
             if (item.type === "text") {
               return (
                 <div
                   className="kanit-regular text-[#555353]"
                   key={item.id}
                   dangerouslySetInnerHTML={{
-                    __html: item.content?.[selectedLanguage]?.content,
+                    __html: content?.[selectedLanguage]?.content,
                   }}
                 />
               );
@@ -144,7 +154,7 @@ export default function EuropeDayComponent() {
               return (
                 <div key={item.id} className="relative w-full h-[443px]">
                   <Image
-                    src={`${imageUrl}/${item.content?.path}`}
+                    src={`${imageUrl}/${content?.path}`}
                     alt=""
                     fill
                     className="object-cover rounded-md"
@@ -157,7 +167,7 @@ export default function EuropeDayComponent() {
               return (
                 <div key={item.id} className="relative w-full h-0 pb-[56.25%]">
                   <iframe
-                    src={item.content.youtube_url}
+                    src={content?.youtube_url}
                     title="YouTube video"
                     allowFullScreen
                     className="absolute top-0 left-0 w-full h-full rounded-md"
@@ -167,7 +177,7 @@ export default function EuropeDayComponent() {
             }
 
             if (item.type === "gallery") {
-              return <GalleryCarousel key={item.id} gallery={item.content} />;
+              return <GalleryCarousel key={item.id} gallery={content} />;
             }
 
             return null;
@@ -177,4 +187,6 @@ export default function EuropeDayComponent() {
       <Footer />
     </>
   );
-}
+};
+
+export default CampaingsDetail;

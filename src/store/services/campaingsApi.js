@@ -14,7 +14,11 @@ export const campaingsApi = createApi({
     getCampaingsApi: builder.query({
       query: () => `/campaings/getCampaings`,
     }),
+    getCampaingsDetailApi: builder.query({
+      query: ({ id }) => `/event-details/getEventCampaingsById/${id}`,
+    }),
   }),
 });
 
-export const { useGetCampaingsApiQuery } = campaingsApi;
+export const { useGetCampaingsApiQuery, useGetCampaingsDetailApiQuery } =
+  campaingsApi;

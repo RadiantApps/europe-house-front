@@ -93,38 +93,40 @@ const pages = () => {
             </tr>
           </thead>
           <tbody>
-            {blogData?.map((item) => (
-              <tr
-                key={item.blog_id}
-                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-              >
-                <td className="px-4 py-4">{item?.translations?.sq?.title}</td>
-                <td className="px-4 py-4">{item?.translations?.en?.title}</td>
-                <td className="px-4 py-4">{item?.translations?.sr?.title}</td>
-                <td className="px-4 py-4 flex space-x-2">
-                  <button
-                    onClick={() => openModalUpdate(item)}
-                    className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
-                  >
-                    Edit
-                  </button>
-                  <Link
-                    href="/"
-                    className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
-                  >
-                    Go to blog
-                  </Link>
-                  <button
-                    onClick={() => {
-                      dispatch(deleteBlogs(item.blog_id));
-                    }}
-                    className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {blogData?.map((item) => {
+              return (
+                <tr
+                  key={item.blog_id}
+                  className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+                >
+                  <td className="px-4 py-4">{item?.translations?.sq?.title}</td>
+                  <td className="px-4 py-4">{item?.translations?.en?.title}</td>
+                  <td className="px-4 py-4">{item?.translations?.sr?.title}</td>
+                  <td className="px-4 py-4 flex space-x-2">
+                    <button
+                      onClick={() => openModalUpdate(item)}
+                      className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
+                    >
+                      Edit
+                    </button>
+                    <Link
+                      href={`/dashboard/blogs/${item?.blog_id}`}
+                      className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
+                    >
+                      Go to blog
+                    </Link>
+                    <button
+                      onClick={() => {
+                        dispatch(deleteBlogs(item.blog_id));
+                      }}
+                      className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

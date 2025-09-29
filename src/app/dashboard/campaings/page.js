@@ -7,6 +7,7 @@ import {
   deleteCampings,
   getAllCampaings,
 } from "@/store/features/campaingsSlice";
+import Link from "next/link";
 
 const CampaingsDash = () => {
   const dispatch = useDispatch();
@@ -107,7 +108,12 @@ const CampaingsDash = () => {
                   >
                     Edit
                   </button>
-
+                  <Link
+                    href={`/dashboard/campaings/${item?.id}`}
+                    className="bg-[#F5F5F5] rounded-[10px] w-[153px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
+                  >
+                    Go to Campaing
+                  </Link>
                   <button
                     onClick={() => dispatch(deleteCampings(item?.id))}
                     className="bg-[#F5F5F5] rounded-[10px] w-[93px] h-[32px] flex items-center justify-center text-[#888] text-[16px] leading-[22px]"
