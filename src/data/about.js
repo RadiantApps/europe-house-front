@@ -1,15 +1,16 @@
 import {
-  Users,
-  BookOpen,
-  Mic,
-  Calendar,
-  Building,
-  Globe,
-  Award,
-  MessageCircle,
-  Video,
-  Phone,
-} from "lucide-react";
+  FirstIcon,
+  SecondIcon,
+  ThirdIcon,
+  FourthIcon,
+  FifthIcon,
+  SixthIcon,
+  SeventhIcon,
+  EighthIcon,
+  NinthIcon,
+  TenIcon,
+  LastIcon,
+} from "@/assets/about-us";
 
 export const content = {
   en: {
@@ -41,62 +42,62 @@ export const content = {
 export const servicesData = {
   en: [
     {
-      icon: <MessageCircle className="w-6 h-6" />,
+      icon: <FirstIcon />,
       title:
         "A competence center where you can ask about various information related to the EU and the Centre",
       bgColor: "bg-blue-600",
     },
     {
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <SecondIcon />,
       title: "A conference room which can accommodate up to 50 people",
       bgColor: "bg-purple-600",
     },
     {
-      icon: <Calendar className="w-6 h-6" />,
+      icon: <ThirdIcon />,
       title: "Event areas can accommodate up to 100 people standing",
       bgColor: "bg-indigo-600",
     },
     {
-      icon: <Phone className="w-6 h-6" />,
+      icon: <FourthIcon />,
       title: "EU related publications and are free of charge",
       bgColor: "bg-blue-500",
     },
     {
-      icon: <Building className="w-6 h-6" />,
+      icon: <FifthIcon />,
       title:
         "Interactive corner where citizens can enjoy reading various European monthly magazines",
       bgColor: "bg-purple-500",
     },
     {
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <SixthIcon />,
       title:
         "A mini-library where you can find books, articles and publications on EU-related matters",
       bgColor: "bg-indigo-500",
     },
     {
-      icon: <Globe className="w-6 h-6" />,
+      icon: <SeventhIcon />,
       title: "An internet corner that has online access",
       bgColor: "bg-blue-400",
     },
     {
-      icon: <Video className="w-6 h-6" />,
+      icon: <EighthIcon />,
       title:
         "Cultural activities such as art exhibitions, film screenings and other EU-related cultural activities",
       bgColor: "bg-purple-400",
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: <NinthIcon />,
       title:
         "Direct transmission/broadcasting of training via satellite (EBS) and Eurovisions",
       bgColor: "bg-indigo-400",
     },
     {
-      icon: <Mic className="w-6 h-6" />,
+      icon: <TenIcon />,
       title: "Lectures, public debates and presentations on EU-related topics",
       bgColor: "bg-blue-300",
     },
     {
-      icon: <Award className="w-6 h-6" />,
+      icon: <LastIcon />,
       title:
         "These activities aim to increase public awareness and knowledge, especially targeting youth so they can take informed decisions on the past and benefits of EU integration process",
       bgColor: "bg-purple-300",
@@ -105,63 +106,63 @@ export const servicesData = {
 
   sq: [
     {
-      icon: <MessageCircle className="w-6 h-6" />,
+      icon: <FirstIcon />,
       title:
         "Qendër kompetence ku mund të pyesni për informacione të ndryshme lidhur me BE dhe Qendrën",
       bgColor: "bg-blue-600",
     },
     {
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <SecondIcon />,
       title: "Një sallë konferencash që mund të pranojë deri në 50 persona",
       bgColor: "bg-purple-600",
     },
     {
-      icon: <Calendar className="w-6 h-6" />,
+      icon: <ThirdIcon />,
       title:
         "Hapësirat e ngjarjeve mund të pranojnë deri në 100 persona në këmbë",
       bgColor: "bg-indigo-600",
     },
     {
-      icon: <Phone className="w-6 h-6" />,
+      icon: <FourthIcon />,
       title: "Publikime lidhur me BE-në dhe janë pa pagesë",
       bgColor: "bg-blue-500",
     },
     {
-      icon: <Building className="w-6 h-6" />,
+      icon: <FifthIcon />,
       title:
         "Kënd interaktiv ku qytetarët mund të shijojnë leximin e revistave të ndryshme mujore evropiane",
       bgColor: "bg-purple-500",
     },
     {
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <SixthIcon />,
       title:
         "Një mini-bibliotekë ku mund të gjeni libra, artikuj dhe publikime mbi çështjet e lidhura me BE-në",
       bgColor: "bg-indigo-500",
     },
     {
-      icon: <Globe className="w-6 h-6" />,
+      icon: <SeventhIcon />,
       title: "Kënd interneti me akses online",
       bgColor: "bg-blue-400",
     },
     {
-      icon: <Video className="w-6 h-6" />,
+      icon: <EighthIcon />,
       title:
         "Aktivitete kulturore si ekspozita arti, shfaqje filmi dhe aktivitete të tjera kulturore lidhur me BE-në",
       bgColor: "bg-purple-400",
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: <NinthIcon />,
       title:
         "Transmetim i drejtpërdrejt i trajnimeve përmes satelitit (EBS) dhe Eurovisions",
       bgColor: "bg-indigo-400",
     },
     {
-      icon: <Mic className="w-6 h-6" />,
+      icon: <TenIcon />,
       title: "Ligjërata, debate publike dhe prezantime mbi temat e BE-së",
       bgColor: "bg-blue-300",
     },
     {
-      icon: <Award className="w-6 h-6" />,
+      icon: <LastIcon />,
       title:
         "Këto aktivitete synojnë të rrisin ndërgjegjësimin dhe njohuritë publike, veçanërisht tek të rinjtë për vendime të informuara mbi integrimin në BE",
       bgColor: "bg-purple-300",
@@ -170,61 +171,61 @@ export const servicesData = {
 
   sr: [
     {
-      icon: <MessageCircle className="w-6 h-6" />,
+      icon: <FirstIcon />,
       title:
         "Centar kompetencija gde možete pitati za različite informacije vezane za EU i Centar",
       bgColor: "bg-blue-600",
     },
     {
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <SecondIcon />,
       title: "Konferencijska sala koja može primiti do 50 ljudi",
       bgColor: "bg-purple-600",
     },
     {
-      icon: <Calendar className="w-6 h-6" />,
+      icon: <ThirdIcon />,
       title: "Prostorije za događaje mogu primiti do 100 ljudi stojeći",
       bgColor: "bg-indigo-600",
     },
     {
-      icon: <Phone className="w-6 h-6" />,
+      icon: <FourthIcon />,
       title: "Publikacije vezane za EU i besplatne su",
       bgColor: "bg-blue-500",
     },
     {
-      icon: <Building className="w-6 h-6" />,
+      icon: <FifthIcon />,
       title:
         "Interaktivni kutak gde građani mogu uživati u čitanju raznih evropskih mesečnih časopisa",
       bgColor: "bg-purple-500",
     },
     {
-      icon: <BookOpen className="w-6 h-6" />,
+      icon: <SixthIcon />,
       title:
         "Mini-biblioteka gde možete pronaći knjige, članke i publikacije o temama vezanim za EU",
       bgColor: "bg-indigo-500",
     },
     {
-      icon: <Globe className="w-6 h-6" />,
+      icon: <SeventhIcon />,
       title: "Internet kutak sa online pristupom",
       bgColor: "bg-blue-400",
     },
     {
-      icon: <Video className="w-6 h-6" />,
+      icon: <EighthIcon />,
       title:
         "Kulturne aktivnosti kao što su umetničke izložbe, filmske projekcije i druge EU kulturne aktivnosti",
       bgColor: "bg-purple-400",
     },
     {
-      icon: <Users className="w-6 h-6" />,
+      icon: <NinthIcon />,
       title: "Direktan prenos/trening putem satelita (EBS) i Eurovisions",
       bgColor: "bg-indigo-400",
     },
     {
-      icon: <Mic className="w-6 h-6" />,
+      icon: <TenIcon />,
       title: "Predavanja, javne debate i prezentacije o temama vezanim za EU",
       bgColor: "bg-blue-300",
     },
     {
-      icon: <Award className="w-6 h-6" />,
+      icon: <LastIcon />,
       title:
         "Ove aktivnosti imaju za cilj povećanje javne svesti i znanja, posebno kod mladih za informisane odluke o integraciji u EU",
       bgColor: "bg-purple-300",

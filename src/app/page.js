@@ -12,11 +12,9 @@ import Footer from "@/components/footer";
 import UpcomingEvents from "@/components/first_page/upcoming-events";
 
 export default function Home() {
-  const [expandedCampaign, setExpandedCampaign] = useState(null);
-
   return (
     <div className="min-h-screen bg-[#D2E6FF]">
-        <LatestEU />
+      <LatestEU />
       <UpcomingEvents />
       <EventFirstPage />
       <News />

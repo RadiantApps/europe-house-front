@@ -19,15 +19,14 @@ export default function EventPage() {
     (state) => state.language.selectedLanguage
   );
   const params = useParams();
-  const eventId = params.slug; // [id] from URL
-
+  const eventId = params.slug;
   const [copied, setCopied] = useState(false);
   const { data } = useGetEventItemQuery({ id: eventId });
   const { data: updcomingEvent } = useGetUpcomingEventQuery();
   const event = data?.[0] || null;
 
   const handleCopy = () => {
-    navigator.clipboard.writeText(window.location.href);
+    // navigator.clipboard.writeText(window.location.href);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -38,10 +37,11 @@ export default function EventPage() {
         selectedLanguage
       ].photo.replaceAll("\\", "/")}`
     : null;
+
   const handleClick = (id) => {
     router.push(`/events/${id}`);
   };
-
+  console.log(eventPhoto);
   return (
     <div className="w-full font-sans">
       <main>

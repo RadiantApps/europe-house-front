@@ -1,6 +1,8 @@
 "use client";
 
-import { CreateEuSupportModal, UpdateEuSupportModal } from "@/components";
+// import { CreateEuSupportModal, UpdateEuSupportModal } from "@/components";
+import CreateEuSupportModal from "@/components/modal/eusupport/CreateEuSupportModal";
+import UpdateEuSupportModal from "@/components/modal/eusupport/UpdateEuSupportModal";
 import { imageUrl } from "@/config";
 import {
   deleteEuSupport,

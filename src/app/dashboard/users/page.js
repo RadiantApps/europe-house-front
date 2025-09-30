@@ -5,8 +5,9 @@ import { formatYear } from "@/utils/utils";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreateUserModal, UpdateUserModal } from "@/components";
-
+// import { CreateUserModal, UpdateUserModal } from "@/components";
+import CreateUserModal from "@/components/modal/users/CreateUserModal";
+import UpdateUserModal from "@/components/modal/users/UpdateUserModal";
 const page = () => {
   const router = useRouter();
   const dispatch = useDispatch();

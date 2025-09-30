@@ -8,8 +8,13 @@ import event3 from "../../assets/events/3.png";
 import event4 from "../../assets/events/4.png";
 import event5 from "../../assets/events/5.png";
 import UpcomingEventsImg from "../../assets/events/upcoming-events.svg";
-
+import { translations } from "@/data/home";
+import { useSelector } from "react-redux";
 const UpcomingEvents = () => {
+  const selectedLanguage = useSelector(
+    (state) => state.language.selectedLanguage
+  );
+
   const images = [event1, event2, event3, event4, event5];
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -25,15 +30,15 @@ const UpcomingEvents = () => {
         {/* Left Side Content */}
         <div className="space-y-6">
           <Image src={UpcomingEventsImg} alt="UpcomingEventsImg" />
-          <h2 className="text-3xl font-bold text-gray-900">
-            Be part of our upcoming Events and Activities
-          </h2>
-          <p className="text-gray-500 text-lg leading-relaxed">
-            Discover what's happening at Europe House Kosovo—join discussions,
-            workshops, and cultural activities that inspire and engage.
+
+          <p className="kanit-semibold text-[34px] laeding-[30px] text-[#1C1A1A]">
+            {translations[selectedLanguage].upcomingEventTitle}
           </p>
-          <button className="bg-indigo-600 text-white w-[190px] h-[46px] rounded-[56px] px-[20px] font-semibold shadow hover:bg-indigo-700 transition flex items-center justify-center">
-            Explore all Events{" "}
+          <p className="text-[#8E8D8D] kanit-light text-[22px]">
+            {translations[selectedLanguage].upcomingEventDescription}
+          </p>
+          <button className="bg-[#4433EE] text-[#F7F0F0] w-[190px] h-[50px] text-[16px] kanit-medium rounded-[56px] flex items-center justify-center">
+            {translations[selectedLanguage].upcomingEventButton}
           </button>
         </div>
 

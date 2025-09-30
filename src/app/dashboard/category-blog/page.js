@@ -1,6 +1,7 @@
 "use client";
 
-import { CreateBlogCategoryModal } from "@/components";
+// import { CreateBlogCategoryModal } from "@/components";
+import CreateBlogCategoryModal from "@/components/modal/blog/CreateBlogCategoryModal";
 import {
   deleteBlogCategory,
   getAllBlogCategory,

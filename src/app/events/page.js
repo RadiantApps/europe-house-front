@@ -514,7 +514,9 @@ export default function Events() {
               <div key={idx} className="relative">
                 <select
                   value={tempFilters[filter.key]}
-                  onChange={(e) => handleTempFilterChange(filter.key, e.target.value)}
+                  onChange={(e) =>
+                    handleTempFilterChange(filter.key, e.target.value)
+                  }
                   className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
                 >
                   <option value="">{filter.label}</option>
@@ -552,7 +554,9 @@ export default function Events() {
             <div className="relative">
               <select
                 value={tempFilters.location}
-                onChange={(e) => handleTempFilterChange("location", e.target.value)}
+                onChange={(e) =>
+                  handleTempFilterChange("location", e.target.value)
+                }
                 className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
               >
                 <option value="">Location</option>
@@ -588,7 +592,9 @@ export default function Events() {
             <div className="relative">
               <select
                 value={tempFilters.category}
-                onChange={(e) => handleTempFilterChange("category", e.target.value)}
+                onChange={(e) =>
+                  handleTempFilterChange("category", e.target.value)
+                }
                 className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
               >
                 <option value="">Category</option>

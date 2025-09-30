@@ -1,31 +1,37 @@
+"use client";
 import React, { useState, useEffect } from "react";
 import { AiOutlineBars } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { setToggle, setToggleManual } from "../../store/features/toggleSlice";
-import { MdKeyboardArrowDown } from "react-icons/md";
 
 const DashboardNavbar = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
-  const [screenSize, setScreenSize] = useState();
+  const [screenSize, setScreenSize] = useState(null);
 
   useEffect(() => {
-    const handleResize = () => setScreenSize(window.innerWidth);
+    // Only run if window exists (prevent SSR issues)
+    if (typeof window !== "undefined") {
+      const handleResize = () => setScreenSize(window.innerWidth);
 
-    window.addEventListener("resize", handleResize);
+      window.addEventListener("resize", handleResize);
 
-    handleResize();
+      // Set initial screen size
+      handleResize();
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, [setScreenSize]);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, []);
 
   useEffect(() => {
+    if (screenSize === null) return;
+
     if (screenSize <= 900) {
       dispatch(setToggleManual(false));
     } else {
       dispatch(setToggleManual(true));
     }
-  }, [screenSize, setToggleManual]);
+  }, [screenSize, dispatch]);
 
   return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative">

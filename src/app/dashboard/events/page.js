@@ -3,10 +3,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreateEventModal, UpdateEventModal } from "@/components";
+// import { CreateEventModal, UpdateEventModal } from "@/components";
 import { deleteEvent, getEvents } from "@/store/features/eventsSlice";
 import { formatDateYear, getLanguageLabel } from "@/utils/utils";
-
+import CreateEventModal from "@/components/modal/event/CreateEventModal";
+import UpdateEventModal from "@/components/modal/event/UpdateEventModal";
 const Events = () => {
   const router = useRouter();
   const dispatch = useDispatch();

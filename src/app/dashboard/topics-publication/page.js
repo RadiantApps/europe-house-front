@@ -1,6 +1,7 @@
 "use client";
 
-import { CreateBlogCategoryModal, CreateTopicsPulication } from "@/components";
+// import { CreateBlogCategoryModal, CreateTopicsPulication } from "@/components";
+import CreateTopicsPulication from "@/components/modal/publication/CreateTopicsPulication";
 import {
   deleteTopicsPublication,
   getAllTopicsPublication,

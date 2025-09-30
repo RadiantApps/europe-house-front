@@ -1,4 +1,4 @@
-const firstIcone = () => {
+const FirstIcon = () => {
   return (
     <svg
       width="57"
@@ -16,4 +16,4 @@ const firstIcone = () => {
   );
 };
 
-export default firstIcone;
+export default FirstIcon;

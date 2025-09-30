@@ -1,8 +1,9 @@
 "use client";
-import { CreateContactModal } from "@/components";
+// import { CreateContactModal } from "@/components";
 import { deleteLocation, getLocation } from "@/store/features/locationSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CreateContactModal from "@/components/modal/contact/CreateContactModal";
 
 const Contact = () => {
   const dispatch = useDispatch();

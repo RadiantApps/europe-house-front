@@ -1,13 +1,13 @@
 "use client";
 
-import { CreateEventCategoryModal } from "@/components";
+// import { CreateEventCategoryModal } from "@/components";
+import CreateEventCategoryModal from "@/components/modal/event/CreateEventCategoryModal";
 import {
   deleteCategoryEvent,
   getAllCategoryEvent,
 } from "@/store/features/categoryEventSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
 
 const EventCategory = () => {
   const dispatch = useDispatch();

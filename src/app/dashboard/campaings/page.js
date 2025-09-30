@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreateCampingsModal, EditCampaingsModal } from "@/components";
+import CreateCampingsModal from "@/components/modal/campings/CreateCampingsModal";
+import EditCampaingsModal from "@/components/modal/campings/EditCampaingsModal";
 import {
   deleteCampings,
   getAllCampaings,

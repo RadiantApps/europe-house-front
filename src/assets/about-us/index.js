@@ -1,0 +1,11 @@
+export { default as FirstIcon } from "./FirstIcon";
+export { default as SecondIcon } from "./SecondIcon";
+export { default as ThirdIcon } from "./ThirdIcon";
+export { default as FourthIcon } from "./FourthIcon";
+export { default as FifthIcon } from "./FifthIcon";
+export { default as SixthIcon } from "./SixthIcon";
+export { default as SeventhIcon } from "./SeventhIcon";
+export { default as EighthIcon } from "./EighthIcon";
+export { default as NinthIcon } from "./NinthIcon";
+export { default as TenIcon } from "./TenIcon";
+export { default as LastIcon } from "./LastIcon";

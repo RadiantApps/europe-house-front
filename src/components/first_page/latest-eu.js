@@ -38,7 +38,6 @@ const LatestEU = () => {
   const titleEvent = event?.translations[selectedLanguage]?.title;
   const dateEvent =
     event?.event_date && formatDateInLanguages(event?.event_date);
-
   const publication = items?.latest_publication;
   const publicationPhoto = publication?.translations[selectedLanguage]?.photo;
   const publicationTitle = publication?.translations[selectedLanguage]?.title;
