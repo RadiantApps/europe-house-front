@@ -1,3 +1,4 @@
+"use client";
 import Logo from "../../public/logo.svg";
 import Image from "next/image";
 import { footerLinks } from "@/data/link";
@@ -67,7 +68,11 @@ export default function Footer() {
             {/* Scroll to top button */}
             <div className="flex justify-center sm:justify-end">
               <button
-                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }}
                 className="bg-[#4433EE] hover:bg-[#3322DD] transition-colors p-3 rounded-md text-white flex items-center justify-center w-12 h-12"
                 aria-label="Scroll to top"
               >

@@ -3,7 +3,10 @@ import { deleteBlogs, getAllBlogs } from "@/store/features/blogSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreateBlogModal, UpdateBlogModal } from "@/components";
+// import { CreateBlogModal, UpdateBlogModal } from "@/components";
+import CreateBlogModal from "@/components/modal/blog/CreateBlogModal";
+import UpdateBlogModal from "@/components/modal/blog/UpdateBlogModal";
+
 import Link from "next/link";
 const pages = () => {
   const router = useRouter();

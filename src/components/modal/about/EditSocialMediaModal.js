@@ -1,3 +1,4 @@
+"use client";
 import { IoIosCloseCircle } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -14,10 +15,15 @@ const EditSocialMediaModal = ({ openModal, data }) => {
     twitter: "",
     linkedin: "",
   });
-
   useEffect(() => {
     if (data) {
-      setFormData(data?.socials || {});
+      setFormData({
+        id: data.id, // keep the team id
+        facebook: data.socials?.facebook || "",
+        instagram: data.socials?.instagram || "",
+        twitter: data.socials?.twitter || "",
+        linkedin: data.socials?.linkedin || "",
+      });
     }
   }, [data]);
 

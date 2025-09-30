@@ -20,6 +20,10 @@ export const translations = {
               informed with expert insights from Europe House Kosovo and our
               partners on Europe's evolving impact on Kosovo.`,
     seeallpublication: "See All Publication",
+    upcomingEventTitle: "Be part of our upcoming Events and Activities",
+    upcomingEventDescription:
+      "Discover what's happening at Europe House Kosovo—join discussions, workshops, and cultural activities that inspire and engage.",
+    upcomingEventButton: "Explore all Events",
   },
   sq: {
     main_title: "Të fundit nga Shtëpia e BE-së",
@@ -39,6 +43,11 @@ export const translations = {
     title_publication: "Eksploroni Publikimet tona",
     description_publication: `Shfletoni raportet, punimet kërkimore dhe përmbledhjet tona të politikave mbi integrimin evropian, qeverisjen dhe zhvillimin lokal. Qëndroni të informuar me njohuritë e ekspertëve nga Europe House Kosovo dhe partnerët tanë mbi ndikimin në zhvillim të Evropës në Kosovë.`,
     seeallpublication: "Shiko të gjitha publikimet",
+    upcomingEventTitle:
+      "Bëhuni pjesë e Eventeve dhe Aktiviteteve tona të ardhshme",
+    upcomingEventDescription:
+      "Zbuloni se çfarë po ndodh në Europe House Kosovo—bashkohuni në diskutime, punëtori dhe aktivitete kulturore që frymëzojnë dhe angazhojnë.",
+    upcomingEventButton: "Eksploro Ngjarjet",
   },
   sr: {
     main_title: "Najnovije iz EU kuće",
@@ -58,5 +67,9 @@ export const translations = {
     title_publication: "Istražite naše publikacije",
     description_publication: `Istražite naše izveštaje, istraživačke radove i političke izveštaje o evropskim integracijama, upravljanju i lokalnom razvoju. Ostanite informisani uz stručne uvide iz Europe House Kosovo i naših partnera o promenljivom uticaju Evrope na Kosovo.`,
     seeallpublication: "Pogledajte sve publikacije",
+    upcomingEventTitle: "Budite deo naših predstojećih događaja i aktivnosti",
+    upcomingEventDescription:
+      "Otkrijte šta se dešava u Evropskoj kući Kosovo — pridružite se diskusijama, radionicama i kulturnim aktivnostima koje inspirišu i angažuju.",
+    upcomingEventButton: "Istražite sve događaje",
   },
 };

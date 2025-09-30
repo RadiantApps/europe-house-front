@@ -4,10 +4,11 @@ import { getProgrammes } from "@/store/features/programmesSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProgrammes } from "@/store/features/programmesSlice";
-import { CreateProgrammeModal, EditProgrammeModal } from "@/components";
 import Image from "next/image";
 import { imageUrl } from "@/config";
 import EuSupport from "./EuSupport";
+import CreateProgrammeModal from "@/components/modal/programme/CreateProgrammeModal";
+import EditProgrammeModal from "@/components/modal/programme/EditProgrammeModal";
 const Support = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);

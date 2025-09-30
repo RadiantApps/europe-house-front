@@ -2,12 +2,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { CreatePublication, EditCampaingsModal } from "@/components";
+// import { CreatePublication, EditCampaingsModal } from "@/components";
 import {
   deletePublication,
   getPublication,
 } from "@/store/features/publicationSlice";
 import EditPublicationModal from "@/components/modal/publication/EditPublicationModal";
+import CreatePublication from "@/components/modal/publication/CreatePublication";
 
 const Publication = () => {
   const dispatch = useDispatch();

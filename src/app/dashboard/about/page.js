@@ -2,15 +2,20 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  CreateTeamModal,
-  EditTeamPositonModal,
-  EditSocialMediaModal,
-  EditTeamModal,
-} from "@/components";
+// import {
+//   CreateTeamModal,
+//   EditTeamPositonModal,
+//   EditSocialMediaModal,
+//   EditTeamModal,
+// } from "@/components";
+import CreateTeamModal from "@/components/modal/about/CreateTeamModal";
+import EditTeamPositonModal from "@/components/modal/about/EditTeamPositonModal";
+import EditSocialMediaModal from "@/components/modal/about/EditSocialMediaModal";
+
 import { deleteTeams, getAllTeams } from "@/store/features/teamSlice";
 import Image from "next/image";
 import { imageUrl } from "@/config";
+import EditTeamInfoModal from "@/components/modal/about/EditTeamModal";
 const About = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -179,7 +184,7 @@ const About = () => {
         />
       )}
       {isOpenEditMain && (
-        <EditTeamModal
+        <EditTeamInfoModal
           openModal={() => setIsOpenEditMain(!isOpenEditMain)}
           data={itemEditMain}
         />
