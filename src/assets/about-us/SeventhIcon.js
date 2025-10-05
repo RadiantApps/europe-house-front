@@ -11,21 +11,21 @@ const SeventhIcon = () => {
       <path
         d="M39.5184 28.0755C39.5184 22.0701 34.6503 17.202 28.6449 17.202C22.6395 17.202 17.7715 22.0701 17.7715 28.0755C17.7715 34.0809 22.6395 38.9489 28.6449 38.9489"
         stroke="white"
-        stroke-width="1.63102"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.63102"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M29.7318 17.2565C29.7318 17.2565 32.9938 21.5515 32.9938 28.0755M27.5571 38.8946C27.5571 38.8946 24.2951 34.5996 24.2951 28.0755C24.2951 21.5515 27.5571 17.2565 27.5571 17.2565M18.4561 31.8812H28.6445M18.4561 24.2698H38.8329"
         stroke="white"
-        stroke-width="1.63102"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.63102"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M39.387 34.5093C39.9242 34.8398 39.8905 35.6434 39.3381 35.7064L36.5469 36.0228L35.2953 38.5368C35.0474 39.0359 34.2808 38.7912 34.1536 38.1736L32.789 31.5234C32.6814 31.0015 33.1511 30.6731 33.6045 30.9526L39.387 34.5093Z"
         stroke="white"
-        stroke-width="1.63102"
+        strokeWidth="1.63102"
       />
     </svg>
   );

@@ -2,11 +2,6 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import event1 from "../../assets/events/1.png";
-import event2 from "../../assets/events/2.png";
-import event3 from "../../assets/events/3.png";
-import event4 from "../../assets/events/4.png";
-import event5 from "../../assets/events/5.png";
 import UpcomingEventsImg from "../../assets/events/upcoming-events.svg";
 import { translations } from "@/data/home";
 import { useSelector } from "react-redux";
@@ -15,7 +10,12 @@ const UpcomingEvents = () => {
     (state) => state.language.selectedLanguage
   );
 
-  const images = [event1, event2, event3, event4, event5];
+  const images = [
+    "/assets/events/event1.mp4",
+    "/assets/events/event2.mp4",
+    "/assets/events/event3.mp4",
+    "/assets/events/event4.mp4",
+  ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const prevSlide = () =>
@@ -25,7 +25,7 @@ const UpcomingEvents = () => {
     setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1));
 
   return (
-    <section className="bg-white rounded-t-[36px] py-10 px-6 lg:px-[74px]">
+    <section className="bg-white  rounded-t-[36px] py-10 px-6 lg:pl-[74px]">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start">
         {/* Left Side Content */}
         <div className="space-y-6">
@@ -42,28 +42,22 @@ const UpcomingEvents = () => {
           </button>
         </div>
 
-        {/* Right Side Card */}
         <div className="w-full h-full overflow-hidden relative flex flex-col justify-center">
-          {/* Decorative border frame */}
-          <div className="absolute -top-16 left-50 right-0 h-12 border-t border-r border-gray-300 z-50"></div>
+          <div className="absolute z-50"></div>
 
-          {/* Desktop */}
-          {/* Desktop */}
           <div className="hidden lg:block relative">
-            {/* Gray background */}
             <div
-              className="absolute bg-gray-100 rounded-2xl"
+              className="absolute bg-[#F7F0F0] rounded-tl-[24px] rounded-bl-[24px]"
               style={{
                 left: "20%",
                 top: "-5px",
-                height: "350px",
+                height: "517px",
                 width: "85%",
                 zIndex: 0,
               }}
             ></div>
 
-            {/* Carousel + controls */}
-            <div className="relative z-10 p-6">
+            <div className="relative z-10 mt-[40px] ">
               <div
                 className="flex transition-transform duration-500"
                 style={{
@@ -75,19 +69,19 @@ const UpcomingEvents = () => {
                     key={idx}
                     className="flex-shrink-0 w-[40%] mr-4 rounded-2xl overflow-hidden shadow-lg"
                   >
-                    <Image
-                      src={src}
-                      alt={`Europe House ${idx + 1}`}
-                      width={600}
-                      height={400}
-                      className="w-full h-[268px] object-cover"
+                    <video
+                      src={src} // <-- directly on video
+                      className="w-full h-[268px] object-cover rounded-2xl"
+                      autoPlay // <-- autoplay
+                      muted // <-- required for autoplay
+                      loop // <-- loop
+                      playsInline // <-- mobile support
                     />
                   </div>
                 ))}
               </div>
 
-              {/* Buttons + counter inside gray area */}
-              <div className="absolute left-[22%] mt-3 right-6 flex items-center justify-between">
+              <div className="absolute left-[22%] mt-[30px] right-6 flex items-center justify-between">
                 <div className="flex gap-4">
                   <button
                     onClick={prevSlide}
@@ -103,31 +97,29 @@ const UpcomingEvents = () => {
                   </button>
                 </div>
                 <span className="text-gray-500 text-sm">
-                  Events {currentIndex + 1}/{images.length}
+                  {translations[selectedLanguage].eventSlideTitle}{" "}
+                  {currentIndex + 1}/{images.length}
                 </span>
               </div>
             </div>
           </div>
 
           {/* Mobile */}
-          {/* Mobile */}
-          <div className="lg:hidden relative">
+          <div className="lg:hidden relative h-[420px] rounded-tl-[24px] rounded-bl-[24px]">
             {/* Gray background */}
             <div
-              className="absolute bg-gray-100"
+              className="absolute bg-[#F7F0F0] "
               style={{
                 left: "15%",
                 top: "-20px",
-                height: "350px", // increased height
+                height: "520px", // increased height
                 width: "90%",
                 zIndex: 0,
-                borderTopLeftRadius: "24px",
-                borderBottomLeftRadius: "24px",
               }}
             ></div>
 
             {/* Carousel + controls */}
-            <div className="relative z-10 p-6 h-[350px] flex flex-col justify-between">
+            <div className="relative z-10 p-6 h-[350px] flex flex-col justify-between mt-[21px]">
               {/* Image area */}
               <div
                 className="flex transition-transform duration-500"
@@ -138,19 +130,20 @@ const UpcomingEvents = () => {
                     key={idx}
                     className="flex-shrink-0 w-full rounded-2xl px-1 overflow-hidden shadow-lg"
                   >
-                    <Image
-                      src={src}
-                      alt={`Europe House ${idx + 1}`}
-                      width={800}
-                      height={500}
-                      className="w-full h-[250px] object-cover"
+                    <video
+                      src={src} // <-- directly on video
+                      className="w-full h-[268px] object-cover rounded-2xl"
+                      autoPlay // <-- autoplay
+                      muted // <-- required for autoplay
+                      loop // <-- loop
+                      playsInline // <-- mobile support
                     />
                   </div>
                 ))}
               </div>
 
               {/* Buttons + counter anchored at bottom */}
-              <div className="flex items-center justify-between ml-16">
+              <div className="flex items-center justify-between ml-16 mt-[30px]">
                 <div className="flex gap-3">
                   <button
                     onClick={prevSlide}
@@ -166,7 +159,8 @@ const UpcomingEvents = () => {
                   </button>
                 </div>
                 <span className="text-gray-500 text-sm">
-                  Events {currentIndex + 1}/{images.length}
+                  {translations[selectedLanguage].eventSlideTitle}{" "}
+                  {currentIndex + 1}/{images.length}
                 </span>
               </div>
             </div>

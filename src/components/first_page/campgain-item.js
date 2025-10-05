@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import { translations } from "@/data/home";
@@ -7,7 +7,6 @@ import { useGetLatestCampaingsQuery } from "@/store/services/homeApi";
 import { imageUrl } from "@/config";
 import { CloseIcon, OpenIcon } from "@/assets/home";
 import { useRouter } from "next/navigation";
-
 const CampaignsView = () => {
   const router = useRouter();
   const selectedLanguage = useSelector(
@@ -21,7 +20,11 @@ const CampaignsView = () => {
   const [openId, setOpenId] = useState(
     campaingsData && campaingsData.length > 0 ? campaingsData[0].id : null
   );
-
+  useEffect(() => {
+    if (campaingsData && campaingsData.length > 0) {
+      setOpenId(campaingsData[0].id);
+    }
+  }, [campaingsData]);
   const handleToggle = (id) => {
     setOpenId((prevId) => (prevId === id ? null : id));
   };
@@ -29,7 +32,7 @@ const CampaignsView = () => {
     router.push("/campaigns");
   };
   return (
-    <div className="bg-white px-6 lg:px-[74px] py-8 lg:py-[66px] xl:max-w-[1500px] mx-auto">
+    <div className=" mx-auto bg-white px-6 lg:px-[74px] py-8 lg:py-[66px] ">
       <div className="lg:p-10 px-4 py-8 bg-[#EDF5FF]">
         {/* Header */}
         <div className="mb-8">

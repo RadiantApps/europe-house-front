@@ -26,7 +26,7 @@ const News = () => {
   const latest_5_blog = blogs?.blogs_data?.last_5_blogs;
 
   return (
-    <div className="px-6 lg:px-[74px] bg-[#EDF5FF] py-8 lg:py-[64px] xl:max-w-[1500px] mx-auto">
+    <div className=" mx-auto px-6 lg:px-[74px] bg-[#EDF5FF] py-8 lg:py-[64px] ">
       <div className="flex justify-between items-center mb-11">
         <h2 className="kanit-medium text-[#1C1A1A] text-[34px] leading-[42px]">
           {translations[selectedLanguage].title_latest_news}
@@ -84,26 +84,35 @@ const News = () => {
           </button>
         </div>
       </div>
-      {/* Mobile Layout*/}
       <div className="md:hidden"></div>
       {/* Desktop Layout */}
       <div className="hidden lg:grid grid-cols-3 gap-6">
         {/* Left Side - Main Featured Article */}
         <div className="col-span-1 flex flex-col">
-          <div className="relative rounded-lg min-h-[502px] mb-4 overflow-hidden">
-            <Image
-              src={`${imageUrl}/${photo_latest_blog?.path}`}
-              alt={title_latest_blog}
-              fill
-              className="object-cover"
-            />
+          <div className="relative rounded-lg min-h-[507px] mb-4 overflow-hidden">
+            {photo_latest_blog?.path ? (
+              <Image
+                src={`${imageUrl}/${photo_latest_blog.path}`}
+                alt={title_latest_blog || "Latest blog image"}
+                height={507}
+                width={370}
+                className="object-cover w-full h-full"
+              />
+            ) : (
+              <div className="bg-gray-100 w-full h-full flex items-center justify-center text-gray-400">
+                No image available
+              </div>
+            )}
           </div>
+
           <div>
-            <p className="text-xs text-gray-500 mb-2">
-              {latest_blog?.created_at && date_latest_blog[selectedLanguage]}
-            </p>
-            <h3 className="text-[#1C1A1A] text-[24px]  kanit-semibold">
-              {title_latest_blog}
+            {latest_blog?.created_at && (
+              <p className="text-xs text-gray-500 mb-2">
+                {date_latest_blog?.[selectedLanguage] || ""}
+              </p>
+            )}
+            <h3 className="text-[#1C1A1A] text-[24px] kanit-semibold leading-snug line-clamp-2">
+              {title_latest_blog || "Untitled blog"}
             </h3>
           </div>
         </div>
@@ -130,7 +139,7 @@ const News = () => {
                   <p className="kanit-regualr text-[12px] leading-[24px] text-[#8E8D8D]">
                     {date[selectedLanguage]}
                   </p>
-                  <h3 className="kanit-semibold text-[24px] text-[#1C1A1A]">
+                  <h3 className="kanit-semibold text-[20px] text-[#1C1A1A]">
                     {title}
                   </h3>
                 </div>

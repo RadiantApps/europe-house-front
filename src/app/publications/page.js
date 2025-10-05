@@ -75,7 +75,7 @@ export default function PublicationsPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
-      <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px] xl:max-w-[1500px] xl:mx-auto">
+      <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px] ">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
           <div className="flex items-center gap-3 flex-shrink-0">
             <Image
@@ -100,7 +100,7 @@ export default function PublicationsPage() {
       </div>
 
       {/* Filters Section */}
-      <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-[18px] md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px] xl:max-w-[1500px] xl:mx-auto">
+      <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-[18px] md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px] ">
         <div className="md:hidden flex justify-end">
           <button
             onClick={toggleFilterSidebar}
@@ -181,7 +181,7 @@ export default function PublicationsPage() {
       {/* Items */}
       <div className="w-full bg-[#EDF5FF] rounded-t-[36px]">
         <div className="px-4 sm:px-6 md:px-12 lg:px-[74px] pt-8 sm:pt-12 md:pt-[66px] pb-8 sm:pb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-[28px] max-w-[1340px] mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-[28px]  mx-auto">
             {publication?.map((item) => {
               const translation = item?.translations[selectedLanguage];
               const translationsArray = Object.entries(item?.translations).map(
@@ -257,7 +257,7 @@ export default function PublicationsPage() {
                               <a
                                 key={lang.lang}
                                 href={`${imageUrl}/${lang?.filepath}`}
-                                target="_blank" // open in new tab
+                                target="_blank"
                                 rel="noopener noreferrer"
                                 className="px-3 xl:px-4 py-1 rounded-[42px] bg-[#f7f0f0] flex-shrink-0"
                               >
@@ -284,7 +284,6 @@ export default function PublicationsPage() {
         </div>
       </div>
 
-      {/* Mobile Filter Sidebar Overlay */}
       {isFilterSidebarOpen && (
         <div
           className="md:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
@@ -292,14 +291,12 @@ export default function PublicationsPage() {
         />
       )}
 
-      {/* Mobile Filter Sidebar */}
       <div
         className={`md:hidden fixed top-0 right-0 max-w-xs w-full h-full bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out overflow-auto ${
           isFilterSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col p-6 space-y-6">
-          {/* Close Button */}
           <button
             onClick={closeFilterSidebar}
             className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-gray-600 hover:text-gray-800"
@@ -364,7 +361,9 @@ export default function PublicationsPage() {
             <div className="relative">
               <select
                 value={tempFilters.topic || ""}
-                onChange={(e) => handleTempFilterChange("topic", e.target.value)}
+                onChange={(e) =>
+                  handleTempFilterChange("topic", e.target.value)
+                }
                 className="kanit-regular appearance-none bg-white text-gray-700 px-0 py-2 pr-6 border-b border-gray-400 focus:outline-none focus:border-gray-600 min-w-[80px] w-full text-sm font-medium cursor-pointer"
               >
                 <option value="">Topic</option>

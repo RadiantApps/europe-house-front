@@ -10,7 +10,7 @@ const LeftIcon = () => {
       <path
         d="M22 10.5146L2 10.5147M2 10.5147L11 19.5146M2 10.5147L11 1.51465"
         stroke="#4433EE"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );

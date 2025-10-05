@@ -6,7 +6,14 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      rotate: {
+        15: "45deg",
+      },
+      screens: {
+        "2xl-max": { max: "2000px" }, // max-width 2000px
+      },
+    },
   },
   plugins: [],
-}
+};

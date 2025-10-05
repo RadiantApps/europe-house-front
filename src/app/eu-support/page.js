@@ -27,7 +27,7 @@ export default function EuropeHouseMainContent() {
         />
       </div>
 
-      <div className="px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto">
+      <div className="px-6 md:px-[74px] ">
         <section className="py-8 md:py-[54px]">
           <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
             <div className="space-y-6 md:space-y-[46px]">
@@ -72,26 +72,26 @@ export default function EuropeHouseMainContent() {
         </section>
 
         <section className="py-8 md:py-[54px]">
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
+          <div className="flex flex-col lg:flex-row gap-8 md:gap-12 items-start justify-between">
             <div className="space-y-6 md:space-y-[46px]">
               <h1 className="text-[#1C1A1A] kanit-semibold text-[36px] md:text-[64px] leading-[1.1]">
                 {supportTranslations[selectedLanguage]?.title}
               </h1>
-              <p className="text-[#8E8D8D] kanit-leight text-[16px] md:text-[22px]  md:w-[75%]">
+              <p className="text-[#8E8D8D] kanit-leight text-[16px] md:text-[22px] md:w-[55%]">
                 {supportTranslations[selectedLanguage]?.description}
               </p>
             </div>
 
-            <div className="lg:max-w-md">
-              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                <div className="h-[200px] md:h-32  md:h-40 lg:h-56 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center relative">
+            <div className="lg:max-w-md flex justify-end">
+              <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group w-full">
+                <div className="md:h-[200px] md:h-32 md:h-40 lg:h-56 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center relative">
                   <Image
                     src={Img1}
                     alt="Kosovo Projects"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <button className="kanit-medium  w-full bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-3 md:py-4 font-semibold text-base md:text-lg flex items-center justify-between transition-colors duration-200 group-hover:scale-[1.02]">
+                <button className="kanit-medium w-full bg-blue-600 hover:bg-blue-700 text-white px-4 md:px-6 py-3 md:py-4 font-semibold text-base md:text-lg flex items-center justify-between transition-colors duration-200 group-hover:scale-[1.02]">
                   Kosovo Projects
                   <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
