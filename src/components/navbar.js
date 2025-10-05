@@ -25,7 +25,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="w-full border-b border-gray-200 px-6 lg:px-[74px] flex items-center justify-between py-4 relative xl:max-w-[1500px] mx-auto">
+      <header className=" mx-auto border-b border-gray-200 px-6 lg:px-[74px] flex items-center justify-between py-4 relative">
         {/* Logo */}
         <Image
           src={Logo}

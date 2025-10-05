@@ -10,7 +10,7 @@ const RightIcon = () => {
       <path
         d="M7.86805e-07 10.5146L20 10.5147M20 10.5147L11 19.5146M20 10.5147L11 1.51465"
         stroke="#4433EE"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );

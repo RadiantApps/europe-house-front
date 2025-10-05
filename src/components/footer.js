@@ -1,11 +1,13 @@
 "use client";
-import Logo from "../../public/logo.svg";
 import Image from "next/image";
 import { footerLinks } from "@/data/link";
 import { useSelector } from "react-redux";
 import Link from "next/link";
 import { communityContent, footerContent } from "@/data/footerData";
-import { UpIcon } from "@/assets/footer";
+import { UpIcon, X, YouTube } from "@/assets/footer";
+import LogoFooter from "@/assets/footer/LogoFooter.jpg";
+import { Facebook, Instagram } from "@/assets/footer";
+import Linkedin from "@/assets/footer/Linkedin";
 export default function Footer() {
   const selectedLanguage = useSelector(
     (state) => state.language.selectedLanguage
@@ -13,46 +15,72 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="border-t bg-white">
-      {/* Main footer content */}
-      <div className="px-4 md:px-[74px] pt-[40px] pb-8 xl:max-w-[1500px] xl:mx-auto">
+    <footer className=" bg-white">
+      <div className="px-4 md:px-[74px] pt-[40px] pb-8 ">
         <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-8 lg:gap-4">
-          {/* Left section - Join Community */}
-          <div className="flex flex-col lg:max-w-[400px]">
-            <h3 className="text-[22px] kanit-semibold text-black pb-[18px]">
+          <div className="flex flex-col lg:max-w-[500px]">
+            <h3 className="text-[22px] kanit-semibold text-[#1C1A1A] ">
               {communityContent[selectedLanguage]?.title}
             </h3>
-            <p className="text-[15px] text-gray-600 pb-[22px] leading-relaxed kanit-light">
+            <p className=" text-[#555353] kanit-light text-[15px]">
               {communityContent[selectedLanguage]?.description}
             </p>
 
             {/* Email signup */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-[12px] pb-[30px]">
+            <div className="flex flex-col sm:flex-row  sm:items-center gap-3 sm:gap-[12px] mt-[22px]">
               <input
                 type="email"
                 placeholder="Email address"
-                className="flex-1 border border-gray-300 rounded-full px-4 py-2 text-sm outline-none focus:border-[#4433EE] transition-colors"
+                className="
+                    flex-1
+                    border
+                    border-[#B7A0F8] 
+                    rounded-[56px] 
+                    h-[46px]
+                    px-4
+                    outline-none
+                    bg-[#F1F6F8]
+                    placeholder-[#B7A0F8]
+                    transition
+                    duration-300
+                    hover:border-[#7F5AF0] 
+                    focus:border-[#5A31F4] 
+                    focus:ring-2 
+                    focus:ring-[#5A31F4]
+                  "
               />
-              <button className="bg-[#4433EE] hover:bg-[#3322DD] transition-colors text-white px-6 py-2 rounded-full kanit-medium  text-sm whitespace-nowrap">
+
+              <button className="bg-[#4433EE] w-[155px] h-[46px] rounded-[56px] text-[#F7F0F0]">
                 {communityContent[selectedLanguage]?.button}
               </button>
             </div>
 
-            {/* Logo and social icons */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pb-[41px]">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mt-[30px]">
               <div className="flex-shrink-0">
-                <Image
-                  src={Logo}
-                  alt="Europe House Logo"
-                  className="h-8 w-auto"
-                />
+                <Image src={LogoFooter} alt="Europe House Logo" className="" />
+              </div>
+
+              <div className="flex space-x-[12px]">
+                <div>
+                  <Facebook />
+                </div>
+                <div>
+                  <Instagram />
+                </div>
+                <div>
+                  <X />
+                </div>
+                <div>
+                  <YouTube />
+                </div>
+                <div>
+                  <Linkedin />
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Right section - Navigation and scroll button */}
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between lg:items-center gap-8 lg:gap-12">
-            {/* Navigation links */}
             <div className="flex flex-col space-y-3 text-black">
               {footerLinks[selectedLanguage]?.map(({ href, label }) => (
                 <Link

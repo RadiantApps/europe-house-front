@@ -35,7 +35,7 @@ const WhoWeAre = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* About Section */}
-      <div className="px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto">
+      <div className="px-6 md:px-[74px] ">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 md:gap-12 mt-[32px]">
           <div
             className="w-full md:max-w-2xl 2xl:max-w-3xl"
@@ -62,7 +62,7 @@ const WhoWeAre = () => {
 
       {/* Services Section */}
       <div className="py-16 lg:py-24 bg-[#EDF5FF]">
-        <div className="w-full px-6 md:px-[74px] xl:max-w-[1500px] xl:mx-auto mt-[45px] md:mt-[88px] md:mb-[88px] ">
+        <div className="w-full px-6 md:px-[74px]  mt-[45px] md:mt-[88px] md:mb-[88px] ">
           <h2 className="text-[32px] text-[#1C1A1A] kanit-semibold w-[70%] mx-auto text-center">
             BOTH CENTRES OFFER:
           </h2>

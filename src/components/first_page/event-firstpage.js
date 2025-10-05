@@ -2,11 +2,11 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import event1 from "../../assets/events/1.png";
-import event2 from "../../assets/events/2.png";
-import event3 from "../../assets/events/3.png";
-import event4 from "../../assets/events/4.png";
-import event5 from "../../assets/events/5.png";
+import event1 from "../../assets/joinushome/1.png";
+import event2 from "../../assets/joinushome/2.png";
+import event3 from "../../assets/joinushome/3.png";
+import event4 from "../../assets/joinushome/4.png";
+import event5 from "../../assets/joinushome/5.png";
 import Star from "../../assets/events/star.svg";
 import { translations } from "@/data/home";
 import { useSelector } from "react-redux";
@@ -24,40 +24,39 @@ export default function EuropeHouse() {
     setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1));
 
   return (
-    <section className="bg-white  py-10 px-6 lg:px-[74px]">
+    <section className="bg-white py-10 px-6 lg:pl-[74px]">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start">
         {/* Left Side Content */}
         <div className="space-y-6">
           <Image src={Star} alt="Star" />
-          <h2 className="text-3xl font-bold text-gray-900">
+          <p className="kanit-semibold text-[34px] laeding-[30px] text-[#1C1A1A]">
             {translations[selectedLanguage].join_us_event}
-          </h2>
-          <p className="text-gray-500 text-lg leading-relaxed">
+          </p>
+          <p className="text-[#8E8D8D] kanit-light text-[22px]">
             {translations[selectedLanguage].join_us_event_description}
           </p>
-          <button className="bg-indigo-600 text-white w-[190px] h-[46px] rounded-[56px] px-[20px] font-semibold shadow hover:bg-indigo-700 transition flex items-center justify-center">
+          <button className="bg-[#4433EE] text-[#F7F0F0] w-[190px] h-[50px] text-[16px] kanit-medium rounded-[56px] flex items-center justify-center">
             {translations[selectedLanguage].visit_us_event}
           </button>
         </div>
 
         <div className="w-full h-full overflow-hidden relative flex flex-col justify-center">
-          <div className="absolute -top-16 left-50 right-0 h-12 border-t border-r border-gray-300 z-50"></div>
+          <div className="absolute z-50"></div>
 
           <div className="hidden lg:block relative">
-            {/* Gray background */}
             <div
-              className="absolute bg-gray-100 rounded-2xl"
+              className="absolute bg-[#F7F0F0] rounded-tl-[24px] rounded-bl-[24px]"
               style={{
                 left: "20%",
                 top: "-5px",
-                height: "350px",
+                height: "517px",
                 width: "85%",
                 zIndex: 0,
               }}
             ></div>
 
             {/* Carousel + controls */}
-            <div className="relative z-10 p-6">
+            <div className="relative z-10 mt-[40px] ">
               <div
                 className="flex transition-transform duration-500"
                 style={{
@@ -81,7 +80,7 @@ export default function EuropeHouse() {
               </div>
 
               {/* Buttons + counter inside gray area */}
-              <div className="absolute left-[22%] mt-3 right-6 flex items-center justify-between">
+              <div className="absolute left-[22%] mt-[30px] right-6 flex items-center justify-between">
                 <div className="flex gap-4">
                   <button
                     onClick={prevSlide}
@@ -105,18 +104,16 @@ export default function EuropeHouse() {
 
           {/* Mobile */}
           {/* Mobile */}
-          <div className="lg:hidden relative">
+          <div className="lg:hidden relative h-[406px] rounded-tl-[24px] rounded-bl-[24px]">
             {/* Gray background */}
             <div
-              className="absolute bg-gray-100"
+              className="absolute bg-[#F7F0F0] "
               style={{
                 left: "15%",
                 top: "-20px",
-                height: "350px", // increased height
+                height: "406px", // increased height
                 width: "90%",
                 zIndex: 0,
-                borderTopLeftRadius: "24px",
-                borderBottomLeftRadius: "24px",
               }}
             ></div>
 
@@ -124,27 +121,27 @@ export default function EuropeHouse() {
             <div className="relative z-10 p-6 h-[350px] flex flex-col justify-between">
               {/* Image area */}
               <div
-                className="flex transition-transform duration-500"
+                className="flex transition-transform duration-500 space-x-2"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
               >
                 {images.map((src, idx) => (
                   <div
                     key={idx}
-                    className="flex-shrink-0 w-full rounded-2xl px-1 overflow-hidden shadow-lg"
+                    className="flex-shrink-0 w-full rounded-[11px]  overflow-hidden shadow-lg"
                   >
                     <Image
                       src={src}
                       alt={`Europe House ${idx + 1}`}
                       width={800}
                       height={500}
-                      className="w-full h-[250px] object-cover"
+                      className="w-full h-[297px] object-cover"
                     />
                   </div>
                 ))}
               </div>
 
               {/* Buttons + counter anchored at bottom */}
-              <div className="flex items-center justify-between ml-16">
+              <div className="flex items-center justify-between ml-16 mt-[20px]">
                 <div className="flex gap-3">
                   <button
                     onClick={prevSlide}

@@ -34,21 +34,21 @@ export default function PublicationsShowcase() {
   );
 
   return (
-    <div className="px-6 lg:px-[74px] py-8 lg:py-[64px] bg-[#EDF5FF] xl:max-w-[1500px] mx-auto">
+    <div className=" mx-auto px-6 lg:px-[74px] py-8 lg:py-[64px] bg-[#F1F6F8] ">
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start md:mt-[66px]">
         {/* Left Content */}
         <div className="space-y-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            <h2 className="text-[#1C1A1A] kanit-semibold text-[34px] leading-[42px]">
               {translations[selectedLanguage].title_publication}
             </h2>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="text-[#8E8D8D] kanit-light text-[22px]  mt-[32px]">
               {translations[selectedLanguage]?.description_publication}
             </p>
           </div>
           <button
             onClick={() => router.push("/publications")}
-            className="bg-indigo-600 text-white px-6 py-3 rounded-full hover:bg-indigo-700 transition-colors duration-200 font-medium"
+            className="w-[209px] bg-[#4433EE] rounded-[56px] h-[46px] text-[#F7F0F0] kanit-medium text-[16px]"
           >
             {translations[selectedLanguage]?.seeallpublication}
           </button>
@@ -126,9 +126,7 @@ export default function PublicationsShowcase() {
 
           {/* Desktop Layout */}
           <div className="hidden lg:flex">
-            {/* Left Side - Split into two sections */}
             <div className="flex flex-col flex-1">
-              {/* Top Left - Main Content Area */}
               <div
                 className={`text-white p-6 relative flex-1 min-h-[243px] bg-indigo-600 border-b border-gray-300`}
               >

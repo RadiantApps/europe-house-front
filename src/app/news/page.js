@@ -36,8 +36,7 @@ export default function NewsBlog() {
     category: filters.category,
   });
 
-  // frontend "See more"
-  const [visibleCount, setVisibleCount] = useState(8); // how many to show initially
+  const [visibleCount, setVisibleCount] = useState(8);
   const handleSeeMore = () => {
     setVisibleCount((prev) => prev + 8); // load 8 more
   };
@@ -81,23 +80,22 @@ export default function NewsBlog() {
                 height={64}
                 className="w-12 h-12 md:w-16 md:h-16 object-contain"
               />
-              <h1 className="text-[#1C1A1A] leading-[1.1] text-[52px] kanit-semibold">
+              <h1 className="text-[#1C1A1A] leading-[1.1]  text-[64px] kanit-semibold">
                 {translations[selectedLanguage].title}
               </h1>
             </div>
-            <div className="w-full hidden lg:flex border-t border-[#C6C6C6]"></div>
           </div>
 
-          <div className="md:w-[35%]">
-            <p className="kanit-light text-[18px] leading-[25px] text-[#515151]">
+          <div className="md:w-[45%] flex justify-between">
+            <p className="kanit-light text-[18px] leading-[25px] text-[#555353] w-[60%]">
               {translations[selectedLanguage].description}
             </p>
-            <button className=" kanit-medium  mt-6 lg:mt-8 w-[190px] h-[50px] flex items-center justify-center gap-[10px] bg-indigo-600 text-white font-medium rounded-[56px]">
+            <button className="bg-[#4433EE] h-[46px] w-[155px] rounded-[56px] text-[16px] text-[#F7F0F0] kanit-medium">
               {translations[selectedLanguage].subscribe}
             </button>
           </div>
         </div>
-        <div className="lg:hidden w-full border-t border-[#C6C6C6]"></div>
+        <div className="h-[1px] w-full bg-[#C6C6C6]" />
       </div>
 
       <div className="px-4 sm:px-6 md:px-[74px] pt-4 sm:pt-6 md:pt-[32px] pb-6 sm:pb-8 md:pb-[37.8px]">
@@ -152,6 +150,7 @@ export default function NewsBlog() {
             </div>
           ))}
 
+          <hr />
           {/* Category Filter */}
           <div className="relative flex-shrink-0">
             <select
