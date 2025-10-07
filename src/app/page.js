@@ -14,8 +14,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[#D2E6FF]">
       <LatestEU />
-      <UpcomingEvents />
-      <EventFirstPage />
+      <section className="bg-white rounded-t-[36px] py-10 ">
+        <UpcomingEvents />
+        <EventFirstPage />
+      </section>
+
       <News />
       <CampaignsView />
       <PublicationsShowcase />

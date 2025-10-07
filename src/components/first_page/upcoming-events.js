@@ -28,8 +28,8 @@ const UpcomingEvents = () => {
     setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1));
 
   return (
-    <section className="bg-white rounded-t-[36px] py-10 h-[1100px] md:h-[780px]">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start  mt-[102px]">
+    <section>
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start pb-[50px mt-[102px]">
         {/* Left Side Content */}
         <div className="space-y-6 pl-6 lg:pl-[74px]">
           <Image src={UpcomingEventsImg} alt="UpcomingEventsImg" />
