@@ -33,13 +33,13 @@ const CampaignsView = () => {
   };
   return (
     <div className=" mx-auto bg-white px-6 lg:px-[74px] py-8 lg:py-[66px] ">
-      <div className="lg:p-10 px-4 py-8 bg-[#EDF5FF]">
+      <div className="lg:p-10 px-4 py-8 bg-[#EDF5FF] rounded-[12px]">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-4">
+          <h1 className="text-[#1C1A1A] kanit-medium text-[34px] leading-[42px]">
             {translations[selectedLanguage].title_campaings}
           </h1>
-          <div className="w-full h-px bg-[#B7A0F8]"></div>
+          <div className="w-full h-px bg-[#B7A0F8] mt-[26px]"></div>
         </div>
         {/* Mobile Layout*/}
         <div className="md:hidden">

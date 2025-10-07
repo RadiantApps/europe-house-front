@@ -5,6 +5,9 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import UpcomingEventsImg from "../../assets/events/upcoming-events.svg";
 import { translations } from "@/data/home";
 import { useSelector } from "react-redux";
+import LeftArrow from "@/assets/home/LeftArrow";
+import RightArrow from "@/assets/home/RightArrow";
+
 const UpcomingEvents = () => {
   const selectedLanguage = useSelector(
     (state) => state.language.selectedLanguage
@@ -25,13 +28,12 @@ const UpcomingEvents = () => {
     setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1));
 
   return (
-    <section className="bg-white  rounded-t-[36px] py-10 px-6 lg:pl-[74px]">
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start">
+    <section className="bg-white rounded-t-[36px] py-10 h-[1100px] md:h-[780px]">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start  mt-[102px]">
         {/* Left Side Content */}
-        <div className="space-y-6">
+        <div className="space-y-6 pl-6 lg:pl-[74px]">
           <Image src={UpcomingEventsImg} alt="UpcomingEventsImg" />
-
-          <p className="kanit-semibold text-[34px] laeding-[30px] text-[#1C1A1A]">
+          <p className="kanit-semibold text-[34px] leading-[30px] text-[#1C1A1A]">
             {translations[selectedLanguage].upcomingEventTitle}
           </p>
           <p className="text-[#8E8D8D] kanit-light text-[22px]">
@@ -42,22 +44,19 @@ const UpcomingEvents = () => {
           </button>
         </div>
 
-        <div className="w-full h-full overflow-hidden relative flex flex-col justify-center">
-          <div className="absolute z-50"></div>
-
+        <div className="w-full h-full overflow-hidden relative flex flex-col h-[600px] md:h-[520px]">
+          {/* Desktop */}
           <div className="hidden lg:block relative">
             <div
               className="absolute bg-[#F7F0F0] rounded-tl-[24px] rounded-bl-[24px]"
               style={{
-                left: "20%",
-                top: "-5px",
+                right: 0,
                 height: "517px",
                 width: "85%",
                 zIndex: 0,
               }}
             ></div>
-
-            <div className="relative z-10 mt-[40px] ">
+            <div className="relative z-10 mt-[40px]">
               <div
                 className="flex transition-transform duration-500"
                 style={{
@@ -67,36 +66,37 @@ const UpcomingEvents = () => {
                 {images.map((src, idx) => (
                   <div
                     key={idx}
-                    className="flex-shrink-0 w-[40%] mr-4 rounded-2xl overflow-hidden shadow-lg"
+                    className="flex-shrink-0 w-[367px] mr-[28px] rounded-[12px] overflow-hidden "
                   >
                     <video
-                      src={src} // <-- directly on video
-                      className="w-full h-[268px] object-cover rounded-2xl"
-                      autoPlay // <-- autoplay
-                      muted // <-- required for autoplay
-                      loop // <-- loop
-                      playsInline // <-- mobile support
+                      src={src}
+                      className="w-[367px] h-[368px] object-cover rounded-[12px]"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
                     />
                   </div>
                 ))}
               </div>
 
-              <div className="absolute left-[22%] mt-[30px] right-6 flex items-center justify-between">
+              {/* Controls */}
+              <div className="absolute left-[22%] mt-[30px] right-6 flex items-center justify-between gap-8">
                 <div className="flex gap-4">
                   <button
                     onClick={prevSlide}
-                    className="flex items-center justify-center w-[70px] h-[35px] border-2 border-indigo-600 rounded-full text-indigo-600 hover:bg-indigo-50 transition"
+                    className="border border-[2px] border-[#4433EE] w-[70px] h-[35px] rounded-[100px] flex items-center justify-center "
                   >
-                    <ArrowLeft size={18} />
+                    <LeftArrow />
                   </button>
                   <button
                     onClick={nextSlide}
-                    className="flex items-center justify-center w-[70px] h-[35px] border-2 border-indigo-600 rounded-full text-indigo-600 hover:bg-indigo-50 transition"
+                    className="border border-[2px] border-[#4433EE] w-[70px] h-[35px] rounded-[100px] flex items-center justify-center "
                   >
-                    <ArrowRight size={18} />
+                    <RightArrow />
                   </button>
                 </div>
-                <span className="text-gray-500 text-sm">
+                <span className="kanit-light text-[20px] leading-[42px] text-[#8E8D8D] mr-[40px]">
                   {translations[selectedLanguage].eventSlideTitle}{" "}
                   {currentIndex + 1}/{images.length}
                 </span>
@@ -105,22 +105,20 @@ const UpcomingEvents = () => {
           </div>
 
           {/* Mobile */}
-          <div className="lg:hidden relative h-[420px] rounded-tl-[24px] rounded-bl-[24px]">
+          <div className="lg:hidden relative h-[406px] rounded-tl-[24px] rounded-bl-[24px]">
             {/* Gray background */}
             <div
-              className="absolute bg-[#F7F0F0] "
+              className="absolute bg-[#F7F0F0] rounded-tl-[24px] rounded-bl-[24px]"
               style={{
-                left: "15%",
-                top: "-20px",
-                height: "520px", // increased height
-                width: "90%",
+                right: 0,
+                height: "406px",
+                width: "85%",
                 zIndex: 0,
               }}
             ></div>
 
             {/* Carousel + controls */}
-            <div className="relative z-10 p-6 h-[350px] flex flex-col justify-between mt-[21px]">
-              {/* Image area */}
+            <div className="relative z-10 px-6 flex flex-col justify-between mt-[21px] ">
               <div
                 className="flex transition-transform duration-500"
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -128,37 +126,37 @@ const UpcomingEvents = () => {
                 {images.map((src, idx) => (
                   <div
                     key={idx}
-                    className="flex-shrink-0 w-full rounded-2xl px-1 overflow-hidden shadow-lg"
+                    className="flex-shrink-0 flex items-center justify-center w-[298px] h-[298px] rounded-[12px] mr-[28px] bg-white overflow-hidden"
                   >
                     <video
-                      src={src} // <-- directly on video
-                      className="w-full h-[268px] object-cover rounded-2xl"
-                      autoPlay // <-- autoplay
-                      muted // <-- required for autoplay
-                      loop // <-- loop
-                      playsInline // <-- mobile support
+                      src={src}
+                      className="w-[298px] h-[298px] object-contain rounded-[12px]"
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
                     />
                   </div>
                 ))}
               </div>
 
-              {/* Buttons + counter anchored at bottom */}
-              <div className="flex items-center justify-between ml-16 mt-[30px]">
+              {/* Controls + counter */}
+              <div className="flex items-center justify-between ml-16 mt-[30px] gap-6">
                 <div className="flex gap-3">
                   <button
                     onClick={prevSlide}
-                    className="flex items-center justify-center w-[70px] h-[35px] border-2 border-indigo-600 rounded-full text-indigo-600 hover:bg-indigo-50 transition"
+                    className="border border-[2px] border-[#4433EE] w-[70px] h-[35px] rounded-[100px] flex items-center justify-center "
                   >
-                    <ArrowLeft size={18} />
+                    <LeftArrow />
                   </button>
                   <button
                     onClick={nextSlide}
-                    className="flex items-center justify-center w-[70px] h-[35px] border-2 border-indigo-600 rounded-full text-indigo-600 hover:bg-indigo-50 transition"
+                    className="border border-[2px] border-[#4433EE] w-[70px] h-[35px] rounded-[100px] flex items-center justify-center "
                   >
-                    <ArrowRight size={18} />
+                    <RightArrow />
                   </button>
                 </div>
-                <span className="text-gray-500 text-sm">
+                <span className="text-[#8E8D8D] kanit-light text-[16px]">
                   {translations[selectedLanguage].eventSlideTitle}{" "}
                   {currentIndex + 1}/{images.length}
                 </span>
@@ -166,6 +164,9 @@ const UpcomingEvents = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="px-6 lg:px-[74px] mx-auto mt-[50px]">
+        <div className="bg-[#B7A0F8] h-[1px] w-full mb-[50px] " />
       </div>
     </section>
   );

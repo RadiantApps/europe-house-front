@@ -88,7 +88,7 @@ const WhoWeAre = () => {
 
       {/* Team Section */}
       <div className="py-16 lg:py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="px-6 md:px-[74px] ">
           <h2 className="text-[32px] text-[#1C1A1A] kanit-semibold w-[70%] md:w-full md:text-[48px]  mx-auto text-center">
             {content[selectedLanguage]?.about}
           </h2>
