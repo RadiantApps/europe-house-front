@@ -1,7 +1,6 @@
 "use client";
 import "./globals.css";
 
-import { useState } from "react";
 import CampaignsView from "@/components/first_page/campgain-item";
 import PublicationsShowcase from "@/components/first_page/publications";
 

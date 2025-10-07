@@ -18,7 +18,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#EDF5FF] xl:max-w-[1500px] xl:mx-auto ">
+    <div className="flex flex-col min-h-screen bg-[#EDF5FF]  ">
       <div className="flex-1 flex flex-col py-8 lg:py-[92px] px-6 lg:px-[74px] overflow-hidden  ">
         <div className="flex flex-col md:flex-row md:justify-between gap-8 xl:justify-between w-full">
           <div className="mb-6">
