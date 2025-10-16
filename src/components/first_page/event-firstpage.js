@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import event1 from "../../assets/joinushome/1.png";
 import event2 from "../../assets/joinushome/2.png";
 import event3 from "../../assets/joinushome/3.png";
@@ -18,12 +17,71 @@ export default function EuropeHouse() {
   );
   const images = [event1, event2, event3, event4, event5];
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [visibleSlides, setVisibleSlides] = useState(5.5);
 
-  const prevSlide = () =>
-    setCurrentIndex((p) => (p === 0 ? images.length - 1 : p - 1));
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
 
-  const nextSlide = () =>
-    setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1));
+      if (width < 339) {
+        setVisibleSlides(1.1);
+      } else if (width >= 339 && width < 392) {
+        setVisibleSlides(1.2);
+      } else if (width >= 393 && width < 420) {
+        setVisibleSlides(1.4);
+      } else if (width >= 421 && width < 439) {
+        setVisibleSlides(1.5);
+      } else if (width >= 440 && width < 460) {
+        setVisibleSlides(1.6);
+      } else if (width >= 461 && width < 500) {
+        setVisibleSlides(1.7);
+      } else if (width >= 501 && width < 569) {
+        setVisibleSlides(2);
+      } else if (width >= 570 && width < 600) {
+        setVisibleSlides(2.4);
+      } else if (width >= 601 && width < 650) {
+        setVisibleSlides(2.6);
+      } else if (width >= 651 && width < 700) {
+        setVisibleSlides(2.8);
+      } else if (width >= 701 && width < 750) {
+        setVisibleSlides(3);
+      } else if (width >= 1029 && width < 1100) {
+        setVisibleSlides(2.4);
+      } else if (width >= 1101 && width < 1200) {
+        setVisibleSlides(2.6);
+      } else if (width >= 1201 && width < 1300) {
+        setVisibleSlides(3);
+      } else if (width >= 1301 && width < 1400) {
+        setVisibleSlides(3.2);
+      } else if (width >= 1401 && width < 1500) {
+        setVisibleSlides(4);
+      } else if (width >= 1501 && width < 1700) {
+        setVisibleSlides(4.8);
+      } else if (width >= 1701 && width < 1919) {
+        setVisibleSlides(6);
+      } else if (width >= 1920) {
+        setVisibleSlides(7);
+      } else {
+        setVisibleSlides(8);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const nextSlide = () => {
+    if (currentIndex < images.length) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   return (
     <section>
@@ -58,7 +116,9 @@ export default function EuropeHouse() {
               <div
                 className="flex transition-transform duration-500"
                 style={{
-                  transform: `translateX(-${currentIndex * (100 / 2.2)}%)`,
+                  transform: `translateX(-${
+                    currentIndex * (100 / visibleSlides)
+                  }%)`,
                 }}
               >
                 {images.map((src, idx) => (
@@ -100,8 +160,6 @@ export default function EuropeHouse() {
             </div>
           </div>
 
-          {/* Mobile */}
-          {/* Mobile */}
           <div className="lg:hidden relative h-[406px] rounded-tl-[24px] rounded-bl-[24px]">
             {/* Gray background */}
             <div
@@ -118,7 +176,11 @@ export default function EuropeHouse() {
             <div className="relative z-10 px-6 flex flex-col justify-between mt-[21px] ">
               <div
                 className="flex transition-transform duration-500"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                style={{
+                  transform: `translateX(-${
+                    currentIndex * (100 / visibleSlides)
+                  }%)`,
+                }}
               >
                 {images.map((src, idx) => (
                   <div

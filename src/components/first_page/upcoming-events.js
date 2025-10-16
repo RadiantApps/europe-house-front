@@ -1,7 +1,6 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import UpcomingEventsImg from "../../assets/events/upcoming-events.svg";
 import { translations } from "@/data/home";
 import { useSelector } from "react-redux";
@@ -13,6 +12,46 @@ const UpcomingEvents = () => {
     (state) => state.language.selectedLanguage
   );
 
+  const [visibleSlides, setVisibleSlides] = useState(5.5);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+
+      if (width < 339) {
+        setVisibleSlides(1.1);
+      } else if (width >= 339 && width < 400) {
+        setVisibleSlides(1.4);
+      } else if (width >= 400 && width < 450) {
+        setVisibleSlides(1.6);
+      } else if (width >= 480 && width < 569) {
+        setVisibleSlides(2.1);
+      } else if (width >= 570 && width < 630) {
+        setVisibleSlides(3);
+      } else if (width >= 631 && width < 720) {
+        setVisibleSlides(4);
+      } else if (width >= 1029 && width < 1200) {
+        setVisibleSlides(3.3);
+      } else if (width >= 1201 && width < 1300) {
+        setVisibleSlides(3.8);
+      } else if (width >= 1301 && width < 1400) {
+        setVisibleSlides(3.8);
+      } else if (width >= 1401 && width < 1500) {
+        setVisibleSlides(4.6);
+      } else if (width >= 1501 && width < 1600) {
+        setVisibleSlides(5);
+      } else if (width >= 1920) {
+        setVisibleSlides(10);
+      } else {
+        setVisibleSlides(8);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const images = [
     "/assets/events/event1.mp4",
     "/assets/events/event2.mp4",
@@ -21,11 +60,17 @@ const UpcomingEvents = () => {
   ];
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const prevSlide = () =>
-    setCurrentIndex((p) => (p === 0 ? images.length - 1 : p - 1));
+  const nextSlide = () => {
+    if (currentIndex < images.length) {
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
 
-  const nextSlide = () =>
-    setCurrentIndex((p) => (p === images.length - 1 ? 0 : p + 1));
+  const prevSlide = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   return (
     <section>
@@ -60,7 +105,9 @@ const UpcomingEvents = () => {
               <div
                 className="flex transition-transform duration-500"
                 style={{
-                  transform: `translateX(-${currentIndex * (100 / 2.2)}%)`,
+                  transform: `translateX(-${
+                    currentIndex * (100 / visibleSlides)
+                  }%)`,
                 }}
               >
                 {images.map((src, idx) => (
@@ -121,7 +168,11 @@ const UpcomingEvents = () => {
             <div className="relative z-10 px-6 flex flex-col justify-between mt-[21px] ">
               <div
                 className="flex transition-transform duration-500"
-                style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+                style={{
+                  transform: `translateX(-${
+                    currentIndex * (100 / visibleSlides)
+                  }%)`,
+                }}
               >
                 {images.map((src, idx) => (
                   <div

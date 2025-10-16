@@ -11,8 +11,6 @@ const CreatePublication = ({ openModal }) => {
   const topicCategoryData =
     useSelector((state) => state.categoryPublication.topicsCategoryData) || [];
 
-  const [error, setError] = useState(null);
-
   const [formData, setFormData] = useState({
     publication_blog_id: "",
     slug: "",
@@ -43,8 +41,50 @@ const CreatePublication = ({ openModal }) => {
     });
   };
 
+  const validateForm = () => {
+    if (!formData.publication_blog_id) {
+      toast.error("Please select a publication category.");
+      return false;
+    }
+
+    // At least one language must be filled
+    if (!formData.sq.trim() && !formData.en.trim() && !formData.sr.trim()) {
+      toast.error(
+        "Please fill in at least one language title (SQ, EN, or SR)."
+      );
+      return false;
+    }
+
+    // Validate per language
+    const languages = ["sq", "en", "sr"];
+    for (const lang of languages) {
+      const title = formData[lang];
+      const photo = formData[`photo_${lang}`];
+      const pdf = formData[`pdf_${lang}`];
+
+      if (title.trim() || photo || pdf) {
+        // if any field is filled for this language, require all 3
+        if (!title.trim()) {
+          toast.error(`Please enter title for ${lang.toUpperCase()}.`);
+          return false;
+        }
+        if (!photo) {
+          toast.error(`Please upload a photo for ${lang.toUpperCase()}.`);
+          return false;
+        }
+        if (!pdf) {
+          toast.error(`Please upload a PDF for ${lang.toUpperCase()}.`);
+          return false;
+        }
+      }
+    }
+
+    return true;
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) return;
 
     const translations = [
       { title: formData.sq, language: "sq" },

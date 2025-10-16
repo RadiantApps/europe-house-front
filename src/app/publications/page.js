@@ -20,7 +20,6 @@ export default function PublicationsPage() {
   );
   const currentYear = new Date().getFullYear();
 
-  // Years array from 2015 -> current year
   const yearOptions = Array.from(
     { length: currentYear - 2015 + 1 },
     (_, i) => 2015 + i
@@ -29,10 +28,6 @@ export default function PublicationsPage() {
   const [filters, setFilters] = useState({});
   const [tempFilters, setTempFilters] = useState({});
   const [isFilterSidebarOpen, setIsFilterSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
 
   const toggleFilterSidebar = () => {
     if (!isFilterSidebarOpen) {

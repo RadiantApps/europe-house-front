@@ -34,14 +34,12 @@ const CampaignsView = () => {
   return (
     <div className=" mx-auto bg-white px-6 lg:px-[74px] py-8 lg:py-[66px] ">
       <div className="lg:p-10 px-4 py-8 bg-[#EDF5FF] rounded-[12px]">
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-[#1C1A1A] kanit-medium text-[34px] leading-[42px]">
             {translations[selectedLanguage].title_campaings}
           </h1>
           <div className="w-full h-px bg-[#B7A0F8] mt-[26px]"></div>
         </div>
-        {/* Mobile Layout*/}
         <div className="md:hidden">
           <div>
             {campaingsData?.map((item) => {
@@ -155,6 +153,7 @@ const CampaignsView = () => {
                 <div key={item.id}>
                   <div className="flex gap-6">
                     <div className="flex space-x-[36px] w-3/5">
+                      {/* Button */}
                       <button
                         onClick={() => handleToggle(item.id)}
                         className="border border-[#4433EE] rounded-full w-[56px] h-[56px] flex justify-center items-center shrink-0 relative overflow-hidden"
@@ -182,6 +181,7 @@ const CampaignsView = () => {
                         </span>
                       </button>
 
+                      {/* Image section only collapses */}
                       <div
                         className={`transition-all duration-500 ease-in-out overflow-hidden flex-1`}
                         style={{
@@ -203,15 +203,10 @@ const CampaignsView = () => {
                       </div>
                     </div>
 
-                    <div
-                      className={`transition-all duration-500 ease-in-out overflow-hidden w-3/5`}
-                      style={{
-                        maxHeight: isOpen ? "300px" : "0px",
-                        opacity: isOpen ? 1 : 0,
-                      }}
-                    >
+                    {/* Title and description always visible */}
+                    <div className="w-3/5 transition-all duration-500 ease-in-out">
                       <div className="flex gap-6">
-                        <span className="w-1/2 kanit-medium text-[24px] leading-[28px] text-[#4433EE]">
+                        <span className="w-1/2 kanit-medium text-[24px] leading-[28px] text-[#4433EE] ">
                           {camp?.title}
                         </span>
                         <span className="w-1/2 kanit-light text-[16px] leading-[23px] text-[#4433EE]">

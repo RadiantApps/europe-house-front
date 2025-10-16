@@ -20,8 +20,11 @@ export default function Home() {
       </section>
 
       <News />
+
       <CampaignsView />
+
       <PublicationsShowcase />
+
       <Footer />
     </div>
   );
