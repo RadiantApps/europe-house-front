@@ -85,7 +85,7 @@ export default function Campaigns() {
                       src={`${imageUrl}/${camp?.photo}`}
                       alt={camp?.title || "Campaign photo"}
                       fill
-                      className="object-cover rounded-lg"
+                      className="object-cover rounded-[12px]"
                     />
                   </div>
 
@@ -100,7 +100,7 @@ export default function Campaigns() {
                       </p>
                       <button
                         onClick={() => router.push(`/campaigns/${item?.id}`)}
-                        className="bg-[#4433EE] h-[46px] px-[20px] rounded-[56px] mt-[32px] kanit-medium text-[#F7F0F0] text-[16px]"
+                        className="bg-[#4433EE] h-[46px] w-[190px] rounded-[56px] mt-[32px] kanit-medium text-[#F7F0F0] text-[16px]"
                       >
                         {translations[selectedLanguage].button}
                       </button>
@@ -114,7 +114,7 @@ export default function Campaigns() {
           <div className="flex justify-center mt-8">
             <button
               onClick={handleSeeMore}
-              className="bg-[#4433EE] text-white px-6 py-3 rounded-[56px] kanit-medium text-[16px] hover:bg-[#3322cc] transition"
+              className="bg-[#4433EE] text-[#F7F0F0] w-[190px] h-[50px] rounded-[56px] kanit-medium text-[16px]  "
             >
               {translations[selectedLanguage].seeMore}
             </button>

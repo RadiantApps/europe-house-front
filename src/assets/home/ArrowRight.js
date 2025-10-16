@@ -1,4 +1,4 @@
-const RightArrow = () => {
+const ArrowRight = () => {
   return (
     <svg
       width="22"
@@ -8,12 +8,12 @@ const RightArrow = () => {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M7.86805e-07 9.74756L20 9.74756M20 9.74756L11 18.7476M20 9.74756L11 0.74756"
-        stroke="#4433EE"
+        d="M0.58545 10.1807L20.5855 10.1807M20.5855 10.1807L11.5854 19.1807M20.5855 10.1807L11.5855 1.18067"
+        stroke="#F7F0F0"
         strokeWidth="2"
       />
     </svg>
   );
 };
 
-export default RightArrow;
+export default ArrowRight;

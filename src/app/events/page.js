@@ -138,7 +138,7 @@ export default function Events() {
 
       {/* Header Section */}
       <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px]">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8 xl:max-w-[1500px] xl:mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8  ">
           <div className="flex items-center gap-3 flex-shrink-0">
             <Image
               src={RrotaIcon}
@@ -286,7 +286,7 @@ export default function Events() {
       </div>
 
       {/* Events List Section */}
-      <div className="w-full bg-[#EDF5FF] rounded-t-[36px] flex-1 xl:max-w-[1500px] xl:mx-auto">
+      <div className="w-full bg-[#EDF5FF] rounded-t-[36px] flex-1 ">
         <div className="px-4 md:px-[74px] space-y-6">
           {event.slice(0, offset + limit).map((eventItem, index) => {
             const inner_photo =

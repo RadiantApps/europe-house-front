@@ -77,18 +77,35 @@ const LatestEU = () => {
           onClick={() => handleChangeRouteCampaign(campaings?.id)}
         >
           <div className="relative h-[353px]">
-            <Image
-              src={`${imageUrl}/${campaings?.translations[selectedLanguage].photo}`}
-              alt={title_campaings}
-              fill
-              className="w-full h-[353px] object-cover"
-            />
+            {campaings?.translations[selectedLanguage]?.photo ? (
+              <>
+                {/* Image with zoom on hover */}
+                <Image
+                  src={`${imageUrl}/${campaings.translations[selectedLanguage].photo}`}
+                  alt={title_campaings || "Campaign image"}
+                  fill
+                  className="object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-110"
+                />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center text-gray-500">
+                Loading image...
+              </div>
+            )}
 
-            <span className="absolute top-2 left-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded">
-              {translations[selectedLanguage].campaings_category}
-            </span>
+            {/* Category badge */}
+            <div className="absolute top-4 left-4 z-10">
+              <span className="bg-white text-[#4433EE] text-xs font-medium px-3 py-1 rounded-full shadow-lg">
+                {translations[selectedLanguage]?.campaings_category ||
+                  "Category"}
+              </span>
+            </div>
+            <div className="absolute top-4 right-4 inline-flex items-center justify-center w-[38px] h-[38px] bg-[#F7F0F0] rounded-full transform transition-transform duration-700 ease-in-out group-hover:rotate-15 group-hover:scale-110">
+              <ArrowRow />
+            </div>
 
             <h3 className="absolute bottom-[44px] left-2 text-[#fff] kanit-semibold text-[24px] leading-[25px] z-10">
               {title_campaings}
@@ -105,18 +122,36 @@ const LatestEU = () => {
           onClick={() => handleChangeRouteBlog(blog?.id)}
         >
           <div className="relative h-[190px]">
-            <Image
-              src={`${imageUrl}/${blogPhoto?.path}`}
-              alt={blogTitle}
-              fill
-              className="w-full h-full object-cover"
-            />
+            {blogPhoto?.path ? (
+              <>
+                {/* Blog image with smooth zoom */}
+                <Image
+                  src={`${imageUrl}/${blogPhoto.path}`}
+                  alt={blogTitle || "Blog image"}
+                  fill
+                  className="w-full h-full object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-110"
+                />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center text-gray-500">
+                Loading image...
+              </div>
+            )}
 
-            <span className="absolute top-2 left-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded">
-              {translations[selectedLanguage].blog_category}
-            </span>
+            {/* Category badge */}
+            <div className="absolute top-4 left-4 z-10">
+              <span className="bg-white text-[#4433EE] text-xs font-medium px-3 py-1 rounded-full shadow-lg">
+                {translations[selectedLanguage].blog_category}
+              </span>
+            </div>
+
+            {/* Arrow icon with rotation and scale */}
+            <div className="absolute top-4 right-4 inline-flex items-center justify-center w-[38px] h-[38px] bg-[#F7F0F0] rounded-full transform transition-transform duration-700 ease-in-out group-hover:rotate-15 group-hover:scale-110">
+              <ArrowRow />
+            </div>
 
             <h3 className="absolute bottom-[44px] left-2 text-[#fff] kanit-semibold text-[24px] leading-[25px] z-10">
               {blogTitle}
@@ -133,18 +168,35 @@ const LatestEU = () => {
           onClick={() => handleChangeRouteEvent(event?.id)}
         >
           <div className="relative h-[190px]">
-            <Image
-              src={`${imageUrl}/${eventPhoto}`}
-              alt={titleEvent}
-              fill
-              className="w-full h-full object-cover"
-            />
+            {eventPhoto ? (
+              <>
+                {/* Event image with smooth zoom */}
+                <Image
+                  src={`${imageUrl}/${eventPhoto}`}
+                  alt={titleEvent || "Event image"}
+                  fill
+                  className="w-full h-full object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-110"
+                />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center text-gray-500">
+                Loading image...
+              </div>
+            )}
 
-            <span className="absolute top-2 left-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded">
-              {translations[selectedLanguage].event_category}
-            </span>
+            <div className="absolute top-4 left-4 z-10">
+              <span className="bg-white text-[#4433EE] text-xs font-medium px-3 py-1 rounded-full shadow-lg">
+                {translations[selectedLanguage].event_category}
+              </span>
+            </div>
+
+            {/* Arrow icon with rotation */}
+            <div className="absolute top-4 right-4 inline-flex items-center justify-center w-[38px] h-[38px] bg-[#F7F0F0] rounded-full transform transition-transform duration-700 ease-in-out group-hover:rotate-15 group-hover:scale-110">
+              <ArrowRow />
+            </div>
 
             <h3 className="absolute bottom-[44px] left-2 text-[#fff] kanit-semibold text-[24px] leading-[25px] z-10">
               {titleEvent}
@@ -161,18 +213,34 @@ const LatestEU = () => {
           onClick={handleChangeRoutePublication}
         >
           <div className="relative h-[190px]">
-            <Image
-              src={`${imageUrl}/${publicationPhoto}`}
-              alt={publicationTitle}
-              fill
-              className="w-full h-full object-cover"
-            />
+            {publicationPhoto ? (
+              <>
+                {/* Image with stronger zoom */}
+                <Image
+                  src={`${imageUrl}/${publicationPhoto}`}
+                  alt={publicationTitle || "Publication image"}
+                  fill
+                  className="w-full h-full object-cover transform transition-transform duration-700 ease-in-out group-hover:scale-110"
+                />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center text-gray-500">
+                Loading image...
+              </div>
+            )}
 
-            <span className="absolute top-2 left-2 bg-indigo-600 text-white text-xs px-2 py-1 rounded">
-              {translations[selectedLanguage].publication_category}
-            </span>
+            <div className="absolute top-4 left-4 z-10">
+              <span className="bg-white text-[#4433EE] text-xs font-medium px-3 py-1 rounded-full shadow-lg">
+                {translations[selectedLanguage].publication_category}
+              </span>
+            </div>
+
+            {/* Arrow icon with rotation */}
+            <div className="absolute top-4 right-4 inline-flex items-center justify-center w-[38px] h-[38px] bg-[#F7F0F0] rounded-full transform transition-transform duration-700 ease-in-out group-hover:rotate-15 group-hover:scale-110">
+              <ArrowRow />
+            </div>
 
             <h3 className="absolute bottom-[44px] left-2 text-[#fff] kanit-semibold text-[24px] leading-[25px] z-10">
               {publicationTitle}
@@ -364,17 +432,8 @@ const LatestEU = () => {
               </span>
             </div>
 
-            <div
-              className="absolute top-4 right-4 inline-flex items-center justify-center transform transition-transform duration-700 ease-in-out group-hover:rotate-15 group-hover:scale-110"
-              style={{
-                width: "38px",
-                height: "38px",
-                backgroundColor: "#F7F0F0",
-                borderRadius: "38px",
-                marginLeft: "426px",
-                opacity: 1,
-              }}
-            >
+            {/* Arrow icon with rotation */}
+            <div className="absolute top-4 right-4 inline-flex items-center justify-center w-[38px] h-[38px] bg-[#F7F0F0] rounded-full transform transition-transform duration-700 ease-in-out group-hover:rotate-15 group-hover:scale-110">
               <ArrowRow />
             </div>
 
