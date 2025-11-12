@@ -77,8 +77,22 @@ const UpcomingEvents = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start pb-[50px mt-[102px]">
         {/* Left Side Content */}
         <div className="space-y-6 pl-6 lg:pl-[74px]">
-          <Image src={UpcomingEventsImg} alt="UpcomingEventsImg" />
-          <p className="kanit-semibold text-[34px] leading-[30px] text-[#1C1A1A]">
+          <div className="ml-[-20px] mb-[-30px] relative w-[180px] h-[227px] flex items-center justify-center">
+            {/* GIF background */}
+            <Image
+              src="/staricon.gif"
+              alt="Upcoming Events"
+              fill
+              unoptimized
+              className="object-contain"
+            />
+
+            {/* Centered text overlay */}
+            <span className="absolute w-[77px] kanit-medium text-[14px] leading-[17px] text-center">
+              {translations[selectedLanguage].upcomingEventIconTitle}
+            </span>
+          </div>
+          <p className="kanit-semibold text-[34px] leading-[42px] text-[#1C1A1A]">
             {translations[selectedLanguage].upcomingEventTitle}
           </p>
           <p className="text-[#8E8D8D] kanit-light text-[22px]">

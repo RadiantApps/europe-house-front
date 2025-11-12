@@ -17,8 +17,11 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 export const metadata = {
-  title: "Europa House",
-  description: "Europa House",
+  title: "Europe House",
+  description: "Europe House",
+  icons: {
+    icon: "/favicon-32x32.png",
+  },
 };
 
 export default function RootLayout({ children }) {

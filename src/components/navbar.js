@@ -49,7 +49,7 @@ export default function Navbar() {
 
         {/* Desktop Language Selector (vetëm ≥1024px) */}
         <select
-          className="hidden lg:block border border-gray-300 rounded-md text-[16px] px-3 py-1 bg-white focus:outline-none kanit-regular"
+          className="hidden lg:block border border-[1px] border-[#DDE2E4]  rounded-[6px] px-[12px] py-[4px]  text-[#252C32] text-[14px] kanit-regular leading-[24px]"
           value={selectedLanguage}
           onChange={handleLanguageChange}
         >
