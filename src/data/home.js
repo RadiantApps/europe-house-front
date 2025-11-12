@@ -25,6 +25,7 @@ export const translations = {
       "Discover what's happening at Europe House Kosovo—join discussions, workshops, and cultural activities that inspire and engage.",
     upcomingEventButton: "Explore all Events",
     eventSlideTitle: "Events",
+    upcomingEventIconTitle: "Upcoming Events",
   },
   sq: {
     main_title: "Të fundit nga Shtëpia e BE-së",
@@ -50,6 +51,7 @@ export const translations = {
       "Zbuloni se çfarë po ndodh në Europe House Kosovo—bashkohuni në diskutime, punëtori dhe aktivitete kulturore që frymëzojnë dhe angazhojnë.",
     upcomingEventButton: "Eksploro Ngjarjet",
     eventSlideTitle: "Ngjarjet",
+    upcomingEventIconTitle: "Ngjarjet e Ardhshme",
   },
   sr: {
     main_title: "Najnovije iz EU kuće",
@@ -74,5 +76,6 @@ export const translations = {
       "Otkrijte šta se dešava u Evropskoj kući Kosovo — pridružite se diskusijama, radionicama i kulturnim aktivnostima koje inspirišu i angažuju.",
     upcomingEventButton: "Istražite sve događaje",
     eventSlideTitle: "Događaji",
+    upcomingEventIconTitle: "Predstojeći događaji",
   },
 };
