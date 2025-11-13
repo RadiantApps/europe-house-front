@@ -47,8 +47,7 @@ export default function Campaigns() {
       {/* Header */}
       <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
-          {/* Left side: Icon + Title */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="w-[70%] flex items-center gap-3 flex-shrink-0">
             <Image
               src={CampaignLogo}
               alt="Campaigns Icon"
@@ -62,8 +61,8 @@ export default function Campaigns() {
           </div>
 
           {/* Right side: Description */}
-          <div className="lg:max-w-xl min-w-0">
-            <p className="kanit-light w-[70%] text-[16px] sm:text-[18px] leading-relaxed text-[#555353] text-left lg:text-justify">
+          <div className=" lg:max-w-xl min-w-0 ">
+            <p className=" text-[16px] sm:text-[18px] font-light leading-relaxed text-[#555353] text-left lg:text-justify kanit-light">
               {translations[selectedLanguage].description}
             </p>
           </div>
