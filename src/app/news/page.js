@@ -87,7 +87,7 @@ export default function NewsBlog() {
           </div>
 
           <div className="md:w-[45%] flex justify-between">
-            <p className="kanit-light text-[18px] leading-[25px] text-[#555353] w-[60%]">
+            <p className="kanit-light text-[18px] leading-[25px] text-[#555353] w-[70%]">
               {translations[selectedLanguage].description}
             </p>
             <button className="bg-[#4433EE] h-[46px] w-[155px] rounded-[56px] text-[16px] text-[#F7F0F0] kanit-medium">

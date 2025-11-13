@@ -77,7 +77,7 @@ const UpcomingEvents = () => {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-8 items-start pb-[50px mt-[102px]">
         {/* Left Side Content */}
         <div className="space-y-6 pl-6 lg:pl-[74px]">
-          <div className="ml-[-20px] mb-[-30px] relative w-[180px] h-[227px] flex items-center justify-center">
+          <div className="ml-[-20px] mb-[-30px] relative w-[240px] h-[280px] flex items-center justify-center">
             {/* GIF background */}
             <Image
               src="/staricon.gif"
