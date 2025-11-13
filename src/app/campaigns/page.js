@@ -26,7 +26,6 @@ export default function Campaigns() {
     setOffset((prev) => prev + limit);
   };
 
-  // Ensure data is always an array
   const campaigns = Array.isArray(data) ? data : [];
 
   return (

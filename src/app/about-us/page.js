@@ -61,10 +61,10 @@ const WhoWeAre = () => {
       </div>
 
       {/* Services Section */}
-      <div className="py-16 lg:py-24 bg-[#EDF5FF]">
-        <div className="w-full px-6 md:px-[74px]  mt-[45px] md:mt-[88px] md:mb-[88px] ">
-          <h2 className="text-[32px] text-[#1C1A1A] kanit-semibold w-[70%] mx-auto text-center">
-            BOTH CENTRES OFFER:
+      <div className="py-16 lg:py-[88px] bg-[#EDF5FF]">
+        <div className="w-full px-6 md:px-[74px]   md:mb-[40px] ">
+          <h2 className="text-[48px] text-[#1C1A1A] kanit-semibold w-[70%] mx-auto text-center">
+            {content[selectedLanguage]?.serviceTitle}
           </h2>
           <div className="flex flex-wrap gap-6 justify-center mt-[46px]">
             {servicesData[selectedLanguage].map((service, index) => (
@@ -87,9 +87,9 @@ const WhoWeAre = () => {
       </div>
 
       {/* Team Section */}
-      <div className="py-16 lg:py-24 bg-white">
+      <div className="py-16 lg:py-[88px] bg-white">
         <div className="px-6 md:px-[74px] ">
-          <h2 className="text-[32px] text-[#1C1A1A] kanit-semibold w-[70%] md:w-full md:text-[48px]  mx-auto text-center">
+          <h2 className="text-[48px] text-[#1C1A1A] kanit-semibold w-[70%] md:w-full   mx-auto text-center">
             {content[selectedLanguage]?.about}
           </h2>
 
@@ -105,7 +105,7 @@ const WhoWeAre = () => {
                     <img
                       src={`${imageUrl}/${member?.photo}`}
                       alt={member.name}
-                      className="w-full object-contain"
+                      className="w-full h-[302px] object-cover rounded-[12px]"
                     />
                   </div>
 
