@@ -138,7 +138,6 @@ export default function PublicationsPage() {
             </div>
           </div>
 
-          {/* Topic Filter */}
           <div className="relative flex-shrink-0">
             <select
               value={filters.topic}
@@ -176,7 +175,12 @@ export default function PublicationsPage() {
       {/* Items */}
       <div className="w-full bg-[#EDF5FF] rounded-t-[36px]">
         <div className="px-4 sm:px-6 md:px-12 lg:px-[74px] pt-8 sm:pt-12 md:pt-[66px] pb-8 sm:pb-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-[28px]  mx-auto">
+          <div
+            className="
+    grid grid-cols-1 gap-6 sm:gap-8 mx-auto
+    md:flex md:justify-between md:gap-[28px]
+  "
+          >
             {publication?.map((item) => {
               const translation = item?.translations[selectedLanguage];
               const translationsArray = Object.entries(item?.translations).map(

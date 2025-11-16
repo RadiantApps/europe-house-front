@@ -128,7 +128,9 @@ const CampaignsView = () => {
                             {camp?.title}
                           </span>
                           <span className="kanit-light text-[16px] leading-[23px] text-[#4433EE] mt-[24px]">
-                            {camp?.content}
+                            {isOpen
+                              ? camp?.content
+                              : camp?.content.slice(0, 100)}
                           </span>
                         </div>
                       </div>
@@ -153,7 +155,7 @@ const CampaignsView = () => {
                 <div key={item.id}>
                   <div className="flex gap-6">
                     <div className="flex space-x-[36px] w-3/5">
-                      {/* Button */}
+                      {/* Toggle Button */}
                       <button
                         onClick={() => handleToggle(item.id)}
                         className="border border-[#4433EE] rounded-full w-[56px] h-[56px] flex justify-center items-center shrink-0 relative overflow-hidden"
@@ -181,36 +183,57 @@ const CampaignsView = () => {
                         </span>
                       </button>
 
-                      {/* Image section only collapses */}
-                      <div
-                        className={`transition-all duration-500 ease-in-out overflow-hidden flex-1`}
-                        style={{
-                          maxHeight: isOpen ? "400px" : "0px",
-                          opacity: isOpen ? 1 : 0,
-                        }}
-                      >
-                        <div className="relative h-[320px] rounded overflow-hidden">
-                          <Image
-                            src={`${imageUrl}/${camp?.photo.replace(
-                              /\\/g,
-                              "/"
-                            )}`}
-                            alt={camp?.title}
-                            fill
-                            className="object-cover rounded"
-                          />
+                      {/* LEFT SIDE: IMAGE OR TITLE */}
+                      <div className="flex-1">
+                        {/* When closed → TITLE instead of image */}
+                        {!isOpen && (
+                          <div
+                            className={`
+    transition-all duration-500 ease-out
+    ${isOpen ? "translate-x-20" : "translate-x-0"}
+  `}
+                          >
+                            <span className="kanit-medium text-[24px] text-[#4433EE]">
+                              {camp?.title}
+                            </span>
+                          </div>
+                        )}
+
+                        {/* When open → IMAGE */}
+                        <div
+                          className={`transition-all duration-500 ease-in-out overflow-hidden`}
+                          style={{
+                            maxHeight: isOpen ? "400px" : "0px",
+                            opacity: isOpen ? 1 : 0,
+                          }}
+                        >
+                          {isOpen && (
+                            <div className="relative h-[320px] rounded overflow-hidden">
+                              <Image
+                                src={`${imageUrl}/${camp?.photo.replace(
+                                  /\\/g,
+                                  "/"
+                                )}`}
+                                alt={camp?.title}
+                                fill
+                                className="object-cover rounded"
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
 
-                    {/* Title and description always visible */}
+                    {/* RIGHT SIDE ALWAYS VISIBLE */}
                     <div className="w-3/5 transition-all duration-500 ease-in-out">
                       <div className="flex gap-6">
                         <span className="w-1/2 kanit-medium text-[24px] leading-[28px] text-[#4433EE] ">
-                          {camp?.title}
+                          {isOpen && camp?.title}
                         </span>
                         <span className="w-1/2 kanit-light text-[16px] leading-[23px] text-[#4433EE]">
-                          {camp?.content}
+                          {isOpen
+                            ? camp?.content
+                            : camp?.content.slice(0, 70) + " ..."}
                         </span>
                       </div>
                     </div>
