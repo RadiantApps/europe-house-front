@@ -17,7 +17,10 @@ export default function EuropeHouse() {
   );
   const images = [event1, event2, event3, event4, event5];
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [countIndex, setCountIndex] = useState(1);
   const [visibleSlides, setVisibleSlides] = useState(5.5);
+  const itemsPerSlide =
+    typeof window !== "undefined" && window.innerWidth >= 1024 ? 2 : 3;
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,13 +76,15 @@ export default function EuropeHouse() {
 
   const nextSlide = () => {
     if (currentIndex < images.length) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex(currentIndex + itemsPerSlide);
+      setCountIndex(countIndex + 1);
     }
   };
 
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex(currentIndex - itemsPerSlide);
+      setCountIndex(countIndex - 1);
     }
   };
 
@@ -154,7 +159,7 @@ export default function EuropeHouse() {
                   </button>
                 </div>
                 <span className="kanit-light text-[20px] leading-[42px] text-[#8E8D8D] mr-[40px]">
-                  Events {currentIndex + 1}/{images.length}
+                  Events {countIndex}/{images.length}
                 </span>
               </div>
             </div>
@@ -214,7 +219,7 @@ export default function EuropeHouse() {
                   </button>
                 </div>
                 <span className="text-[#8E8D8D] kanit-light text-[16px]">
-                  Events {currentIndex + 1}/{images.length}
+                  Events {countIndex}/{images.length}
                 </span>
               </div>
             </div>
