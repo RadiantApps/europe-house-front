@@ -48,7 +48,7 @@ export default function Campaigns() {
       <div className="px-6 md:px-[74px] pt-8 md:pt-[43px] pb-4 md:pb-[32px]">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
           <div className="w-[70%] flex items-center gap-3 flex-shrink-0">
-            <Imagez
+            <Image
               src={CampaignLogo}
               alt="Campaigns Icon"
               width={64}
