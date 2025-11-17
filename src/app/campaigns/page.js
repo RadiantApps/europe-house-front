@@ -69,7 +69,6 @@ export default function Campaigns() {
         </div>
       </div>
 
-      {/* Campaigns List */}
       <div className="w-full bg-[#EDF5FF] rounded-t-[36px]">
         <div className="px-6 md:px-[74px] pt-[43px] pb-[32px] space-y-8">
           {campaigns.slice(0, offset + limit).map((item) => {
@@ -77,7 +76,6 @@ export default function Campaigns() {
             return (
               <div key={item.id}>
                 <div className="flex flex-col md:flex-row w-full justify-between gap-6">
-                  {/* Image Section */}
                   <div className="relative w-full md:w-[40%] h-[304px]">
                     <Image
                       src={`${imageUrl}/${camp?.photo}`}

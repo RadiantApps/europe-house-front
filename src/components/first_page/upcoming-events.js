@@ -173,10 +173,6 @@ const UpcomingEvents = () => {
                     <RightArrow />
                   </button>
                 </div>
-                <span className="kanit-light text-[20px] leading-[42px] text-[#8E8D8D] mr-[40px]">
-                  {translations[selectedLanguage].eventSlideTitle} {countIndex}/
-                  {images.length}
-                </span>
               </div>
             </div>
           </div>
@@ -247,10 +243,6 @@ const UpcomingEvents = () => {
                     <RightArrow />
                   </button>
                 </div>
-                <span className="text-[#8E8D8D] kanit-light text-[16px]">
-                  {translations[selectedLanguage].eventSlideTitle}{" "}
-                  {currentIndex + 1}/{images.length}
-                </span>
               </div>
             </div>
           </div>
