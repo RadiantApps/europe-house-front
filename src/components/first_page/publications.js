@@ -41,7 +41,7 @@ export default function PublicationsShowcase() {
         {/* Left Content */}
         <div className="space-y-6 md:w-[40%]">
           <div>
-            <h2 className="w-[60%] text-[#1C1A1A] kanit-semibold text-[34px] leading-[42px]">
+            <h2 className="text-[#1C1A1A] kanit-semibold text-[34px] leading-[42px]">
               {translations[selectedLanguage].title_publication}
             </h2>
             <p className="text-[#8E8D8D] kanit-light text-[22px]  mt-[32px]">

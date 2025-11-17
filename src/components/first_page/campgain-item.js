@@ -250,7 +250,7 @@ const CampaignsView = () => {
         <div className="text-center">
           <button
             onClick={handleChangeRoute}
-            className="bg-blue-600 text-white px-8 py-4 rounded-full text-sm font-medium transition-colors shadow-sm"
+            className="bg-[#4433EE] w-[246px] h-[56px] rounded-[56px] kanit-medium text-[16px] text-[#F7F0F0]"
           >
             {translations[selectedLanguage].seeallcampaings}
           </button>

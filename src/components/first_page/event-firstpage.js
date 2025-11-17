@@ -158,9 +158,6 @@ export default function EuropeHouse() {
                     <RightArrow />
                   </button>
                 </div>
-                <span className="kanit-light text-[20px] leading-[42px] text-[#8E8D8D] mr-[40px]">
-                  Events {countIndex}/{images.length}
-                </span>
               </div>
             </div>
           </div>
@@ -218,9 +215,6 @@ export default function EuropeHouse() {
                     <RightArrow />
                   </button>
                 </div>
-                <span className="text-[#8E8D8D] kanit-light text-[16px]">
-                  Events {countIndex}/{images.length}
-                </span>
               </div>
             </div>
           </div>
