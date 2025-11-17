@@ -187,7 +187,7 @@ export default function PublicationsPage() {
               return (
                 <div
                   key={item.publication_id}
-                  className="w-full w-[49%] mx-auto lg:mx-0 rounded-xl overflow-hidden shadow-md"
+                  className=" w-[49%] mx-auto lg:mx-0 rounded-xl overflow-hidden "
                 >
                   <div className="flex flex-col bg-[#dbdde0] lg:hidden">
                     <div className="p-4 sm:p-6">
