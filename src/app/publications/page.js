@@ -80,7 +80,7 @@ export default function PublicationsPage() {
               height={64}
               className="w-12 h-12 md:w-16 md:h-16 object-contain"
             />
-            <h1 className="text-[#1C1A1A] leading-[1.1] text-[52px] kanit-semibold">
+            <h1 className="text-[#1C1A1A]  text-[44px] md:text-[52px] kanit-semibold">
               {translationTitlePublic[selectedLanguage].title}
             </h1>
           </div>
@@ -175,12 +175,7 @@ export default function PublicationsPage() {
       {/* Items */}
       <div className="w-full bg-[#EDF5FF] rounded-t-[36px]">
         <div className="px-4 sm:px-6 md:px-12 lg:px-[74px] pt-8 sm:pt-12 md:pt-[66px] pb-8 sm:pb-12">
-          <div
-            className="
-    grid grid-cols-1 gap-6 sm:gap-8 mx-auto
-    md:flex md:justify-between md:gap-[28px]
-  "
-          >
+          <div className="flex flex-wrap justify-between gap-[27px]">
             {publication?.map((item) => {
               const translation = item?.translations[selectedLanguage];
               const translationsArray = Object.entries(item?.translations).map(
@@ -196,10 +191,10 @@ export default function PublicationsPage() {
                 >
                   <div className="flex flex-col bg-[#dbdde0] lg:hidden">
                     <div className="p-4 sm:p-6">
-                      <h2 className="text-lg sm:text-xl kanit-medium uppercase text-[#1c1a1a] leading-tight">
+                      <h2 className="text-[26px] kanit-medium text-[#1C1A1A]">
                         {translation.title}
                       </h2>
-                      <p className="text-sm text-[#8e8d8d] mt-3 kanit-regular">
+                      <p className="text-[14px] leading-[34px] kanit-regular text-[#8E8D8D]">
                         {formatDate(item.created_at, selectedLanguage)}
                       </p>
                     </div>
@@ -210,11 +205,11 @@ export default function PublicationsPage() {
                       className="w-full h-[200px] sm:h-[250px] object-cover"
                     />
 
-                    <div className="flex flex-col sm:flex-row sm:justify-between items-center bg-[#4343ee] px-4 sm:px-6 py-3 gap-3 w-full">
-                      <p className="text-white text-base kanit-regular">
+                    <div className="flex justify-center  items-center  space-x-[21px] bg-[#4433EE] h-[70px]">
+                      <p className="kanit-light text-[#FFFFFF] text-[16px] leading-[42px]">
                         Download PDF
                       </p>
-                      <div className="flex gap-2 flex-wrap justify-center sm:justify-end">
+                      <div className="flex space-x-[8px]">
                         {translationsArray.map((lang) => {
                           return (
                             <a
@@ -222,9 +217,9 @@ export default function PublicationsPage() {
                               href={`${imageUrl}/${lang?.filepath}`}
                               target="_blank" // open in new tab
                               rel="noopener noreferrer"
-                              className="px-3 sm:px-4 py-1 rounded-[42px] bg-[#f7f0f0]"
+                              className="w-[50px] h-[24px] rounded-[34px] bg-[#F7F0F0] flex justify-center items-center"
                             >
-                              <p className="text-sm sm:text-base kanit-regular uppercase text-[#4343ee] ">
+                              <p className="text-[14px] text-[#4433EE] kanit-light uppercase">
                                 {lang.lang}
                               </p>
                             </a>
@@ -273,7 +268,7 @@ export default function PublicationsPage() {
                     <img
                       src={`${imageUrl}/${translation?.photo}`}
                       alt={item.title}
-                      className="w-[200px] xl:w-[236px] h-[240px] xl:h-[334px] object-contain flex-shrink-0"
+                      className="w-[200px] xl:w-[236px] h-[240px] xl:h-[334px] object-cover flex-shrink-0"
                     />
                   </div>
                 </div>

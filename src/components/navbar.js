@@ -8,6 +8,7 @@ import { useState } from "react";
 import Logo from "../../public/logo.svg";
 import { useRouter } from "next/navigation";
 import { navLinks } from "@/data/link";
+import ArrayDropDownNavbar from "@/assets/nav/ArrayDropDownNavbar";
 export default function Navbar() {
   const dispatch = useDispatch();
   const selectedLanguage = useSelector(
@@ -26,14 +27,12 @@ export default function Navbar() {
   return (
     <>
       <header className=" mx-auto border-b border-gray-200 px-6 lg:px-[74px] flex items-center justify-between py-4 relative">
-        {/* Logo */}
         <Image
           src={Logo}
           onClick={() => router.push("/")}
           alt="Europe House Logo"
           className="w-auto h-8 cursor-pointer"
         />
-
         {/* Desktop Navigation (vetëm ≥1024px) */}
         <nav className="hidden lg:flex gap-8 items-center">
           {navLinks[selectedLanguage]?.map((link, index) => (
@@ -46,19 +45,26 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
+        <div className="relative hidden lg:block">
+          <select
+            className="
+  appearance-none border border-[#DDE2E4] rounded-[6px]
+  px-[12px] pr-[32px] py-[4px] text-[#252C32] text-[14px]
+  kanit-regular leading-[24px]
+  focus:outline-none focus:ring-0 focus:border-[#DDE2E4]
+"
+            value={selectedLanguage}
+            onChange={handleLanguageChange}
+          >
+            <option value="en">English</option>
+            <option value="sq">Shqip</option>
+            <option value="sr">Serbian</option>
+          </select>
 
-        {/* Desktop Language Selector (vetëm ≥1024px) */}
-        <select
-          className="hidden lg:block border border-[1px] border-[#DDE2E4]  rounded-[6px] px-[12px] py-[4px]  text-[#252C32] text-[14px] kanit-regular leading-[24px]"
-          value={selectedLanguage}
-          onChange={handleLanguageChange}
-        >
-          <option value="en">English</option>
-          <option value="sq">Shqip</option>
-          <option value="sr">Serbian</option>
-        </select>
+          {/* Positioning OUTSIDE the component */}
+          <ArrayDropDownNavbar className="pointer-events-none absolute right-[10px] top-1/2 -translate-y-1/2" />
+        </div>
 
-        {/* Mobile Menu Button (shfaqet <1024px) */}
         <button
           onClick={toggleMobileMenu}
           className="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5"

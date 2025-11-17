@@ -6,6 +6,10 @@ import { translations } from "@/data/home";
 import { useSelector } from "react-redux";
 import LeftArrow from "@/assets/home/LeftArrow";
 import RightArrow from "@/assets/home/RightArrow";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const UpcomingEvents = () => {
   const selectedLanguage = useSelector(
@@ -13,7 +17,7 @@ const UpcomingEvents = () => {
   );
 
   const [visibleSlides, setVisibleSlides] = useState(5.5);
-
+  const [countIndex, setCountIndex] = useState(1);
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -62,13 +66,15 @@ const UpcomingEvents = () => {
 
   const nextSlide = () => {
     if (currentIndex < images.length) {
-      setCurrentIndex(currentIndex + 1);
+      setCurrentIndex(currentIndex + 2);
+      setCountIndex(countIndex + 1);
     }
   };
 
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
+      setCurrentIndex(currentIndex - 2);
+      setCountIndex(countIndex - 1);
     }
   };
 
@@ -145,21 +151,31 @@ const UpcomingEvents = () => {
               <div className="absolute left-[22%] mt-[30px] right-6 flex items-center justify-between gap-8">
                 <div className="flex gap-4">
                   <button
-                    onClick={prevSlide}
+                    onClick={() => {
+                      if (currentIndex > 0) {
+                        setCurrentIndex(currentIndex - 2);
+                        setCountIndex(countIndex - 1);
+                      }
+                    }}
                     className="border border-[2px] border-[#4433EE] w-[70px] h-[35px] rounded-[100px] flex items-center justify-center "
                   >
                     <LeftArrow />
                   </button>
                   <button
-                    onClick={nextSlide}
+                    onClick={() => {
+                      if (currentIndex < images.length) {
+                        setCurrentIndex(currentIndex + 2);
+                        setCountIndex(countIndex + 1);
+                      }
+                    }}
                     className="border border-[2px] border-[#4433EE] w-[70px] h-[35px] rounded-[100px] flex items-center justify-center "
                   >
                     <RightArrow />
                   </button>
                 </div>
                 <span className="kanit-light text-[20px] leading-[42px] text-[#8E8D8D] mr-[40px]">
-                  {translations[selectedLanguage].eventSlideTitle}{" "}
-                  {currentIndex + 1}/{images.length}
+                  {translations[selectedLanguage].eventSlideTitle} {countIndex}/
+                  {images.length}
                 </span>
               </div>
             </div>
@@ -209,13 +225,23 @@ const UpcomingEvents = () => {
               <div className="flex items-center justify-between ml-16 mt-[30px] gap-6">
                 <div className="flex gap-3">
                   <button
-                    onClick={prevSlide}
+                    onClick={() => {
+                      if (currentIndex > 0) {
+                        setCurrentIndex(currentIndex - 5);
+                        setCountIndex(countIndex - 1);
+                      }
+                    }}
                     className="border border-[2px] border-[#4433EE] w-[70px] h-[35px] rounded-[100px] flex items-center justify-center "
                   >
                     <LeftArrow />
                   </button>
                   <button
-                    onClick={nextSlide}
+                    onClick={() => {
+                      if (currentIndex < images.length) {
+                        setCurrentIndex(currentIndex + 1);
+                        setCountIndex(countIndex + 1);
+                      }
+                    }}
                     className="border border-[2px] border-[#4433EE] w-[70px] h-[35px] rounded-[100px] flex items-center justify-center "
                   >
                     <RightArrow />
