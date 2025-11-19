@@ -123,17 +123,16 @@ export default function Events() {
   return (
     <div className="min-h-screen bg-white flex flex-col">
       {/* Video Header */}
-      <div className="w-full h-8 relative overflow-hidden">
-        <video
-          className="w-full h-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-        >
-          <source src="/slider-video.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+      <div className="w-full h-[32px] bg-[#4433EE] relative overflow-hidden">
+        <div className="absolute inset-0 flex items-center">
+          <p className="whitespace-nowrap animate-marquee text-white text-sm font-medium flex gap-6">
+            <span>🚀 Big Sale Today! 50% OFF on selected products</span>
+            <span className="w-[1px] h-[16px] bg-white inline-block"></span>
+            <span>🔥 Hurry up! Limited stock — Don’t miss out!</span>
+            <span className="w-[1px] h-[16px] bg-white inline-block"></span>
+            <span>📦 Free Delivery on all orders today</span>
+          </p>
+        </div>
       </div>
 
       {/* Header Section */}

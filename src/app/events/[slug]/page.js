@@ -167,7 +167,7 @@ export default function EventPage() {
                     <Image
                       src={`${imageUrl}/${event.photo}`.replace(/\\/g, "/")} // Fix backslashes
                       alt={event.title || "Event Image"}
-                      className="w-full h-auto"
+                      className="w-full h-[280px] object-cover rounded-[12px]"
                       width={500} // specify width and height if not using `fill`
                       height={300}
                     />

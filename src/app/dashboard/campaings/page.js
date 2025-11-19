@@ -60,7 +60,7 @@ const CampaingsDash = () => {
             className="bg-[#B8F900] w-[283px]  font-medium py-2 px-4 rounded h-[50px] text-[#121212] text-[18px] leading-[22px]"
             onClick={openModal}
           >
-            Add Campaings
+            Add Campaigns
           </button>
         </div>
       </div>

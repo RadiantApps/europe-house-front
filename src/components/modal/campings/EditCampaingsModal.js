@@ -119,7 +119,7 @@ const EditCampaingsModal = ({ openModal, editData, onSave }) => {
           {/* Header */}
           <div className="flex items-center justify-between">
             <h3 className="mb-1 text-xl font-normal text-gray-700">
-              Edit Campaings
+              Edit Campaigns
             </h3>
             <button onClick={openModal}>
               <IoIosCloseCircle className="text-2xl text-gray-600" />

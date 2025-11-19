@@ -59,7 +59,7 @@ export const translations = {
     upcoming_button: "Mëso më shumë",
   },
   sr: {
-    title: "Догађаји",
+    title: "DOGAĐAJI",
     description:
       "Откријте шта се дешава у Europe House Kosovo—придружите се дискусијама, радионицама и културним активностима које инспиришу и ангажују.",
     button: "Više",

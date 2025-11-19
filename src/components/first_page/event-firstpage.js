@@ -53,15 +53,15 @@ export default function EuropeHouse() {
       } else if (width >= 1101 && width < 1200) {
         setVisibleSlides(2.6);
       } else if (width >= 1201 && width < 1300) {
-        setVisibleSlides(3);
+        setVisibleSlides(8);
       } else if (width >= 1301 && width < 1400) {
         setVisibleSlides(3.2);
       } else if (width >= 1401 && width < 1500) {
-        setVisibleSlides(4);
+        setVisibleSlides(3);
       } else if (width >= 1501 && width < 1700) {
-        setVisibleSlides(4.8);
+        setVisibleSlides(3);
       } else if (width >= 1701 && width < 1919) {
-        setVisibleSlides(6);
+        setVisibleSlides(6.5);
       } else if (width >= 1920) {
         setVisibleSlides(7);
       } else {
@@ -76,14 +76,13 @@ export default function EuropeHouse() {
 
   const nextSlide = () => {
     if (currentIndex < images.length) {
-      setCurrentIndex(currentIndex + itemsPerSlide);
+      setCurrentIndex(currentIndex + 1);
       setCountIndex(countIndex + 1);
     }
   };
-
   const prevSlide = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - itemsPerSlide);
+      setCurrentIndex(currentIndex - 1);
       setCountIndex(countIndex - 1);
     }
   };
