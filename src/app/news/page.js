@@ -198,14 +198,16 @@ export default function NewsBlog() {
                   className="overflow-hidden gap-9 lg:gap-11"
                 >
                   <div className="relative">
-                    <div className="w-full h-[230px]">
-                      <Image
-                        src={`${imageUrl}/${photo?.path}`}
-                        alt={article?.title}
-                        fill
-                        className="object-cover rounded-[12px]"
-                      />
-                    </div>
+                    <Link href={`/news/${item.blog_id}`} className="w-full">
+                      <div className="w-full h-[230px] relative">
+                        <Image
+                          src={`${imageUrl}/${photo?.path}`}
+                          alt={article?.title || ""}
+                          fill
+                          className="object-cover rounded-[12px]"
+                        />
+                      </div>
+                    </Link>
                   </div>
                   <div className="flex-col mt-[20px]">
                     <span className="text-[#8E8D8D] kanit-light text-[14px]">
