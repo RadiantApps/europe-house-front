@@ -1,7 +1,7 @@
 export const translations = {
   en: {
     main_title: "Latest from EU House",
-    location: "Pristina & North Mitrovica",
+    location: "Pristina & Mitrovica North",
     campaings_category: "Campaings",
     blog_category: "Blog",
     event_category: "EVENTS",

@@ -33,9 +33,9 @@ export const officeTranslations = {
       phone: "+383 (0) 38 25 99 99",
     },
     mitrovica: {
-      city: "North Mitrovica",
+      city: "Mitrovica North",
       street: 'Str. "Kralj Petar I" n.n.,',
-      full: "North Mitrovica 40000, Kosovo",
+      full: "Mitrovica North 40000, Kosovo",
       email: "info@europehouse-kosovo.com",
       phone: ["+381 65 6599754", "+383 47 125 275"],
     },
