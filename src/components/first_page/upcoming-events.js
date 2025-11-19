@@ -43,7 +43,7 @@ const UpcomingEvents = () => {
       } else if (width >= 1401 && width < 1500) {
         setVisibleSlides(4.6);
       } else if (width >= 1501 && width < 1600) {
-        setVisibleSlides(5);
+        setVisibleSlides(6.2);
       } else if (width >= 1920) {
         setVisibleSlides(10);
       } else {

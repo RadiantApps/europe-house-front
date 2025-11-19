@@ -34,7 +34,7 @@ const Sidebar = () => {
               className="items-center gap-3 pl-[57px] mt-4 flex text-xl font-extrabold tracking-tight text-slate-900"
             >
               {/* <LogoDashboard /> */}
-              Europe house
+              Europe House
             </Link>
             <button
               type="button"

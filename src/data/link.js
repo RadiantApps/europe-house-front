@@ -22,7 +22,7 @@ export const links = [
       },
 
       {
-        name: "Campaings",
+        name: "Campaigns",
         url: "campaings",
         icon: "",
         roles: ["admin"],
