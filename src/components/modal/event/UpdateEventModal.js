@@ -8,6 +8,7 @@ import { imageUrl } from "@/config";
 import { getLocation } from "@/store/features/locationSlice";
 import { getAllCategoryEvent } from "@/store/features/categoryEventSlice";
 import { updateEvent } from "@/store/features/eventsSlice";
+import CKEditorClient from "@/utils/editor";
 
 const UpdateEventModal = ({ openModal, editData }) => {
   const dispatch = useDispatch();
@@ -107,6 +108,19 @@ const UpdateEventModal = ({ openModal, editData }) => {
         },
       }));
     }
+  };
+
+  const handleChangeEditor = (lang, field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      translations: {
+        ...prev.translations,
+        [lang]: {
+          ...prev.translations[lang],
+          [field]: value,
+        },
+      },
+    }));
   };
 
   const handleChange = (e, lang, field) => {
@@ -395,10 +409,11 @@ const UpdateEventModal = ({ openModal, editData }) => {
                       ? "English"
                       : "Serbian"}
                   </label>
-                  <textarea
+                  <CKEditorClient
                     value={formData.translations[lang].description}
-                    onChange={(e) => handleChange(e, lang, "description")}
-                    className="bg-white w-full rounded-[10px] pl-[12px] pt-[8px] pb-[8px] h-[120px] resize-y border border-gray-300"
+                    onChange={(data) =>
+                      handleChangeEditor(lang, "description", data)
+                    }
                   />
                 </div>
               </div>

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { getLocation } from "@/store/features/locationSlice";
 import { getAllCategoryEvent } from "@/store/features/categoryEventSlice";
 import { createEvent } from "@/store/features/eventsSlice";
+import CKEditorClient from "@/utils/editor";
 
 const CreateEventModal = ({ openModal }) => {
   const dispatch = useDispatch();
@@ -136,6 +137,19 @@ const CreateEventModal = ({ openModal }) => {
         console.error(error);
         toast.error("Something went wrong");
       });
+  };
+
+  const handleChangeEditor = (lang, field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      translations: {
+        ...prev.translations,
+        [lang]: {
+          ...prev.translations[lang],
+          [field]: value,
+        },
+      },
+    }));
   };
 
   useEffect(() => {
@@ -359,10 +373,11 @@ const CreateEventModal = ({ openModal }) => {
                       ? "English"
                       : "Serbian"}
                   </label>
-                  <textarea
+                  <CKEditorClient
                     value={formData.translations[lang].description}
-                    onChange={(e) => handleChange(e, lang, "description")}
-                    className="bg-white w-full rounded-[10px] pl-[12px] pt-[8px] pb-[8px] h-[120px] resize-y border border-gray-300"
+                    onChange={(data) =>
+                      handleChangeEditor(lang, "description", data)
+                    }
                   />
                 </div>
               </div>
