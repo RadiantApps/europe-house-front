@@ -1,21 +1,24 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
+// Dynamically import both CKEditor React wrapper and ClassicEditor
 const CKEditor = dynamic(
-  () => import("@ckeditor/ckeditor5-react").then((mod) => mod.CKEditor),
-  { ssr: false }
+  async () => {
+    const { CKEditor } = await import("@ckeditor/ckeditor5-react");
+    const ClassicEditor = (await import("@ckeditor/ckeditor5-build-classic"))
+      .default;
+    return (props) => <CKEditor editor={ClassicEditor} {...props} />;
+  },
+  { ssr: false } // this ensures it only runs on the client
 );
 
 export default function CKEditorClient({ value, onChange }) {
   return (
     <CKEditor
-      editor={ClassicEditor}
       data={value}
       onChange={(event, editor) => {
-        const data = editor.getData();
-        onChange(data);
+        onChange(editor.getData());
       }}
     />
   );
