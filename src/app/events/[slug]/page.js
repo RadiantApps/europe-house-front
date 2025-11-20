@@ -92,8 +92,13 @@ export default function EventPage() {
 
               {/* Description */}
               <p className="mt-6 lg:mt-11 text-gray-600 leading-relaxed">
-                {event?.event_translations?.[selectedLanguage]?.description ||
-                  "No description available."}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      event?.event_translations?.[selectedLanguage]
+                        ?.description || "No description available.",
+                  }}
+                />
               </p>
 
               <button className="mt-6 lg:mt-8 w-[190px] h-[50px] flex items-center justify-center gap-[10px] bg-indigo-600 text-white font-medium rounded-[56px]">
