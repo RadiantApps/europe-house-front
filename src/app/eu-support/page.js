@@ -30,9 +30,9 @@ export default function EuropeHouseMainContent() {
 
       <div className="px-6 md:px-[74px] ">
         <section className="py-8 md:py-[54px]">
-          <div className="flex">
+          <div className="flex flex-col md:flex-row">
             <div className="space-y-6 md:space-y-[46px]">
-              <h1 className="text-[#1C1A1A] kanit-semibold text-[36px] md:text-[64px] leading-[1.1]">
+              <h1 className="text-[#1C1A1A] kanit-semibold text-[36px] md:text-[40px]  lg:text-[64px] leading-[1.1]">
                 {translationsEuprogrammes[selectedLanguage]?.title}
               </h1>
               <p className="text-[#8E8D8D] kanit-leight text-[16px] md:text-[22px]  md:w-[75%]">
@@ -40,27 +40,34 @@ export default function EuropeHouseMainContent() {
               </p>
             </div>
 
-            <div className="flex space-x-[28px]">
-              <div className="w-[236px] h-[155px] rounded-[12px]">
-                <Image
-                  src={Img3}
-                  alt="Tower"
-                  className="w-full h-full object-cover rounded-t-[12px]"
-                />
-                <div className="bg-[#4433EE] kanit-medium text-[20px] leading-[20px] w-full mt-[0px] h-[63px] rounded-b-[12px] px-[22px] flex items-center justify-between text-[#F7F0F0]">
+            <div className="flex flex-col space-y-[28px] lg:flex-row lg:space-y-0 lg:space-x-[28px] mt-[32px] lg:mt-0">
+              {/* CARD 1 */}
+              <div className="w-full md:w-[236px] h-[283px] md:h-[155px] rounded-[12px] ">
+                <div>
+                  <Image
+                    src={Img3}
+                    alt="Tower"
+                    className="w-full h-full object-cover rounded-t-[12px]"
+                  />
+                </div>
+
+                <div className="bg-[#4433EE] kanit-medium text-[20px] leading-[20px] h-[63px] px-[22px] flex items-center justify-between text-[#F7F0F0] rounded-b-[12px]">
                   Erasmus + <ArrowRightEuSupport />
                 </div>
               </div>
 
-              <div className="w-[236px] h-[155px] rounded-[12px]">
-                <Image
-                  src={Img2}
-                  alt="Creative Europe"
-                  className="w-full h-full object-cover rounded-t-[12px]"
-                />
-                <div className="bg-[#4433EE] kanit-medium text-[20px] leading-[20px] w-full mt-[0px] h-[63px] rounded-b-[12px] px-[22px] flex items-center justify-between text-[#F7F0F0]">
-                  Creative Europe
-                  <ArrowRightEuSupport />
+              {/* CARD 2 */}
+              <div className="w-full md:w-[236px] h-[283px] md:h-[155px] rounded-[12px] mt-[52px]">
+                <div>
+                  <Image
+                    src={Img2}
+                    alt="Creative Europe"
+                    className="w-full h-[201px] md:h-[155px]  object-cover rounded-t-[12px]"
+                  />
+                </div>
+
+                <div className="bg-[#4433EE] kanit-medium text-[20px] leading-[20px] h-[63px] px-[22px] flex items-center justify-between text-[#F7F0F0] rounded-b-[12px]">
+                  Creative Europe <ArrowRightEuSupport />
                 </div>
               </div>
             </div>
@@ -78,8 +85,8 @@ export default function EuropeHouseMainContent() {
               </p>
             </div>
 
-            <div className="w-[236px] h-[155px] rounded-[12px]">
-              <div className="">
+            <div className="w-full md:w-[236px] h-[283px] md:h-[155px] rounded-[12px] ">
+              <div>
                 <Image
                   src={Img1}
                   alt="Kosovo Projects"

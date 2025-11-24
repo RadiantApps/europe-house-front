@@ -138,3 +138,149 @@ body {
   display: inline-block;
   animation: marquee 12s linear infinite;
 }
+
+.map-wrapper {
+  position: relative;
+  width: 400px;
+}
+
+@media (min-width: 768px) {
+  .map-wrapper {
+    width: 600px;
+  }
+}
+.map {
+  width: 100%;
+  display: block;
+}
+
+.dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #3d4bff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.dot::after {
+  content: attr(data-label);
+  position: absolute;
+  top: -40px;
+  left: 70%; /* Move the box to the right */
+  transform: translateX(10%);
+  background: #3d4bff;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 3px;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  display: table;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s ease;
+}
+
+.dot:hover::after {
+  opacity: 1;
+}
+
+.dot::before {
+  content: "";
+  position: absolute;
+  top: -10px; /* Adjust for desired line length */
+  left: 50%;
+  transform: translateX(-50%) rotate(0deg); /* Default to no angle */
+  width: 2px; /* Line thickness */
+  height: 30px; /* Line length */
+  background: #3d4bff;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease;
+}
+
+.dot:hover::before {
+  opacity: 1; /* Show line on hover */
+}
+
+/* Prishtina Line - adjust angle and position */
+.prishtina::before {
+  transform: translateX(-50%) rotate(40deg); /* Angle for Prishtina */
+  top: -17px; /* Adjust line's vertical position */
+  left: 90%; /* Adjust line's horizontal position */
+}
+
+/* Mitrovica Line - adjust angle and position */
+.mitrovica::before {
+  transform: translateX(-50%) rotate(40deg); /* Angle for Mitrovica */
+  top: -20px; /* Adjust line's vertical position */
+  left: 130%; /* Adjust line's horizontal position */
+}
+
+.prishtina {
+  top: 43%;
+  left: 62%;
+}
+
+.mitrovica {
+  top: 13%;
+  left: 45%;
+}
+
+/* Add pulse ring animation styles */
+.pulse-ring {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #3d4bff;
+  border-radius: 50%;
+  animation: pulse 2s ease-out infinite;
+  z-index: 1; /* Lower than dots */
+  pointer-events: none; /* Important: allows clicks to pass through */
+  transform: translate(-50%, -50%); /* This centers the ring perfectly */
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(1); /* Include translate in animation */
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(3); /* Include translate in animation */
+    opacity: 0;
+  }
+}
+
+/* Update dot positioning to also use translate for perfect centering */
+.dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #3d4bff;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10; /* Higher than pulse rings */
+  transform: translate(-50%, -50%); /* This centers the dot perfectly */
+}
+
+/* Update the existing dot positions to account for the transform */
+.prishtina {
+  top: 43%;
+  left: 62%;
+}
+
+.mitrovica {
+  top: 13%;
+  left: 45%;
+}
+
+/* Position the pulse rings for each location - same as dots */
+.prishtina-ring {
+  top: 43%;
+  left: 62%;
+}
+
+.mitrovica-ring {
+  top: 13%;
+  left: 45%;
+}

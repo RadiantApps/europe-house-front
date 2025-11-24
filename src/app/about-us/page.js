@@ -8,7 +8,7 @@ import Footer from "@/components/footer";
 import { content, servicesData } from "@/data/about";
 import { useGetTeamQuery } from "@/store/services/aboutApi";
 import { imageUrl } from "@/config";
-
+import mapi from "@/assets/about-us/mapi.png";
 // Social icon components (make sure these are React components, not JSX)
 import {
   Facebook,
@@ -36,7 +36,7 @@ const WhoWeAre = () => {
     <div className="min-h-screen bg-white">
       {/* About Section */}
       <div className="px-6 md:px-[74px] ">
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 md:gap-12 mt-[32px]">
+        <div className="flex flex-col md:flex-row md:justify-between  gap-8 md:gap-12 mt-[32px]">
           <div
             className="w-full md:max-w-2xl 2xl:max-w-3xl"
             key={selectedLanguage}
@@ -52,9 +52,14 @@ const WhoWeAre = () => {
             </p>
           </div>
 
-          <div className="w-full md:flex md:justify-center">
-            <div className="w-full h-[400px] md:h-[580px] md:max-w-md flex items-center justify-center mb-[44px] md:mb-0">
-              <Image src={Map} alt="map" />
+          <div className="w-full h-[500px] md:h-[800px] md:flex md:justify-center">
+            <div class="map-wrapper">
+              <Image src={mapi} alt="map" />
+              <div class="pulse-ring prishtina-ring"></div>
+              <div class="dot prishtina" data-label="Prishtina"></div>
+
+              <div class="pulse-ring mitrovica-ring"></div>
+              <div class="dot mitrovica" data-label="North Mitrovica"></div>
             </div>
           </div>
         </div>
